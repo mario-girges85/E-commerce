@@ -1,7 +1,19 @@
 import React from "react";
-
+import { Button } from "@material-tailwind/react";
+import { Route, Routes } from "react-router-dom";
+import Userlayout from "./Userlayout";
+import Adminlayout from "./Adminlayout";
+import Notfound from "./Notfound";
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <Routes>
+        <Route path="/*" element={<Userlayout />}></Route>
+        <Route path="/admin/*" element={<Adminlayout />}></Route>
+        <Route path="*" element={<Notfound />} />
+      </Routes>
+    </div>
+  );
 };
 
 export default App;
