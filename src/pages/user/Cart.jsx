@@ -1,23 +1,52 @@
 import axios from "axios";
-import FakeCart from "../../components/Cart/FakeCart";
+import FakeCart from "../components/FakeCart.jsx";
 import { useEffect, useState } from "react";
+
+// Important
+// Note : the code runs on the first user in api to make it daynamic
+// i will need a prameter from APP.jsx to tell me who is signed in use & his ID
+// Beshoy ^^
+
 const Cart = () => {
     const [apiData, editApiData] = useState([]);
     const [apiState, editApiState] = useState(false);
+
     const getdata = () => {
         axios({
             method: "get",
-            url: "https://booming-odd-lark.glitch.me/users",
+            url: "https://booming-odd-lark.glitch.me/users/1",
         }).then(({ data }) => {
-            editApiData(data[0].cart);
-            editApiState(true);
+            editApiData(data.cart);
         });
     };
+
     useEffect(() => {
         getdata();
     }, [apiState]);
+
+    const numOfItems = (idOfitem, sign) => {
+        let temp = apiData[idOfitem - 1];
+        sign == "-"
+            ? temp.count > 1
+                ? (temp.count -= 1)
+                : temp.count
+            : (temp.count += 1);
+        let fullcart = [...apiData];
+        fullcart[idOfitem - 1] = temp;
+        editApiData(fullcart);
+        axios({
+            method: "patch",
+            url: "https://booming-odd-lark.glitch.me/users/1",
+            data: {
+                cart: fullcart,
+            },
+        }).then(() => {
+            editApiState(!apiState);
+        });
+    };
+
     return (
-        <div className="flex flex-col gap-5 w-full h-full mt-10 select-none">
+        <div className="flex flex-col gap-5 w-full h-full select-none">
             {/* Title */}
             <div className="flex justify-center">
                 <span>Shopping Cart</span>
@@ -31,10 +60,10 @@ const Cart = () => {
                         <span className="w-[100px] text-center">Items</span>
                         <span className="w-16 text-center"></span>
                     </div>
-                    {apiData.map((i, index) => {
+                    {apiData.map((item, index) => {
                         return (
                             <div key={index}>
-                                <FakeCart i={i} />
+                                <FakeCart item={item} numOfItems={numOfItems} />
                             </div>
                         );
                     })}
