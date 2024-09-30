@@ -1,78 +1,57 @@
 import React from "react";
-import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-} from "@material-tailwind/react";
-import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
-} from "@heroicons/react/24/solid";
+import axios from "axios";
+
+import { useState, useEffect } from "react";
+import Product from "./Product";
+import { Drawer, Input, Select, Option } from "@material-tailwind/react";
+
 const Aside = () => {
+  const [fromValue, setfromValue] = useState();
+  const [toValue, settoValue] = useState();
+  //filter drawer
+  const [open, setOpen] = React.useState(false);
+  const openDrawer = () => setOpen(true);
+  const closeDrawer = () => setOpen(false);
   return (
     <div>
-      <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
-        <div className="mb-2 p-4">
-          <Typography variant="h5" color="blue-gray">
-            Sidebar
-          </Typography>
-        </div>
-        <List>
-          <ListItem>
-            <ListItemPrefix>
-              <PresentationChartBarIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Dashboard
-          </ListItem>
-          <ListItem>
-            <ListItemPrefix>
-              <ShoppingBagIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            E-Commerce
-          </ListItem>
-          <ListItem>
-            <ListItemPrefix>
-              <InboxIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Inbox
-            <ListItemSuffix>
-              <Chip
-                value="14"
-                size="sm"
-                variant="ghost"
-                color="blue-gray"
-                className="rounded-full"
+      <div>
+        <React.Fragment>
+          <h1 onClick={openDrawer}>Open Drawer</h1>
+          <Drawer
+            open={open}
+            onClose={closeDrawer}
+            className="flex flex-col justify-start items-start gap-4 w-[20%] p-3"
+          >
+            <div className="flex flex-col justify-start items-start gap-4 w-[100%] p-3 border-solid border-b-2 border-gray-400">
+              <h1 className="w-full text-nowrap">Price</h1>
+              <Input
+                className=""
+                label="From"
+                type="number"
+                min="0"
+                value={fromValue}
+                onChange={(e) => check_from(e)}
               />
-            </ListItemSuffix>
-          </ListItem>
-          <ListItem>
-            <ListItemPrefix>
-              <UserCircleIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Profile
-          </ListItem>
-          <ListItem>
-            <ListItemPrefix>
-              <Cog6ToothIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Settings
-          </ListItem>
-          <ListItem>
-            <ListItemPrefix>
-              <PowerIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Log Out
-          </ListItem>
-        </List>
-      </Card>
+              <Input
+                label="To"
+                type="number"
+                min="0"
+                value={toValue}
+                onChange={(e) => check_to(e)}
+              />
+            </div>
+            <div className="w-full flex flex-col justify-start items-start gap-4 p-3 ">
+              <h1>category</h1>
+              <Select label="Select category">
+                <Option>Option 1</Option>
+                <Option>Option 2</Option>
+                <Option>Option 3</Option>
+                <Option>Option 4</Option>
+              </Select>
+            </div>
+          </Drawer>
+        </React.Fragment>
+      </div>
     </div>
   );
 };
