@@ -24,8 +24,8 @@ const Product = ({
 }) => {
   // console.log(image);
   return (
-    <div className="w-full sm:w-[40%] md:w-[30%] lg:w-[22%]">
-      <Card className=" flex items-center overflow-hidden">
+    <div className="w-full cursor-pointer sm:w-[40%] md:w-[30%] lg:w-56">
+      <Card className=" flex  items-center w-fit overflow-hidden">
         <CardHeader
           floated={false}
           shadow={false}
@@ -62,8 +62,10 @@ const Product = ({
         </div>
         <CardFooter className="flex items-center justify-between ">
           <Typography className="mr-2">{price}$</Typography>
-          <Typography className="font-normal">
-            <Button>Add to Cart</Button>
+          <Typography className="font-normal text-white">
+            <Button className="text-nowrap pr-[10%] pl-[10%]">
+              Add to Cart
+            </Button>
           </Typography>
         </CardFooter>
       </Card>
