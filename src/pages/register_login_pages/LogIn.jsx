@@ -9,45 +9,60 @@ const LogIn = () => {
 		email: '',
 		password: '',
 	})
-	const [email, setEmail] = useState(false)
-	const [password, setPassword] = useState(false)
+	const [emailError, setEmailError] = useState(false)
+	const [passwordError, setPasswordError] = useState(false)
 	const [allUsers, setAllUsers] = useState([])
 	const navigate = useNavigate()
-	const handleOnSumbit = (e) => {
+	const [showPassword, setShowPassword] = useState(false)
+
+	const handleOnSubmit = (e) => {
 		e.preventDefault()
-		if (user.email == '') {
-			setEmail(true)
-		} else if (user.password == '') {
-			setPassword(true)
+
+		setEmailError(false)
+		setPasswordError(false)
+
+		if (user.email === '') {
+			setEmailError(true)
+			return
 		}
+		if (user.password === '') {
+			setPasswordError(true)
+			return
+		}
+
 		const loginUser = allUsers.find(({ email, password, id }) => {
-			if (email == user.email && password == user.password) {
-				const ud = id
-				localStorage.ud = ud
-				navigate('/')
-			}
+			return email === user.email && password === user.password
 		})
+
+		if (loginUser) {
+			localStorage.setItem('ud', loginUser.id)
+			navigate('/')
+		} else {
+			console.log('Invalid credentials')
+		}
 	}
+
 	const checkTheUser = () => {
 		axios({
 			method: 'get',
 			url: 'https://booming-odd-lark.glitch.me/users',
 		})
-			.then((e) => {
-				setAllUsers(e.data)
+			.then((res) => {
+				setAllUsers(res.data)
 			})
-			.catch((e) => e.message)
+			.catch((err) => console.error(err.message))
 	}
+
 	useEffect(() => {
 		checkTheUser()
-	}, [allUsers])
+	}, [])
 
 	return (
 		<div className='flex w-full h-screen'>
 			<div className='w-full flex items-center justify-center lg:w-1/2  bg-gray-100'>
 				<form
 					onSubmit={(e) => {
-						handleOnSumbit(e)
+						handleOnSubmit(e)
 					}}
 					className=' bg-white shadow-xl px-10 py-10 rounded-3xl border-2 '
 				>
@@ -59,7 +74,7 @@ const LogIn = () => {
 					</p>
 					<div className='flex justify-between w-80 flex-col gap-6'>
 						<Input
-							error={email}
+							error={emailError}
 							color='blue'
 							label='Email'
 							value={user.email}
@@ -71,9 +86,9 @@ const LogIn = () => {
 							}
 						/>
 						<Input
-							error={password}
+							error={passwordError}
+							type={showPassword ? 'text' : 'password'}
 							color='blue'
-							type='password'
 							label='password'
 							value={user.password}
 							onChange={(e) =>
@@ -87,7 +102,7 @@ const LogIn = () => {
 					<Checkbox
 						label='show password'
 						color='blue'
-						defaultChecked
+						onChange={() => setShowPassword((prev) => !prev)}
 					/>
 					<Button
 						className=' normal-case items-center text-sm  text-center w-full '
