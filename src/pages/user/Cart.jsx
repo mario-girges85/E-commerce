@@ -61,7 +61,7 @@ const Cart = () => {
         return apiData?.reduce((i, y) => i.count * i.price + y.count * y.price);
     };
     return (
-        <div className="flex flex-col gap-5 w-full h-full select-none mt-8">
+        <div className="flex flex-col gap-5 w-full h-full select-none mt-8 ">
             {/* Title */}
             <div className="flex justify-center">
                 <span>Shopping Cart</span>
