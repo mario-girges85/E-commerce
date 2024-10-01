@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 
 const Cart = () => {
     const [apiData, editApiData] = useState([]);
-    const [apiState, editApiState] = useState(false);
 
     const getdata = () => {
         axios({
@@ -22,17 +21,17 @@ const Cart = () => {
 
     useEffect(() => {
         getdata();
-    }, [apiState]);
+    }, []);
 
     const numOfItems = (idOfitem, sign) => {
-        let temp = apiData[idOfitem - 1];
+        let selectedItem = apiData[idOfitem - 1];
         sign == "-"
-            ? temp.count > 1
-                ? (temp.count -= 1)
-                : temp.count
-            : (temp.count += 1);
+            ? selectedItem.count > 1
+                ? (selectedItem.count -= 1)
+                : selectedItem.count
+            : (selectedItem.count += 1);
         let fullcart = [...apiData];
-        fullcart[idOfitem - 1] = temp;
+        fullcart[idOfitem - 1] = selectedItem;
         editApiData(fullcart);
         axios({
             method: "patch",
@@ -40,8 +39,19 @@ const Cart = () => {
             data: {
                 cart: fullcart,
             },
-        }).then(() => {
-            editApiState(!apiState);
+        });
+    };
+
+    const dele = (idOfitem) => {
+        let temp = apiData;
+        let newObj = temp.filter((item) => item.id != idOfitem);
+        editApiData(newObj);
+        axios({
+            method: "patch",
+            url: "https://booming-odd-lark.glitch.me/users/1",
+            data: {
+                cart: newObj,
+            },
         });
     };
 
@@ -58,12 +68,17 @@ const Cart = () => {
                         <span className="w-16 text-center">Name</span>
                         <span className="w-16 text-center">Price</span>
                         <span className="w-[100px] text-center">Items</span>
-                        <span className="w-16 text-center"></span>
+                        <span className="w-16 text-center">Delete</span>
+                        <span className="w-20 text-center">Total</span>
                     </div>
                     {apiData.map((item, index) => {
                         return (
                             <div key={index}>
-                                <FakeCart item={item} numOfItems={numOfItems} />
+                                <FakeCart
+                                    item={item}
+                                    numOfItems={numOfItems}
+                                    dele={dele}
+                                />
                             </div>
                         );
                     })}
@@ -73,15 +88,15 @@ const Cart = () => {
                     <hr className="w-11/12 text-black " />
                     <div className="flex justify-between w-11/12">
                         <span>Subtotal</span>
-                        <span>$20</span>
+                        <span>{}</span>
                     </div>
                     <div className="flex justify-between w-11/12">
                         <span>Taxes</span>
-                        <span>$3</span>
+                        <span>0</span>
                     </div>
                     <div className="flex justify-between w-11/12">
                         <span>Shipping</span>
-                        <span>$0.00</span>
+                        <span>FREE</span>
                     </div>
                     <hr className="w-11/12 text-black " />
                     <div className="flex justify-between w-11/12 my-2">
