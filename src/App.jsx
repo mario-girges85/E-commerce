@@ -4,6 +4,7 @@ import Userlayout from "./Userlayout";
 import Adminlayout from "./Adminlayout";
 import Notfound from "./Notfound";
 import Nav from "./components/Nav";
+import Cart from "./pages/user/Cart";
 import Footer from "./components/Footer";
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/*" element={<Userlayout />}></Route>
         <Route path="/admin/*" element={<Adminlayout />}></Route>
         <Route path="*" element={<Notfound />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </div>

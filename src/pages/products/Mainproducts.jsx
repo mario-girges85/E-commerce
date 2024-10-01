@@ -1,26 +1,43 @@
 import React from "react";
 import axios from "axios";
-import Aside from "./Aside";
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import { Drawer, Input, Select, Option } from "@material-tailwind/react";
+import {
+  Drawer,
+  Input,
+  Select,
+  Option,
+  Button,
+} from "@material-tailwind/react";
 
 const Mainproducts = () => {
+  //products data
   const [productsdata, setproductsdata] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  //checking from value
+  //filter value
+  const [fromValue, setfromValue] = useState(0);
+  const [toValue, settoValue] = useState(0);
+  const [category, setcategory] = useState("All");
+
+  //filter drawer
+  const [open, setOpen] = useState(false);
+  const openDrawer = () => setOpen(true);
+  const closeDrawer = () => setOpen(false);
+
+  // Checking "from" value
   let check_from = (e) => {
-    if (e.target.value >= 0 && !isNaN(e.target.value)) {
-      setfromValue(e.target.value);
+    const value = e.target.value;
+    if (value >= 0 && !isNaN(value)) {
+      setfromValue(value);
     }
   };
-  //checking to value
+
+  // Checking "to" value
   let check_to = (e) => {
-    if (
-      (e.target.value >= 0 && !isNaN(e.target.value)) ||
-      e.target.value >= fromValue
-    ) {
-      settoValue(e.target.value);
+    const value = e.target.value;
+    if (value >= 0 && !isNaN(value) && value >= fromValue) {
+      settoValue(value);
     }
   };
 
@@ -30,22 +47,100 @@ const Mainproducts = () => {
       .get("https://booming-odd-lark.glitch.me/products")
       .then(({ data }) => {
         setproductsdata(data);
+        setFilteredProducts(data); // initialize with all products
       });
-    // console.log(productsdata);
   };
 
-  //update data
-  useEffect(() => getdata(), []);
+  //apply filter
+  const applyfilter = () => {
+    let filtered = productsdata.filter((product) => {
+      // no price no category
+      if (fromValue == 0 && toValue == 0 && category == "All") {
+        return product;
+
+        // no price   yes category
+      } else if (fromValue == 0 && toValue == 0 && category != "All") {
+        return product.category == category;
+
+        // yes price yes category
+      } else if (toValue >= fromValue && category != "All") {
+        return (
+          product.price >= fromValue &&
+          product.price <= toValue &&
+          product.category == category
+        );
+      } else {
+        return product.price >= fromValue && product.price <= toValue;
+      }
+    });
+    setFilteredProducts(filtered);
+  };
+
+  //update data on component load
+  useEffect(() => {
+    getdata();
+  }, []);
+
+  //update filtered products whenever filter values or apply button changes
+  useEffect(() => {
+    applyfilter();
+  }, [fromValue, toValue, category]);
 
   return (
-    <div className="flex flex-col gap-3 justify-between items-center w-[85%] m-auto  pt-4  ">
-      {/**======================================================================================= */}
-      <Aside />
+    <div className="flex flex-col gap-3 justify-between items-start w-[85%] m-auto pt-4">
+      {/**=================================filter====================================================== */}
+      <div>
+        <React.Fragment>
+          <h1
+            className="cursor-pointer p-3 text-blue-gray-900 font-bold underline underline-offset-8"
+            onClick={openDrawer}
+          >
+            Filter
+          </h1>
+          <Drawer
+            open={open}
+            onClose={closeDrawer}
+            className="flex flex-col justify-start items-center gap-4 w-[20%] p-3"
+          >
+            <div className="flex flex-col justify-start items-start gap-4 w-[100%] p-3 border-solid border-b-2 border-gray-400">
+              <h1 className="w-full text-nowrap">Price</h1>
+              <Input
+                label="From"
+                type="number"
+                min="0"
+                value={fromValue}
+                onChange={check_from}
+              />
+              <Input
+                label="To"
+                type="number"
+                min="0"
+                value={toValue}
+                onChange={check_to}
+              />
+            </div>
+
+            <div className="w-full flex flex-col justify-start items-start gap-4 p-3">
+              <h1>Category</h1>
+              <Select
+                label="Select category"
+                value={category}
+                onChange={(val) => setcategory(val)}
+              >
+                <Option value="All">All</Option>
+                <Option value="Electronics">Electronics</Option>
+                <Option value="food">food</Option>
+                <Option value="vehicles">vehicles</Option>
+              </Select>
+            </div>
+          </Drawer>
+        </React.Fragment>
+      </div>
       {/**======================================================================================= */}
 
       {/*products*/}
-      <div className=" mt-5 flex flex-row flex-wrap gap-2  justify-evenly items-center">
-        {productsdata.map((product) => (
+      <div className="mt-5 flex flex-row flex-wrap gap-5 justify-evenly items-center">
+        {filteredProducts.map((product) => (
           <Product key={product.id} data={product} />
         ))}
       </div>

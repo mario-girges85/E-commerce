@@ -42,6 +42,15 @@ function NavList() {
       >
         Log in
       </Typography>
+      <Typography
+        as={Link}
+        to="/cart"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        Cart
+      </Typography>
     </ul>
   );
 }
@@ -69,7 +78,7 @@ export function NavbarSimple() {
           variant="h6"
           className="mr-4 cursor-pointer py-1.5"
         >
-          Material Tailwind
+          DEPI final project -mario gerges-
         </Typography>
         <div className="hidden lg:block">
           <NavList />
