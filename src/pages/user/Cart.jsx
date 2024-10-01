@@ -67,7 +67,7 @@ const Cart = () => {
                 <span>Shopping Cart</span>
             </div>
             {/* Parent of Product & Summary */}
-            <div className="flex flex-row justify-between w-11/12 min-h-[100%]: m-auto ">
+            <div className="flex flex-row justify-between w-11/12 min-h-[100%]: m-auto xs:flex-col xs:items-center">
                 <div className="flex flex-col w-full ">
                     <div
                         className="flex justify-around w-11/12 m-auto my-4 font-bold "
