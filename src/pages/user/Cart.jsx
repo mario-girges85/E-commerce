@@ -1,22 +1,24 @@
 import axios from "axios";
-import FakeCart from "../components/FakeCart.jsx";
+import FakeCart from "../../components/Cart/FakeCart";
 import { useEffect, useState } from "react";
 
-// Important
-// Note : the code runs on the first user in api to make it daynamic
-// i will need a prameter from APP.jsx to tell me who is signed in use & his ID
-// Beshoy ^^
-
 const Cart = () => {
-    const [apiData, editApiData] = useState([]);
-
+    const [apiData, editApiData] = useState([
+        { count: 0, price: 0 },
+        { count: 0, price: 0 },
+    ]);
+    const [apiempty, eapidempty] = useState(false);
     const getdata = () => {
         axios({
             method: "get",
-            url: "https://booming-odd-lark.glitch.me/users/1",
-        }).then(({ data }) => {
-            editApiData(data.cart);
-        });
+            url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
+        })
+            .then(({ data }) => {
+                editApiData(data.cart);
+            })
+            .then((cart) =>
+                cart == [] ? eapidempty(false) : eapidempty(true)
+            );
     };
 
     useEffect(() => {
@@ -35,7 +37,7 @@ const Cart = () => {
         editApiData(fullcart);
         axios({
             method: "patch",
-            url: "https://booming-odd-lark.glitch.me/users/1",
+            url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
             data: {
                 cart: fullcart,
             },
@@ -48,15 +50,18 @@ const Cart = () => {
         editApiData(newObj);
         axios({
             method: "patch",
-            url: "https://booming-odd-lark.glitch.me/users/1",
+            url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
             data: {
                 cart: newObj,
             },
         });
     };
 
+    const total = () => {
+        return apiData?.reduce((i, y) => i.count * i.price + y.count * y.price);
+    };
     return (
-        <div className="flex flex-col gap-5 w-full h-full select-none">
+        <div className="flex flex-col gap-5 w-full h-full select-none mt-8">
             {/* Title */}
             <div className="flex justify-center">
                 <span>Shopping Cart</span>
@@ -64,35 +69,43 @@ const Cart = () => {
             {/* Parent of Product & Summary */}
             <div className="flex flex-row justify-between w-11/12 min-h-[100%]: m-auto ">
                 <div className="flex flex-col w-full ">
-                    <div className="flex justify-around w-11/12 m-auto my-4  font-bold">
+                    <div
+                        className="flex justify-around w-11/12 m-auto my-4 font-bold "
+                        style={{
+                            visibility: apiempty ? "visible" : "hidden",
+                        }}>
                         <span className="w-16 text-center">Name</span>
                         <span className="w-16 text-center">Price</span>
                         <span className="w-[100px] text-center">Items</span>
                         <span className="w-16 text-center">Delete</span>
                         <span className="w-20 text-center">Total</span>
                     </div>
-                    {apiData.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                <FakeCart
-                                    item={item}
-                                    numOfItems={numOfItems}
-                                    dele={dele}
-                                />
-                            </div>
-                        );
-                    })}
+                    {apiempty ? (
+                        apiData.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <FakeCart
+                                        item={item}
+                                        numOfItems={numOfItems}
+                                        dele={dele}
+                                    />
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <div className="text-center mt-5">Cart is Empty</div>
+                    )}
                 </div>
                 <div className=" flex flex-col items-center gap-5 w-[350px] h-[400px] m-5 p-3 rounded-md shadow-xl">
                     <span className="my-3">Summary</span>
                     <hr className="w-11/12 text-black " />
                     <div className="flex justify-between w-11/12">
                         <span>Subtotal</span>
-                        <span>{}</span>
+                        <span>{total()}</span>
                     </div>
                     <div className="flex justify-between w-11/12">
                         <span>Taxes</span>
-                        <span>0</span>
+                        <span>{total() * 0.1}</span>
                     </div>
                     <div className="flex justify-between w-11/12">
                         <span>Shipping</span>
