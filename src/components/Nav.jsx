@@ -47,6 +47,15 @@ function NavList() {
       >
         Log in
       </Typography>
+      <Typography
+        as={Link}
+        to="/cart"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        Cart
+      </Typography>
     </ul>
   );
 }
