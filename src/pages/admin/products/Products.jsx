@@ -2,13 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@material-tailwind/react";
 
-const Products = () => {
+const Products = ({products, setProducts}) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([
-    { id: 1, name: "Product 1" },
-    { id: 2, name: "Product 2" },
-    { id: 3, name: "Product 3" },
-  ]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -21,7 +16,7 @@ const Products = () => {
   return (
     <div className="container mx-auto p-4 my-5">
       <h1 className="text-2xl font-bold my-5 text-center">
-        Products Managment
+        Products Management
       </h1>
       <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
         <Input
@@ -47,7 +42,7 @@ const Products = () => {
           </p>
         </div>
         <div>
-          <Link to="/admin/dashboard/products/add" className="px-4 py-2">
+          <Link to="/admin/dashboard/products/add">
             <Button color="green">Add</Button>
           </Link>
         </div>
