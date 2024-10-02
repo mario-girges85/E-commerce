@@ -17,7 +17,6 @@ const Products = ({ products, setProducts }) => {
   const deleteProduct = (id) => {
     axios.delete(`https://booming-odd-lark.glitch.me/products/${id}`)
       .then((response) => {
-        console.log(response);
         setProducts(products.filter((product) => product.id !== id));
       })
       .catch((error) => {
@@ -34,7 +33,7 @@ const Products = ({ products, setProducts }) => {
         <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8">
           <Input
             color="blue"
-            label="Search By Title..."
+            label="Search By Name..."
             value={searchTerm}
             onChange={handleSearch}
             className="w-full"
@@ -51,7 +50,7 @@ const Products = ({ products, setProducts }) => {
       <div className="flex flex-wrap justify-center mb-4 md:mb-6 lg:mb-8">
         <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
           <p className="text-lg">
-            Number of products:{" "}
+            Count:{" "}
             <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
               {products.length}
             </span>
@@ -59,7 +58,7 @@ const Products = ({ products, setProducts }) => {
         </div>
         <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
           <p className="text-lg">
-            Last product added:{" "}
+            Last added:{" "}
             <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
               {products[products.length - 1]?.name.substring(0, 10)}
             </span>
@@ -88,7 +87,7 @@ const Products = ({ products, setProducts }) => {
               </td>
               <td className="py-3">{product.price}</td>
               <td className="py-3">{product.category}</td>
-              <td className="px-4 py-3 flex flex-col lg:flex-row justify-center">
+              <td className="px-4 py-3 flex flex-col lg:flex-row justify-center gap-y-1">
                 <Link to={`/admin/dashboard/products/edit/${product.id}`}>
                   <Button color="amber" className="mx-1">
                     Edit

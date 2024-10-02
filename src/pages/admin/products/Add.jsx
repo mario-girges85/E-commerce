@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Input } from "@material-tailwind/react";
 import axios from "axios";
 
-const Add = () => {
+const Add = ({ addProduct }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -21,8 +21,10 @@ const Add = () => {
       image,
     };
 
-    axios.post("https://booming-odd-lark.glitch.me/products", product)
+    axios
+      .post("https://booming-odd-lark.glitch.me/products", product)
       .then(() => {
+        addProduct(product);
         navigate("/admin/dashboard/products");
       })
       .catch((error) => {
@@ -31,10 +33,8 @@ const Add = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 my-5">
-      <h1 className="text-2xl font-bold my-5 text-center">
-        Add New Product
-      </h1>
+    <div className="container mx-auto p-4 my-16">
+      <h1 className="text-2xl font-bold my-5 text-center">Add New Product</h1>
       <form onSubmit={handleSubmit}>
         <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
           <Input
