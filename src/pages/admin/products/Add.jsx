@@ -1,16 +1,33 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Input } from "@material-tailwind/react";
+import axios from "axios";
 
-const Add = ({ addProduct, products }) => {
+const Add = () => {
   const [name, setName] = useState("");
-  const [id, setId] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addProduct({ id: products.length + 1, name });
-    navigate("/admin/dashboard/products");
+    const product = {
+      name,
+      description,
+      price,
+      category,
+      image,
+    };
+
+    axios.post("https://booming-odd-lark.glitch.me/products", product)
+      .then(() => {
+        navigate("/admin/dashboard/products");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -27,12 +44,41 @@ const Add = ({ addProduct, products }) => {
             onChange={(event) => setName(event.target.value)}
           />
         </div>
+        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
+          <Input
+            color="blue"
+            label="Product Description..."
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
+        </div>
+        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
+          <Input
+            color="blue"
+            label="Product Price..."
+            value={price}
+            onChange={(event) => setPrice(event.target.value)}
+          />
+        </div>
+        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
+          <Input
+            color="blue"
+            label="Product Category..."
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+          />
+        </div>
+        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
+          <Input
+            color="blue"
+            label="Product Image URL..."
+            value={image}
+            onChange={(event) => setImage(event.target.value)}
+          />
+        </div>
         <div className="my-10 flex justify-evenly items-center">
           <Button color="green" type="submit">
             Add Product
-          </Button>
-          <Button color="blue" onClick={() => navigate("/admin/dashboard/products")}>
-            Back to Products
           </Button>
         </div>
       </form>
