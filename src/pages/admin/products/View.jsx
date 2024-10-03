@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Card, CardBody, Typography, Badge } from "@material-tailwind/react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Card, CardBody, Typography, CardFooter, Button } from "@material-tailwind/react";
 
 const View = ({ products }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const foundProduct = products.find(
@@ -41,6 +42,10 @@ const View = ({ products }) => {
             ${product.price}
           </Typography>
         </CardBody>
+        <CardFooter className="my-2 flex flex-row justify-evenly items-center">
+          <Button color="amber" onClick={() => navigate(`/admin/dashboard/products/edit/${id}`)}>Edit</Button>
+          <Button color="red" onClick={() => navigate(-1)}>Back</Button>
+        </CardFooter>
       </Card>
     </div>
   );

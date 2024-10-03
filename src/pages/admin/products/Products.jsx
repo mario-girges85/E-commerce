@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@material-tailwind/react";
 import axios from "axios";
+import Product from "./Product";
+import Swal from "sweetalert2";
 
 const Products = ({ products, setProducts }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,13 +17,31 @@ const Products = ({ products, setProducts }) => {
   );
 
   const deleteProduct = (id) => {
-    axios.delete(`https://booming-odd-lark.glitch.me/products/${id}`)
-      .then((response) => {
-        setProducts(products.filter((product) => product.id !== id));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`https://capable-scrawny-principal.glitch.me/products/${id}`)
+          .then(() => {
+            setProducts(products.filter((product) => product.id !== id));
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
@@ -76,36 +96,11 @@ const Products = ({ products, setProducts }) => {
         </thead>
         <tbody>
           {filteredProducts.map((product) => (
-            <tr
+            <Product
               key={product.id}
-              className="border-b border-gray-200 text-center"
-            >
-              <td className="py-3">
-                {product.name.length > 15
-                  ? product.name.substring(0, 10) + "..."
-                  : product.name}
-              </td>
-              <td className="py-3">{product.price}</td>
-              <td className="py-3">{product.category}</td>
-              <td className="px-4 py-3 flex flex-col lg:flex-row justify-center gap-y-1">
-                <Link to={`/admin/dashboard/products/edit/${product.id}`}>
-                  <Button color="amber" className="mx-1">
-                    Edit
-                  </Button>
-                </Link>
-                <Link to={`/admin/dashboard/products/view/${product.id}`}>
-                  <Button color="blue" className="mx-1">
-                    View
-                  </Button>
-                </Link>
-                <Button
-                  color="red"
-                  onClick={() => deleteProduct(product.id)}
-                >
-                  Delete
-                </Button>
-              </td>
-            </tr>
+              product={product}
+              deleteProduct={deleteProduct}
+            />
           ))}
         </tbody>
       </table>

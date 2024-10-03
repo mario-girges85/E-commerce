@@ -14,7 +14,7 @@ const Adminlayout = () => {
 
   const getProducts = () => {
     axios
-      .get("https://booming-odd-lark.glitch.me/products")
+      .get("https://capable-scrawny-principal.glitch.me/products")
       .then((response) => {
         setProducts(response.data);
       });

@@ -2,29 +2,37 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Input } from "@material-tailwind/react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Add = ({ addProduct }) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    image: "",
+    rating: {
+      rate: 0,
+      count: 0,
+    },
+  });
+
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const product = {
-      name,
-      description,
-      price,
-      category,
-      image,
-    };
 
     axios
-      .post("https://booming-odd-lark.glitch.me/products", product)
+      .post("https://capable-scrawny-principal.glitch.me/products", data)
       .then(() => {
-        addProduct(product);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        addProduct(data);
         navigate("/admin/dashboard/products");
       })
       .catch((error) => {
@@ -33,55 +41,104 @@ const Add = ({ addProduct }) => {
   };
 
   return (
-    <div className="container mx-auto p-4 my-16">
-      <h1 className="text-2xl font-bold my-5 text-center">Add New Product</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
-          <Input
-            color="blue"
-            label="Product Name..."
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </div>
-        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
-          <Input
-            color="blue"
-            label="Product Description..."
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-          />
-        </div>
-        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
-          <Input
-            color="blue"
-            label="Product Price..."
-            value={price}
-            onChange={(event) => setPrice(event.target.value)}
-          />
-        </div>
-        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
-          <Input
-            color="blue"
-            label="Product Category..."
-            value={category}
-            onChange={(event) => setCategory(event.target.value)}
-          />
-        </div>
-        <div className="my-4 w-4/5 lg:w-2/5 mx-auto">
-          <Input
-            color="blue"
-            label="Product Image URL..."
-            value={image}
-            onChange={(event) => setImage(event.target.value)}
-          />
-        </div>
-        <div className="my-10 flex justify-evenly items-center">
-          <Button color="green" type="submit">
-            Add Product
-          </Button>
-        </div>
-      </form>
+    <div className="w-5/6 lg:w-3/6 mx-auto">
+      <div className="container my-14">
+        <h1 className="text-2xl font-bold my-5 text-center">Add New Product</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="my-4">
+            <Input
+              color="blue"
+              label="Product Name..."
+              value={data.name}
+              onChange={(event) =>
+                setData({ ...data, name: event.target.value })
+              }
+            />
+          </div>
+          <div className="my-4">
+            <Input
+              color="blue"
+              label="Product Description..."
+              value={data.description}
+              onChange={(event) =>
+                setData({ ...data, description: event.target.value })
+              }
+            />
+          </div>
+          <div className="my-4">
+            <Input
+              color="blue"
+              label="Product Price..."
+              value={data.price}
+              onChange={(event) =>
+                setData({ ...data, price: event.target.value })
+              }
+            />
+          </div>
+          <div className="my-4">
+            <Input
+              color="blue"
+              label="Product Category..."
+              value={data.category}
+              onChange={(event) =>
+                setData({ ...data, category: event.target.value })
+              }
+            />
+          </div>
+          <div className="my-4">
+            <Input
+              color="blue"
+              label="Product Image URL..."
+              value={data.image}
+              onChange={(event) =>
+                setData({ ...data, image: event.target.value })
+              }
+            />
+          </div>
+
+          <div className="flex sm:flex-row flex-col">
+            <div className="my-3 w-full lg:w-2/5 mx-auto">
+              <Input
+                color="blue"
+                label="Product Rating..."
+                type="number"
+                className="w-full"
+                value={data.rating.rate}
+                onChange={(event) =>
+                  setData({
+                    ...data,
+                    rating: { ...data.rating, rate: event.target.value },
+                  })
+                }
+              />
+            </div>
+            <div className="my-3 w-full lg:w-2/5 mx-auto">
+              <Input
+                color="blue"
+                label="Product Counting..."
+                type="number"
+                className="w-full"
+                value={data.rating.count}
+                onChange={(event) =>
+                  setData({
+                    ...data,
+                    rating: { ...data.rating, count: event.target.value },
+                  })
+                }
+              />
+            </div>
+          </div>
+
+          <div className="my-7 flex justify-evenly items-center">
+            <Button color="green" type="submit">
+              Save
+            </Button>
+            <Button color="red" onClick={() => navigate(-1)}>
+              Back
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
