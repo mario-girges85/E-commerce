@@ -1,5 +1,3 @@
-import React from "react";
-
 const FakeCart = ({ item, numOfItems, dele }) => {
     return (
         <div>

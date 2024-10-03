@@ -15,10 +15,12 @@ const Cart = () => {
         })
             .then(({ data }) => {
                 editApiData(data.cart);
+                console.log(data);
+                return data.cart;
             })
-            .then((cart) =>
-                cart == [] ? eapidempty(false) : eapidempty(true)
-            );
+            .then((cart) => {
+                cart.length == 0 ? eapidempty(false) : eapidempty(true);
+            });
     };
 
     useEffect(() => {
@@ -58,7 +60,13 @@ const Cart = () => {
     };
 
     const total = () => {
-        return apiData?.reduce((i, y) => i.count * i.price + y.count * y.price);
+        let total = 0;
+        if (apiData.length > 1) {
+            for (let i = 0; i < apiData.length; i++) {
+                total += apiData[i].price * apiData[i].count;
+            }
+        }
+        return total;
     };
     return (
         <div className="flex flex-col gap-5 w-full h-full select-none mt-8 ">
@@ -72,7 +80,7 @@ const Cart = () => {
                     <div
                         className="flex justify-around w-11/12 m-auto my-4 font-bold "
                         style={{
-                            visibility: apiempty ? "visible" : "hidden",
+                            display: apiempty ? "flex" : "none",
                         }}>
                         <span className="w-16 text-center">Name</span>
                         <span className="w-16 text-center">Price</span>
@@ -96,7 +104,11 @@ const Cart = () => {
                         <div className="text-center mt-5">Cart is Empty</div>
                     )}
                 </div>
-                <div className=" flex flex-col items-center gap-5 w-[350px] h-[400px] m-5 p-3 rounded-md shadow-xl  cxs:w-11/12 csm:w-11/12 cmd:w-11/12">
+                <div
+                    className=" flex flex-col items-center gap-5 w-[350px] h-[400px] m-5 p-3 rounded-md shadow-xl  cxs:w-11/12 csm:w-11/12 cmd:w-11/12"
+                    style={{
+                        display: apiempty ? "flex" : "none",
+                    }}>
                     <span className="my-3">Summary</span>
                     <hr className="w-11/12 text-black " />
                     <div className="flex justify-between w-11/12">
@@ -114,7 +126,7 @@ const Cart = () => {
                     <hr className="w-11/12 text-black " />
                     <div className="flex justify-between w-11/12 my-2">
                         <span>Total</span>
-                        <span>$23.0</span>
+                        <span>{total() * 0.1 + total()}</span>
                     </div>
                     <div>
                         <button className="w-full bg-black text-white py-3 px-20 rounded-lg text-sm">
