@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-        Responsive
+        Home 2
       </button>
     </div>
   );

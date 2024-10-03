@@ -40,21 +40,21 @@ function NavList() {
       </Typography>
       <Typography
         as={Link}
-        to="/login"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        Log in
-      </Typography>
-      <Typography
-        as={Link}
         to="/cart"
         variant="small"
         color="blue-gray"
         className="p-1 font-medium"
       >
         Cart
+      </Typography>
+      <Typography
+        as={Link}
+        to="/login"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        Log in
       </Typography>
     </ul>
   );
