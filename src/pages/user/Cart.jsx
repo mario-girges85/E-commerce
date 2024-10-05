@@ -60,12 +60,9 @@ const Cart = () => {
     };
 
     const total = () => {
-        let total = 0;
-        if (apiData.length > 1) {
-            for (let i = 0; i < apiData.length; i++) {
-                total += apiData[i].price * apiData[i].count;
-            }
-        }
+        const total = apiData.reduce((item1, item2) => {
+            return item1 + item2.price * item2.count;
+        }, 0);
         return total;
     };
     return (
