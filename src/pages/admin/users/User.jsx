@@ -1,18 +1,22 @@
 import React from "react";
 import { Button } from "@material-tailwind/react";
 
-const User = ({ user, handleDeleteUser, handleRoleChange }) => {
+const User = ({
+  user: { id, firstName, lastName, email, role },
+  handleDeleteUser,
+  handleRoleChange,
+}) => {
   return (
-    <tr className="border-b border-gray-200 text-center">
-      <td className="py-3">{user.firstName + user.lastName}</td>
-      <td className="py-3">{user.email}</td>
-      <td className="py-3">{user.role}</td>
+    <tr key={id} className="border-b border-gray-200 text-center">
+      <td className="py-3">{firstName + lastName}</td>
+      <td className="py-3">{email}</td>
+      <td className="py-3">{role}</td>
       <td className="py-3 px-3 flex flex-col lg:flex-row justify-center gap-y-1">
-        {user.role === "admin" ? (
+        {role === "admin" ? (
           <Button
             className="mx-1"
             color="green"
-            onClick={() => handleRoleChange(user.id, "user")}
+            onClick={() => handleRoleChange(id, "user")}
           >
             Make User
           </Button>
@@ -20,7 +24,7 @@ const User = ({ user, handleDeleteUser, handleRoleChange }) => {
           <Button
             className="mx-1"
             color="blue"
-            onClick={() => handleRoleChange(user.id, "admin")}
+            onClick={() => handleRoleChange(id, "admin")}
           >
             Make Admin
           </Button>
@@ -28,7 +32,7 @@ const User = ({ user, handleDeleteUser, handleRoleChange }) => {
         <Button
           className="mx-1"
           color="red"
-          onClick={() => handleDeleteUser(user.id)}
+          onClick={() => handleDeleteUser(id)}
         >
           Delete
         </Button>

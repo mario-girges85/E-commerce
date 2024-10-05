@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  Button,
-  Input,
-  Card,
-  CardBody,
-  Typography,
-} from "@material-tailwind/react";
-import Axios from "axios";
+import { Button, Input } from "@material-tailwind/react";
+import axios from "axios";
 import Swal from "sweetalert2";
 
 const Edit = ({ editProduct }) => {
@@ -26,14 +20,11 @@ const Edit = ({ editProduct }) => {
   });
 
   const fetchProduct = () => {
-    Axios({
-      method: "get",
-      url: `https://capable-scrawny-principal.glitch.me/products/${id}`,
-    }).then((response) => {
-      const productData = response.data;
-      const rating = productData.rating || { rate: 0, count: 0 };
-      setData({ ...productData, rating });
-    });
+    axios
+      .get(`https://capable-scrawny-principal.glitch.me/products/${id}`)
+      .then((response) => {
+        setData(response.data);
+      });
   };
 
   useEffect(() => {
@@ -43,36 +34,27 @@ const Edit = ({ editProduct }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const updatedProduct = {
-      id,
-      name: data.name,
-      description: data.description,
-      price: data.price,
-      category: data.category,
-      image: data.image,
-      rating: data.rating,
-    };
-
-    Axios(`https://capable-scrawny-principal.glitch.me/products/${id}`, {
-      method: "PUT",
-      data: updatedProduct,
-    }).then(() => {
-      Swal.fire({
-        position: "top-center",
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 1500
+    axios
+      .put(`https://capable-scrawny-principal.glitch.me/products/${id}`, data)
+      .then(() => {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/admin/dashboard/products");
+        editProduct(data);
       });
-      editProduct(updatedProduct);
-      navigate("/admin/dashboard/products");
-    });
   };
 
   return (
     <div className="w-5/6 lg:w-3/6 mx-auto">
       <div className="container my-14">
-        <h1 className="text-2xl font-bold my-5 text-center">Edit the Product</h1>
+        <h1 className="text-2xl font-bold my-5 text-center">
+          Edit the Product
+        </h1>
         <form onSubmit={handleSubmit}>
           <div className="my-4">
             <Input

@@ -45,14 +45,17 @@ const Adminlayout = () => {
           element={<Products products={products} setProducts={setProducts} />}
         />
         <Route
-          path="/dashboard/products/:add"
+          path="/dashboard/products/add"
           element={<Add addProduct={addProduct} products={products} />}
         />
         <Route
           path="/dashboard/products/edit/:id"
           element={<Edit editProduct={editProduct} products={products} />}
         />
-        <Route path="/dashboard/products/view/:id" element={<View products={products} />} />
+        <Route
+          path="/dashboard/products/view/:id"
+          element={<View products={products} />}
+        />
         <Route path="/dashboard/users" element={<Users />} />
         <Route path="/*" element={<Notfound />} />
       </Routes>

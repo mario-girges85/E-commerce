@@ -16,7 +16,6 @@ const Add = ({ addProduct }) => {
       count: 0,
     },
   });
-
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {

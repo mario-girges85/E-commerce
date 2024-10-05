@@ -19,11 +19,10 @@ const Users = () => {
   };
 
   const handleSearch = (event) => {
-    setSearchQuery(event.target.value);
+    const search = event.target.value;
+    setSearchQuery(search);
     axios
-      .get(
-        `https://capable-scrawny-principal.glitch.me/users?q=${event.target.value}`
-      )
+      .get(`https://capable-scrawny-principal.glitch.me/users?q=${search}`)
       .then((response) => setUsers(response.data));
   };
 
@@ -43,7 +42,7 @@ const Users = () => {
           .then(() => {
             setUsers(users.filter((user) => user.id !== id));
             Swal.fire({
-              title: "Deleted!",
+              title: "Deleted",
               text: "User has been deleted.",
               icon: "success",
             });
@@ -61,7 +60,7 @@ const Users = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, change it!"
+      confirmButtonText: "Yes, change it!",
     }).then((result) => {
       if (result.isConfirmed) {
         axios
@@ -69,13 +68,15 @@ const Users = () => {
             role,
           })
           .then((response) => {
-            setUsers(users.map((user) => (user.id === id ? response.data : user)));
+            setUsers(
+              users.map((user) => (user.id === id ? response.data : user))
+            );
+            Swal.fire({
+              title: "Changed",
+              text: "the role has been changed.",
+              icon: "success",
+            });
           });
-        Swal.fire({
-          title: "Changed!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
       }
     });
   };
@@ -86,7 +87,7 @@ const Users = () => {
         User Dashboard
       </h1>
       <div className="flex flex-wrap justify-center mb-4 md:mb-6 lg:mb-8">
-        <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8">
+        <div className="w-full md:w-1/2 mb-4 md:mb-6 lg:mb-8">
           <Input
             color="blue"
             label="Search By Name..."
@@ -96,8 +97,8 @@ const Users = () => {
           />
         </div>
       </div>
-      <div className="flex flex-wrap justify-center mb-4 md:mb-6 lg:mb-8">
-        <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
+      <div className="flex flex-row justify-evenly items-center mb-2 gap-5 w-full">
+        <div className="md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
           <p className="text-lg">
             Total:{" "}
             <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
@@ -105,7 +106,7 @@ const Users = () => {
             </span>
           </p>
         </div>
-        <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
+        <div className="md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
           <p className="text-lg">
             Admins:{" "}
             <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
@@ -113,7 +114,7 @@ const Users = () => {
             </span>
           </p>
         </div>
-        <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
+        <div className="md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
           <p className="text-lg">
             Users:{" "}
             <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
