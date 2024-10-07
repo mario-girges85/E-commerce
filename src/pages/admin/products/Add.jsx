@@ -4,7 +4,7 @@ import { Button, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Add = ({ addProduct }) => {
+const Add = ({ products, setProducts }) => {
   const [data, setData] = useState({
     name: "",
     description: "",
@@ -18,11 +18,15 @@ const Add = ({ addProduct }) => {
   });
   const navigate = useNavigate();
 
+  const addProduct = (newProduct) => {
+    setProducts([...products, newProduct]);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     axios
-      .post("https://capable-scrawny-principal.glitch.me/products", data)
+      .post("https://booming-odd-lark.glitch.me/products", data)
       .then(() => {
         Swal.fire({
           position: "top-center",
@@ -95,8 +99,8 @@ const Add = ({ addProduct }) => {
             />
           </div>
 
-          <div className="flex sm:flex-row flex-col">
-            <div className="my-3 w-full lg:w-2/5 mx-auto">
+          <div className="flex flex-col md:flex-row">
+            <div className="my-3 w-full md:w-2/5 mx-auto">
               <Input
                 color="blue"
                 label="Product Rating..."
@@ -111,7 +115,7 @@ const Add = ({ addProduct }) => {
                 }
               />
             </div>
-            <div className="my-3 w-full lg:w-2/5 mx-auto">
+            <div className="my-3 w-full md:w-2/5 mx-auto">
               <Input
                 color="blue"
                 label="Product Counting..."

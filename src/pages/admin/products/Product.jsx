@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 
-const Product = ({ product, deleteProduct }) => {
-  const { id, name, price, category } = product;
-
+const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
   return (
     <tr key={id} className="border-b border-gray-200 text-center">
       <td className="py-3">{name}</td>

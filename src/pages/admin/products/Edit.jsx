@@ -4,9 +4,7 @@ import { Button, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Edit = ({ editProduct }) => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+const Edit = ({ products, setProducts }) => {
   const [data, setData] = useState({
     name: "",
     description: "",
@@ -18,24 +16,35 @@ const Edit = ({ editProduct }) => {
       count: 0,
     },
   });
-
-  const fetchProduct = () => {
-    axios
-      .get(`https://capable-scrawny-principal.glitch.me/products/${id}`)
-      .then((response) => {
-        setData(response.data);
-      });
-  };
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchProduct();
+    viewProduct();
   }, [id]);
+
+  const viewProduct = () => {
+    const foundProduct = products.find(
+      (product) => product.id === parseInt(id)
+    );
+    if (foundProduct) {
+      setData(foundProduct);
+    }
+  };
+
+  const editProduct = (updatedProduct) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     axios
-      .put(`https://capable-scrawny-principal.glitch.me/products/${id}`, data)
+      .put(`https://booming-odd-lark.glitch.me/products/${id}`, data)
       .then(() => {
         Swal.fire({
           position: "top-center",
@@ -82,7 +91,7 @@ const Edit = ({ editProduct }) => {
               label="Product Price..."
               value={data.price}
               onChange={(event) =>
-                setData({ ...data, price: event.target.value })
+                setData({ ...data, price: parseFloat(event.target.value) })
               }
             />
           </div>
@@ -107,8 +116,8 @@ const Edit = ({ editProduct }) => {
             />
           </div>
 
-          <div className="flex sm:flex-row flex-col">
-            <div className="my-3 w-full lg:w-2/5 mx-auto">
+          <div className="flex flex-col md:flex-row">
+            <div className="my-3 w-full md:w-2/5 mx-auto">
               <Input
                 color="blue"
                 label="Product Rating..."
@@ -118,12 +127,15 @@ const Edit = ({ editProduct }) => {
                 onChange={(event) =>
                   setData({
                     ...data,
-                    rating: { ...data.rating, rate: event.target.value },
+                    rating: {
+                      ...data.rating,
+                      rate: parseFloat(event.target.value),
+                    },
                   })
                 }
               />
             </div>
-            <div className="my-3 w-full lg:w-2/5 mx-auto">
+            <div className="my-3 w-full md:w-2/5 mx-auto">
               <Input
                 color="blue"
                 label="Product Counting..."
@@ -133,7 +145,10 @@ const Edit = ({ editProduct }) => {
                 onChange={(event) =>
                   setData({
                     ...data,
-                    rating: { ...data.rating, count: event.target.value },
+                    rating: {
+                      ...data.rating,
+                      count: parseInt(event.target.value),
+                    },
                   })
                 }
               />

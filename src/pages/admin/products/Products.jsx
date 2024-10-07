@@ -24,7 +24,7 @@ const Products = ({ products, setProducts }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://capable-scrawny-principal.glitch.me/products/${id}`)
+          .delete(`https://booming-odd-lark.glitch.me/products/${id}`)
           .then(() => {
             setProducts(products.filter((product) => product.id !== id));
             Swal.fire({
@@ -47,11 +47,11 @@ const Products = ({ products, setProducts }) => {
 
   return (
     <div className="container mx-auto p-4 my-5 md:p-6 lg:p-8 xl:p-10">
-      <h1 className="text-3xl font-bold text-center mb-5 md:mb-10 lg:mb-15">
-        Products Management
-      </h1>
-      <div className="flex flex-wrap justify-center mb-4 md:mb-6 lg:mb-8">
-        <div className="w-full md:w-1/2 mb-4 md:mb-6 lg:mb-8">
+      <div className="w-[90%] mx-auto flex flex-col md:flex-row md:justify-between items-center mb-8 mt-5 md:mb-10 md:mt-8 lg:mb-15">
+        <h1 className="text-3xl font-bold text-center mb-5 md:mb-0">
+          Products Management
+        </h1>
+        <div className="w-full md:w-2/5">
           <Input
             color="blue"
             label="Search By Name..."
@@ -61,9 +61,9 @@ const Products = ({ products, setProducts }) => {
           />
         </div>
       </div>
-      <div className="flex flex-col md:flex-row flex-wrap justify-evenly items-center mb-2">
-        <div className="flex justify-evenly items-center gap-5 w-full lg:w-2/3">
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
+      <div className="flex flex-col md:flex-row flex-wrap justify-evenly items-center mb-4 md:mb-0 md:mt-2">
+        <div className="flex justify-evenly items-center gap-5 w-full lg:w-2/3 mb-2">
+          <div className="w-2/6 md:w-1/3 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
               Count:{" "}
               <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
@@ -71,18 +71,18 @@ const Products = ({ products, setProducts }) => {
               </span>
             </p>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
+          <div className="w-4/6 md:w-2/4 xl:w-2/5 mb-4 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
               Last added:{" "}
               <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
-                {products[products.length - 1]?.name?.substring(0, 10) || "N/A"}
+                {products[products.length - 1]?.name?.substring(0, 8) || "N/A"}
               </span>
             </p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
           <Link to="/admin/dashboard/products/add">
-            <Button color="green" className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
+            <Button color="green" className="w-2/5 md:w-1/2 lg:w-1/3 xl:w-1/4">
               Add
             </Button>
           </Link>
