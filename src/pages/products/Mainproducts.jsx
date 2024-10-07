@@ -100,7 +100,7 @@ const Mainproducts = () => {
           <Drawer
             open={open}
             onClose={closeDrawer}
-            className="flex flex-col justify-start items-center gap-4 w-[20%] p-3"
+            className="flex flex-col justify-start items-center gap-4 w-[100%] p-3"
           >
             <div className="flex flex-col justify-start items-start gap-4 w-[100%] p-3 border-solid border-b-2 border-gray-400">
               <h1 className="w-full text-nowrap">Price</h1>
@@ -139,7 +139,7 @@ const Mainproducts = () => {
       {/**======================================================================================= */}
 
       {/*products*/}
-      <div className="mt-5 flex flex-row flex-wrap gap-5 justify-evenly items-center">
+      <div className="mt-5 m-auto flex flex-row flex-wrap gap-5 justify-evenly items-center">
         {filteredProducts.map((product) => (
           <Product key={product.id} data={product} />
         ))}

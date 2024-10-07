@@ -24,8 +24,8 @@ const Product = ({
 }) => {
   // console.log(image);
   return (
-    <div className="w-full cursor-pointer sm:w-[40%] md:w-[30%] lg:w-56">
-      <Card className=" flex  items-center w-fit overflow-hidden">
+    <div className="flex justify-center items-center w-full cursor-pointer sm:w-[40%] md:w-[30%] lg:w-56">
+      <Card className=" flex justify-center items-center w-fit overflow-hidden">
         <CardHeader
           floated={false}
           shadow={false}

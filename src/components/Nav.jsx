@@ -35,21 +35,21 @@ function NavList() {
       </Typography>
       <Typography
         as={Link}
-        to="/login"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        Log in
-      </Typography>
-      <Typography
-        as={Link}
         to="/cart"
         variant="small"
         color="blue-gray"
         className="p-1 font-medium"
       >
         Cart
+      </Typography>
+      <Typography
+        as={Link}
+        to="/login"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        Log in
       </Typography>
     </ul>
   );
@@ -78,7 +78,7 @@ export function NavbarSimple() {
           variant="h6"
           className="mr-4 cursor-pointer py-1.5"
         >
-          DEPI final project -mario gerges-
+          DEPI final project
         </Typography>
         <div className="hidden lg:block">
           <NavList />
