@@ -1,6 +1,8 @@
 import axios from "axios";
 import FakeCart from "../../components/Cart/FakeCart";
 import { useEffect, useState } from "react";
+import EmptyCartImage from "../images/Empty_Cart.svg";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const [apiData, editApiData] = useState([
@@ -8,6 +10,12 @@ const Cart = () => {
         { count: 0, price: 0 },
     ]);
     const [apiempty, eapidempty] = useState(false);
+
+    const navigate = useNavigate();
+    const goproducts = (path) => {
+        navigate(path);
+    };
+
     const getdata = () => {
         axios({
             method: "get",
@@ -66,14 +74,14 @@ const Cart = () => {
         return total;
     };
     return (
-        <div className="flex flex-col gap-5 w-full h-full select-none mt-8 ">
-            {/* Title */}
-            <div className="flex justify-center">
-                <span>Shopping Cart</span>
+        <div className="flex flex-col gap-5 w-full h-fit select-none my-8 font-Inria">
+            <div className="flex justify-center w-full">
+                <span className="flex justify-center items-center w-fit size-12 font-bold">
+                    Shopping Cart
+                </span>
             </div>
-            {/* Parent of Product & Summary */}
             <div className="flex flex-row justify-between w-11/12 min-h-[100%] m-auto cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center ">
-                <div className="flex flex-col w-full ">
+                <div className="flex flex-col items-center w-full">
                     <div
                         className="flex justify-around w-11/12 m-auto my-4 font-bold "
                         style={{
@@ -85,21 +93,39 @@ const Cart = () => {
                         <span className="w-16 text-center">Delete</span>
                         <span className="w-20 text-center">Total</span>
                     </div>
-                    {apiempty ? (
-                        apiData.map((item, index) => {
-                            return (
-                                <div key={index}>
-                                    <FakeCart
-                                        item={item}
-                                        numOfItems={numOfItems}
-                                        dele={dele}
-                                    />
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <div className="text-center mt-5">Cart is Empty</div>
-                    )}
+                    <div>
+                        {apiempty ? (
+                            apiData.map((item, index) => {
+                                return (
+                                    <div key={index}>
+                                        <FakeCart
+                                            item={item}
+                                            numOfItems={numOfItems}
+                                            dele={dele}
+                                        />
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <div className="flex flex-col items-center gap-5 w-[500px] my-5  cxs:w-[300px] cxs:h-[300px]">
+                                <img
+                                    src={EmptyCartImage}
+                                    alt="Empty Cart Image"
+                                    className=" w-[300px] h-[300px]"
+                                />
+                                <span className="font-bold">
+                                    Cart is Feeling Light ?
+                                </span>
+                                <button
+                                    onClick={() => {
+                                        goproducts("/products");
+                                    }}
+                                    className=" flex justify-center items-center w-1/2 h-10 text-center bg-black text-white rounded-lg text-sm cxs:py-[20px]">
+                                    Go Back to Products
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div
                     className=" flex flex-col items-center gap-5 w-[350px] h-[400px] m-5 p-3 rounded-md shadow-xl  cxs:w-11/12 csm:w-11/12 cmd:w-11/12"
