@@ -11,30 +11,29 @@ import axios from "axios";
 
 const Adminlayout = () => {
   const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  const getUsers = () => {
+    axios
+      .get("https://booming-odd-lark.glitch.me/users")
+      .then((response) => setUsers(response.data));
+  };
 
   const getProducts = () => {
     axios
-      .get("https://capable-scrawny-principal.glitch.me/products")
+      .get("https://booming-odd-lark.glitch.me/products")
       .then((response) => {
         setProducts(response.data);
       });
   };
 
   useEffect(() => {
+    getUsers();
+  }, [users]);
+
+  useEffect(() => {
     getProducts();
   }, [products]);
-
-  const addProduct = (newProduct) => {
-    setProducts([...products, newProduct]);
-  };
-
-  const editProduct = (updatedProduct) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
-      )
-    );
-  };
 
   return (
     <div>
@@ -46,17 +45,17 @@ const Adminlayout = () => {
         />
         <Route
           path="/dashboard/products/add"
-          element={<Add addProduct={addProduct} products={products} />}
+          element={<Add products={products} setProducts={setProducts}/>}
         />
         <Route
           path="/dashboard/products/edit/:id"
-          element={<Edit editProduct={editProduct} products={products} />}
+          element={<Edit products={products} setProducts={setProducts}/>}
         />
         <Route
           path="/dashboard/products/view/:id"
           element={<View products={products} />}
         />
-        <Route path="/dashboard/users" element={<Users />} />
+        <Route path="/dashboard/users" element={<Users users={users} setUsers={setUsers}/>} />
         <Route path="/*" element={<Notfound />} />
       </Routes>
     </div>

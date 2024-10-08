@@ -9,15 +9,15 @@ import {
 } from "@material-tailwind/react";
 
 const View = ({ products }) => {
-  const { id } = useParams();
   const [product, setProduct] = useState({});
+  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    viewData();
+    viewProduct();
   }, [id, products]);
 
-  const viewData = () => {
+  const viewProduct = () => {
     const foundProduct = products.find(
       (product) => product.id === parseInt(id)
     );
@@ -25,8 +25,8 @@ const View = ({ products }) => {
   };
 
   return (
-    <div className="my-20 container mx-auto">
-      <Card className="w-full max-w-lg mas-h-lg mx-auto bg-white rounded-lg shadow-md text-center">
+    <div className="my-12 md:my-16 container mx-auto">
+      <Card className="w-[90%] max-w-lg mx-auto bg-white rounded-lg shadow-md text-center">
         <div className="flex justify-center items-center">
           <img
             src={product?.image}
