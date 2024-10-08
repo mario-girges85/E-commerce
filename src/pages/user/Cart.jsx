@@ -23,7 +23,7 @@ const Cart = () => {
         })
             .then(({ data }) => {
                 editApiData(data.cart);
-                console.log(data);
+             
                 return data.cart;
             })
             .then((cart) => {
