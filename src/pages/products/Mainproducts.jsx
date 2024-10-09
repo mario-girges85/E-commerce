@@ -9,7 +9,7 @@ import {
   Option,
   Button,
 } from "@material-tailwind/react";
-
+import Swal from "sweetalert2";
 const Mainproducts = () => {
   //products data
   const [productsdata, setproductsdata] = useState([]);
@@ -30,11 +30,40 @@ const Mainproducts = () => {
   function postusercart(data) {
     let product = data;
     let newcart = usercart;
-    newcart.push(product);
-    setusercart(newcart);
-    axios.patch(`https://booming-odd-lark.glitch.me/users/${localStorage.ud}`, {
-      cart: usercart,
-    });
+    if (usercart.some((item) => item.name === data.name)) {
+      const index = newcart.findIndex((item) => item.name == data.name);
+      newcart[index].count += 1;
+      setusercart(newcart);
+      axios.patch(
+        `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
+        {
+          cart: usercart,
+        }
+      );
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${data.name} count = ${data.count} `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      newcart.push(product);
+      setusercart(newcart);
+      axios.patch(
+        `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
+        {
+          cart: usercart,
+        }
+      );
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${data.name} added successfully `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   }
 
   //filter value
