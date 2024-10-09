@@ -28,6 +28,7 @@ const Product = (props) => {
     name: name,
     price: price,
     count: 1,
+    image: image,
   });
 
   return (

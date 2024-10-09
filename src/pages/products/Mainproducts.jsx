@@ -28,9 +28,12 @@ const Mainproducts = () => {
 
   //post to cart
   function postusercart(data) {
+    let product = data;
+    let newcart = usercart;
+    newcart.push(product);
+    setusercart(newcart);
     axios.patch(`https://booming-odd-lark.glitch.me/users/${localStorage.ud}`, {
-      // cart: [],
-      cart: [...usercart, data],
+      cart: usercart,
     });
   }
 
