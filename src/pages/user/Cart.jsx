@@ -34,8 +34,8 @@ const Cart = () => {
         getdata();
     }, []);
 
-    const numOfItems = (idOfitem, sign) => {
-        let selectedItem = apiData[idOfitem - 1];
+    const numOfItems = (codeOfitem, idOfitem, sign) => {
+        let selectedItem = apiData.find((i) => i.code == codeOfitem);
         sign == "-"
             ? selectedItem.count > 1
                 ? (selectedItem.count -= 1)
@@ -53,9 +53,11 @@ const Cart = () => {
         });
     };
 
-    const dele = (idOfitem) => {
+    const dele = (codeOfitem) => {
+        console.log(codeOfitem);
+
         let temp = apiData;
-        let newObj = temp.filter((item) => item.id != idOfitem);
+        let newObj = temp.filter((item) => item.code != codeOfitem);
         editApiData(newObj);
         axios({
             method: "patch",

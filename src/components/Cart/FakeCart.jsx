@@ -24,14 +24,14 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                     <button
                         className="size-10 rounded-md bg-gray-200"
                         onClick={() => {
-                            numOfItems(item.id, "-");
+                            numOfItems(item.code, item.id, "-");
                         }}>
                         -
                     </button>
                     <span className="text-xl">{item.count}</span>
                     <button
                         className="size-10 rounded-md bg-gray-200"
-                        onClick={() => numOfItems(item.id, "+")}>
+                        onClick={() => numOfItems(item.code, item.id, "+")}>
                         +
                     </button>
                 </div>
@@ -46,7 +46,7 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                 <button
                     className="flex justify-center items-center size-8 bg-gray-200 rounded-l-full cxs:rounded-t-full cxs:rounded-b-none csm:rounded-t-full csm:rounded-b-none"
                     onClick={() => {
-                        dele(item.id);
+                        dele(item.code);
                     }}>
                     <svg
                         stroke="currentColor"
