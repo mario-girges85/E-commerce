@@ -7,6 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { Dashboard } from "./Dashboard";
 
 function NavList() {
   return (
@@ -29,23 +30,8 @@ function NavList() {
       >
         Products
       </Typography>
-      <Typography
-        as={Link}
-        to="/admin/dashboard"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        Dashboard
-      </Typography>
-      <Typography
-        as={Link}
-        to="/login"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-      >
-        Log in
+      <Typography variant="small" color="blue-gray" className="p-1 font-medium">
+        <Dashboard />
       </Typography>
       <Typography
         as={Link}
@@ -55,6 +41,15 @@ function NavList() {
         className="p-1 font-medium"
       >
         Cart
+      </Typography>
+      <Typography
+        as={Link}
+        to="/login"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+      >
+        Log in
       </Typography>
     </ul>
   );
