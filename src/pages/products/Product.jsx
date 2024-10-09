@@ -28,12 +28,9 @@ const Product = (props) => {
     name: name,
     price: price,
     count: 1,
+    image: image,
   });
 
-  function addtocart() {
-    setusercart([...usercart, productcart]);
-    postusercart();
-  }
   return (
     <div className="flex justify-center items-center w-full cursor-pointer sm:w-[40%] md:w-[30%] lg:w-56">
       <Card className=" flex justify-center items-center w-fit overflow-hidden">
@@ -75,7 +72,7 @@ const Product = (props) => {
           <Typography className="mr-2">{price}$</Typography>
           <Typography className="font-normal text-white">
             <Button
-              onClick={() => addtocart()}
+              onClick={() => postusercart(productcart)}
               className="text-nowrap pr-[10%] pl-[10%]"
             >
               Add to Cart

@@ -26,8 +26,12 @@ const Mainproducts = () => {
   }
   useEffect(() => getusercart(), []);
 
-  //post new cart
-  function postusercart() {
+  //post to cart
+  function postusercart(data) {
+    let product = data;
+    let newcart = usercart;
+    newcart.push(product);
+    setusercart(newcart);
     axios.patch(`https://booming-odd-lark.glitch.me/users/${localStorage.ud}`, {
       cart: usercart,
     });
@@ -59,7 +63,7 @@ const Mainproducts = () => {
     }
   };
 
-  //getting data
+  //getting products data
   const getdata = () => {
     axios
       .get("https://booming-odd-lark.glitch.me/products")
