@@ -10,7 +10,6 @@ const Cart = () => {
         { count: 0, price: 0 },
     ]);
     const [apiempty, eapidempty] = useState(false);
-
     const navigate = useNavigate();
     const goproducts = (path) => {
         navigate(path);
@@ -34,28 +33,34 @@ const Cart = () => {
         getdata();
     }, []);
 
-    const numOfItems = (codeOfitem, idOfitem, sign) => {
-        let selectedItem = apiData.find((i) => i.code == codeOfitem);
-        sign == "-"
-            ? selectedItem.count > 1
-                ? (selectedItem.count -= 1)
-                : selectedItem.count
-            : (selectedItem.count += 1);
-        let fullcart = [...apiData];
-        fullcart[idOfitem - 1] = selectedItem;
-        editApiData(fullcart);
+    const numOfItems = (codeOfitem, sign) => {
+        let temp = [...apiData];
+        const newarray = temp.map((item) => {
+            // if (item.code == codeOfitem && sign == "+") {
+            //     item.count += 1;
+            // } else if (item.code == codeOfitem && sign == "-") {
+            //     item.count > 1 ? (item.count -= 1) : item.count;
+            // }
+            item.code == codeOfitem && sign == "+"
+                ? (item.count += 1)
+                : item.code == codeOfitem && sign == "-"
+                ? item.count > 1
+                    ? (item.count -= 1)
+                    : item.count
+                : item;
+            return item;
+        });
+        editApiData(newarray);
         axios({
             method: "patch",
             url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
             data: {
-                cart: fullcart,
+                cart: newarray,
             },
         });
     };
 
     const dele = (codeOfitem) => {
-        console.log(codeOfitem);
-
         let temp = apiData;
         let newObj = temp.filter((item) => item.code != codeOfitem);
         editApiData(newObj);
