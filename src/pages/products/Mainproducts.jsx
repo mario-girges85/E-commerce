@@ -15,6 +15,24 @@ const Mainproducts = () => {
   const [productsdata, setproductsdata] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  //get old cart data
+  const [usercart, setusercart] = useState([]);
+  function getusercart() {
+    axios
+      .get(`https://booming-odd-lark.glitch.me/users/${localStorage.ud}`)
+      .then(({ data }) => {
+        setusercart(data.cart);
+      });
+  }
+  useEffect(() => getusercart(), []);
+
+  //post new cart
+  function postusercart() {
+    axios.patch(`https://booming-odd-lark.glitch.me/users/${localStorage.ud}`, {
+      cart: usercart,
+    });
+  }
+
   //filter value
   const [fromValue, setfromValue] = useState(0);
   const [toValue, settoValue] = useState(0);
@@ -141,8 +159,15 @@ const Mainproducts = () => {
       {/*products*/}
       <div className="mt-5 m-auto flex flex-row flex-wrap gap-5 justify-evenly items-center">
         {filteredProducts.map((product) => (
-          <Product key={product.id} data={product} />
+          <Product
+            key={product.id}
+            usercart={usercart}
+            setusercart={setusercart}
+            data={product}
+            postusercart={postusercart}
+          />
         ))}
+        <Button onClick={() => console.log(usercart)}>show cart</Button>
       </div>
     </div>
   );

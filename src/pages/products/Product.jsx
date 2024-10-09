@@ -10,9 +10,10 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
+import axios from "axios";
 import { useState, useEffect } from "react";
-const Product = ({
-  data: {
+const Product = (props) => {
+  const {
     id,
     name,
     description,
@@ -20,9 +21,19 @@ const Product = ({
     category,
     image,
     rating: { rate, count },
-  },
-}) => {
-  // console.log(image);
+  } = props.data;
+  const { usercart, setusercart, postusercart } = props;
+  const [productcart] = useState({
+    id: id,
+    name: name,
+    price: price,
+    count: 1,
+  });
+
+  function addtocart() {
+    setusercart([...usercart, productcart]);
+    postusercart();
+  }
   return (
     <div className="flex justify-center items-center w-full cursor-pointer sm:w-[40%] md:w-[30%] lg:w-56">
       <Card className=" flex justify-center items-center w-fit overflow-hidden">
@@ -63,7 +74,10 @@ const Product = ({
         <CardFooter className="flex items-center justify-between ">
           <Typography className="mr-2">{price}$</Typography>
           <Typography className="font-normal text-white">
-            <Button className="text-nowrap pr-[10%] pl-[10%]">
+            <Button
+              onClick={() => addtocart()}
+              className="text-nowrap pr-[10%] pl-[10%]"
+            >
               Add to Cart
             </Button>
           </Typography>
