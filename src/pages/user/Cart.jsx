@@ -23,7 +23,6 @@ const Cart = () => {
         })
             .then(({ data }) => {
                 editApiData(data.cart);
-                console.log(data);
                 return data.cart;
             })
             .then((cart) => {
@@ -80,55 +79,42 @@ const Cart = () => {
                     Shopping Cart
                 </span>
             </div>
-            <div className="flex flex-row justify-between w-11/12 min-h-[100%] m-auto cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center ">
-                <div className="flex flex-col items-center w-full">
-                    <div
-                        className="flex justify-around w-11/12 m-auto my-4 font-bold "
-                        style={{
-                            display: apiempty ? "flex" : "none",
-                        }}>
-                        <span className="w-16 text-center">Name</span>
-                        <span className="w-16 text-center">Price</span>
-                        <span className="w-[100px] text-center">Items</span>
-                        <span className="w-16 text-center">Delete</span>
-                        <span className="w-20 text-center">Total</span>
-                    </div>
-                    <div>
-                        {apiempty ? (
-                            apiData.map((item, index) => {
-                                return (
-                                    <div key={index}>
-                                        <FakeCart
-                                            item={item}
-                                            numOfItems={numOfItems}
-                                            dele={dele}
-                                        />
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            <div className="flex flex-col items-center gap-5 w-[500px] my-5  cxs:w-[300px] cxs:h-[300px]">
-                                <img
-                                    src={EmptyCartImage}
-                                    alt="Empty Cart Image"
-                                    className=" w-[300px] h-[300px]"
-                                />
-                                <span className="font-bold">
-                                    Cart is Feeling Light ?
-                                </span>
-                                <button
-                                    onClick={() => {
-                                        goproducts("/products");
-                                    }}
-                                    className=" flex justify-center items-center w-1/2 h-10 text-center bg-black text-white rounded-lg text-sm cxs:py-[20px]">
-                                    Go Back to Products
-                                </button>
-                            </div>
-                        )}
-                    </div>
+            <div className="flex flex-row justify-evenly w-full min-h-[100%] cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center clg:flex-col clg:items-center ">
+                <div className="flex flex-col items-center w-11/12 cxl:w-2/3 c2xl:w-2/3 gap-7 cxs:mb-5">
+                    {apiempty ? (
+                        apiData.map((item, index) => {
+                            return (
+                                <div key={index} className="w-full">
+                                    <FakeCart
+                                        item={item}
+                                        numOfItems={numOfItems}
+                                        dele={dele}
+                                    />
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <div className="flex flex-col items-center gap-5 w-[500px] my-5  cxs:w-[300px] cxs:h-[300px]">
+                            <img
+                                src={EmptyCartImage}
+                                alt="Empty Cart Image"
+                                className=" w-[300px] h-[300px]"
+                            />
+                            <span className="font-bold">
+                                Cart is Feeling Light ?
+                            </span>
+                            <button
+                                onClick={() => {
+                                    goproducts("/products");
+                                }}
+                                className=" flex justify-center items-center w-1/2 h-10 text-center bg-black text-white rounded-lg text-sm cxs:py-[20px]">
+                                Go Back to Products
+                            </button>
+                        </div>
+                    )}
                 </div>
                 <div
-                    className=" flex flex-col items-center gap-5 w-[350px] h-[400px] m-5 p-3 rounded-md shadow-xl  cxs:w-11/12 csm:w-11/12 cmd:w-11/12"
+                    className=" flex flex-col items-center gap-5 w-[350px] h-[400px] p-3 rounded-md shadow-xl cxs:w-11/12 csm:w-11/12 cmd:w-11/12 clg:w-11/12 cxl:w-[300px]"
                     style={{
                         display: apiempty ? "flex" : "none",
                     }}>
