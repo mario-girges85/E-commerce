@@ -21,13 +21,14 @@ const Product = (props) => {
     category,
     image,
     rating: { rate, count },
+    code: code,
   } = props.data;
   const { usercart, setusercart, postusercart } = props;
   const [productcart] = useState({
-    id: id,
+    count: 1,
+    code: code,
     name: name,
     price: price,
-    count: 1,
     image: image,
   });
 
