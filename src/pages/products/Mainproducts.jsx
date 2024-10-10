@@ -9,7 +9,7 @@ import {
   Option,
   Button,
 } from "@material-tailwind/react";
-
+import Swal from "sweetalert2";
 const Mainproducts = () => {
   //products data
   const [productsdata, setproductsdata] = useState([]);
@@ -40,6 +40,13 @@ const Mainproducts = () => {
           cart: usercart,
         }
       );
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${data.name} count = ${data.count} `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } else {
       newcart.push(product);
       setusercart(newcart);
@@ -49,6 +56,13 @@ const Mainproducts = () => {
           cart: usercart,
         }
       );
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${data.name} added successfully `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }
 
