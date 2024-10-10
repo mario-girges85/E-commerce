@@ -21,9 +21,9 @@ const Product = (props) => {
     category,
     image,
     rating: { rate, count },
-    code: code,
+    code,
   } = props.data;
-  const { usercart, setusercart, postusercart } = props;
+  const { postusercart } = props;
   const [productcart] = useState({
     count: 1,
     code: code,
@@ -31,6 +31,7 @@ const Product = (props) => {
     price: price,
     image: image,
   });
+  console.log(props.data);
 
   return (
     <div className="flex justify-center items-center w-full cursor-pointer sm:w-[40%] md:w-[30%] lg:w-56">
