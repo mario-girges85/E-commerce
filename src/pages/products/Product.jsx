@@ -31,7 +31,6 @@ const Product = (props) => {
     price: price,
     image: image,
   });
-  console.log(props.data);
 
   return (
     <div className="flex justify-center items-center w-full cursor-pointer sm:w-[40%] md:w-[30%] lg:w-56">

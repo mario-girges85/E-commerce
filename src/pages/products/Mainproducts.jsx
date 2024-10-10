@@ -41,7 +41,9 @@ const Mainproducts = () => {
         }
       );
       Swal.fire({
-        position: "top-end",
+        width: "300px",
+
+        position: "bottom-end",
         icon: "success",
         title: `${data.name} count = ${data.count} `,
         showConfirmButton: false,
@@ -57,7 +59,9 @@ const Mainproducts = () => {
         }
       );
       Swal.fire({
-        position: "top-end",
+        width: "300px",
+
+        position: "bottom-end",
         icon: "success",
         title: `${data.name} added successfully `,
         showConfirmButton: false,
