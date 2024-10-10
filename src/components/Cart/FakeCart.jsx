@@ -4,15 +4,15 @@ const FakeCart = ({ item, numOfItems, dele }) => {
     const [deleAnimation, edeleAnimation] = useState(false);
     return (
         <div
-            className="flex flex-row flex-wrap overflow-hidden relative border-solid border-2 border-sky-500 rounded-md duration-500 ease-in-out"
+            className="flex flex-row flex-wrap overflow-hidden relative border-solid border-2 border-sky-500 rounded-md duration-500 ease-in translate-x-full"
             style={{
                 transform:
                     deleAnimation == item.code
-                        ? "translateX(-100%)"
+                        ? "translateX(-200%)"
                         : "translateX(0)",
             }}>
             <div
-                className="relative z-10 flex justify-between items-center w-full h-28 rounded-md cxs:flex-col cxs:h-fit csm:flex-col csm:h-fit bg-white duration-100 ease-in-out"
+                className="relative z-10 flex justify-between items-center w-full h-28 rounded-md cxs:flex-col cxs:h-fit csm:flex-col csm:h-fit bg-white duration-500"
                 style={{
                     transform:
                         deleAnimation == item.code
@@ -71,7 +71,7 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                             edeleAnimation(item.code);
                             setTimeout(() => {
                                 dele(item.code);
-                            }, 200);
+                            }, 500);
                         }}>
                         <svg
                             stroke="currentColor"
