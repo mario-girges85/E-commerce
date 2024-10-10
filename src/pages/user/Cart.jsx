@@ -3,13 +3,11 @@ import FakeCart from "../../components/Cart/FakeCart";
 import { useEffect, useState } from "react";
 import EmptyCartImage from "../images/Empty_Cart.svg";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "@material-tailwind/react";
 
 const Cart = () => {
-    const [apiData, editApiData] = useState([
-        { count: 0, price: 0 },
-        { count: 0, price: 0 },
-    ]);
-    const [apiempty, eapidempty] = useState(false);
+    const [apiData, editApiData] = useState([]);
+    const [arrived, earrived] = useState(false);
     const navigate = useNavigate();
     const goproducts = (path) => {
         navigate(path);
@@ -19,14 +17,11 @@ const Cart = () => {
         axios({
             method: "get",
             url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
-        })
-            .then(({ data }) => {
-                editApiData(data.cart);
-                return data.cart;
-            })
-            .then((cart) => {
-                cart.length == 0 ? eapidempty(false) : eapidempty(true);
-            });
+        }).then(({ data }) => {
+            editApiData(data.cart);
+            earrived(true);
+            return data.cart;
+        });
     };
 
     useEffect(() => {
@@ -81,26 +76,19 @@ const Cart = () => {
     };
     return (
         <div className="flex flex-col gap-5 w-full h-fit select-none my-8 font-Inria">
+            {/* Heding */}
             <div className="flex justify-center w-full">
                 <span className="flex justify-center items-center w-fit size-12 font-bold">
                     Shopping Cart
                 </span>
             </div>
+            {/* Parent */}
             <div className="flex flex-row justify-evenly w-full min-h-[100%] cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center clg:flex-col clg:items-center ">
+                {/* Items */}
                 <div className="flex flex-col items-center w-11/12 cxl:w-2/3 c2xl:w-2/3 gap-7 cxs:mb-5">
-                    {apiempty ? (
-                        apiData.map((item, index) => {
-                            return (
-                                <div key={index} className="w-full">
-                                    <FakeCart
-                                        item={item}
-                                        numOfItems={numOfItems}
-                                        dele={dele}
-                                    />
-                                </div>
-                            );
-                        })
-                    ) : (
+                    {apiData.length == 0 && !arrived ? (
+                        <Spinner className="h-12 w-12" />
+                    ) : apiData.length == 0 && arrived ? (
                         <div className="flex flex-col items-center gap-5 w-[500px] my-5  cxs:w-[300px] cxs:h-[300px]">
                             <img
                                 src={EmptyCartImage}
@@ -118,12 +106,26 @@ const Cart = () => {
                                 Go Back to Products
                             </button>
                         </div>
+                    ) : apiData.length != 0 && arrived ? (
+                        apiData.map((item, index) => (
+                            <div key={index} className="w-full">
+                                <FakeCart
+                                    item={item}
+                                    numOfItems={numOfItems}
+                                    dele={dele}
+                                />
+                            </div>
+                        ))
+                    ) : (
+                        console.log("case 0")
                     )}
                 </div>
+                {/* Checkout */}
                 <div
                     className=" flex flex-col items-center gap-5 w-[350px] h-[400px] p-3 rounded-md shadow-xl cxs:w-11/12 csm:w-11/12 cmd:w-11/12 clg:w-11/12 cxl:w-[300px]"
                     style={{
-                        display: apiempty ? "flex" : "none",
+                        display:
+                            apiData.length != 0 && arrived ? "flex" : "none",
                     }}>
                     <span className="my-3">Summary</span>
                     <hr className="w-11/12 text-black " />
