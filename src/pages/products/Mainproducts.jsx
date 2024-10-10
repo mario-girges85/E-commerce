@@ -200,7 +200,6 @@ const Mainproducts = () => {
             postusercart={postusercart}
           />
         ))}
-        <Button onClick={() => console.log(usercart)}>show cart</Button>
       </div>
     </div>
   );
