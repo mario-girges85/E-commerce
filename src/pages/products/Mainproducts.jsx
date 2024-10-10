@@ -30,11 +30,26 @@ const Mainproducts = () => {
   function postusercart(data) {
     let product = data;
     let newcart = usercart;
-    newcart.push(product);
-    setusercart(newcart);
-    axios.patch(`https://booming-odd-lark.glitch.me/users/${localStorage.ud}`, {
-      cart: usercart,
-    });
+    if (usercart.some((item) => item.name === data.name)) {
+      const index = newcart.findIndex((item) => item.name == data.name);
+      newcart[index].count += 1;
+      setusercart(newcart);
+      axios.patch(
+        `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
+        {
+          cart: usercart,
+        }
+      );
+    } else {
+      newcart.push(product);
+      setusercart(newcart);
+      axios.patch(
+        `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
+        {
+          cart: usercart,
+        }
+      );
+    }
   }
 
   //filter value
