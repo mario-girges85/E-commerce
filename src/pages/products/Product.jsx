@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 const Product = (props) => {
   const {
     id,
+    code,
     name,
     description,
     price,
@@ -25,11 +26,19 @@ const Product = (props) => {
   } = props.data;
   const { postusercart } = props;
   const [productcart] = useState({
-    count: 1,
-    code: code,
+// <<<<<<< beshoy
+    code:code,
     name: name,
     price: price,
-    image: image,
+    count: 1,
+    image:image,
+// =======
+//     count: 1,
+//     code: code,
+//     name: name,
+//     price: price,
+//     image: image,
+// >>>>>>> master
   });
   console.log(props.data);
 
