@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Input } from "@material-tailwind/react";
+import { IconButton, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -33,7 +33,7 @@ const Add = ({ products, setProducts }) => {
           icon: "success",
           title: "Your work has been saved",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         addProduct(data);
         navigate("/admin/dashboard/products");
@@ -133,12 +133,41 @@ const Add = ({ products, setProducts }) => {
           </div>
 
           <div className="my-7 flex justify-evenly items-center">
-            <Button color="green" type="submit">
-              Save
-            </Button>
-            <Button color="red" onClick={() => navigate(-1)}>
-              Back
-            </Button>
+            <IconButton
+              variant="outlined"
+              className="hover:bg-green-600 hover:text-white hover:border-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </IconButton>
+            <IconButton
+              variant="outlined"
+              onClick={() => navigate(-1)}
+              className="hover:bg-red-600 hover:text-white hover:border-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </IconButton>
           </div>
         </form>
       </div>

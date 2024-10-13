@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Input } from "@material-tailwind/react";
+import { IconButton, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Product from "./Product";
 import Swal from "sweetalert2";
@@ -66,15 +66,15 @@ const Products = ({ products, setProducts }) => {
           <div className="w-2/6 md:w-1/3 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
               Count:{" "}
-              <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
+              <span className="bg-indigo-500 text-white px-4 py-1 rounded-full text-base">
                 {products.length}
               </span>
             </p>
           </div>
-          <div className="w-4/6 md:w-2/4 xl:w-2/5 mb-4 md:mb-6 lg:mb-8 text-center">
+          <div className="w-3/6 md:w-2/4 xl:w-2/5 mb-4 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
               Last added:{" "}
-              <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
+              <span className="bg-indigo-500 text-white px-4 py-1 rounded-full text-base">
                 {products[products.length - 1]?.name?.substring(0, 8) || "N/A"}
               </span>
             </p>
@@ -82,9 +82,20 @@ const Products = ({ products, setProducts }) => {
         </div>
         <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
           <Link to="/admin/dashboard/products/add">
-            <Button color="green" className="w-2/5 md:w-1/2 lg:w-1/3 xl:w-1/4">
-              Add
-            </Button>
+            <IconButton variant="outlined" className="rounded-full hover:bg-green-600 hover:text-white hover:border-none">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </IconButton>
           </Link>
         </div>
       </div>

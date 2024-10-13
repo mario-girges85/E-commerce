@@ -1,40 +1,44 @@
 import React from "react";
-import { Button, IconButton } from "@material-tailwind/react";
+import { IconButton } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
-const User = ({
-  user: { id, firstName, lastName, email, role },
-  handleDeleteUser,
-  handleRoleChange,
+const Order = ({
+  order: {
+    id,
+    user: { name, email },
+    order: { title, price, quantity },
+  },
 }) => {
   return (
     <tr key={id} className="border-b border-gray-200 text-center">
-      <td className="py-3">{firstName + lastName}</td>
+      <td className="py-3">{name}</td>
       <td className="py-3">
         {email.length >= 10 ? email.substring(0, 10) : email}
       </td>
-      <td className="py-3">{role}</td>
+      <td className="py-3">
+        {title} Price: {price} Count: {quantity} = {price * quantity}
+      </td>
       <td className="py-3 px-3 flex flex-col lg:flex-row items-center lg:justify-evenly gap-y-1">
-        {role === "admin" ? (
-          <Button
-            className="w-full lg:w-1/2"
-            color="green"
-            onClick={() => handleRoleChange(id, "user")}
-          >
-            Make User
-          </Button>
-        ) : (
-          <Button
-            className="w-full lg:w-1/2"
-            color="blue"
-            onClick={() => handleRoleChange(id, "admin")}
-          >
-            Make Admin
-          </Button>
-        )}
         <IconButton
-          variant="text"
-          onClick={() => handleDeleteUser(id)}
-          className="hover:text-red-600 hover:bg-white w-full lg:w-1/2"
+          variant="outlined"
+          className="hover:bg-green-600 hover:text-white hover:border-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="size-6"
+          >
+            <path
+              fillRule="evenodd"
+              d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </IconButton>
+        <IconButton
+          variant="outlined"
+          className="hover:bg-red-600 hover:text-white hover:border-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,4 +58,4 @@ const User = ({
   );
 };
 
-export default User;
+export default Order;
