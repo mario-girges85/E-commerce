@@ -3,14 +3,7 @@ import { useState } from "react";
 const FakeCart = ({ item, numOfItems, dele }) => {
     const [deleAnimation, edeleAnimation] = useState(false);
     return (
-        <div
-            className="flex flex-row flex-wrap overflow-hidden relative border-solid border-2 border-sky-500 rounded-md duration-1000 ease-in"
-            style={{
-                transform:
-                    deleAnimation == item.code
-                        ? "translateX(-200%)"
-                        : "translateX(0)",
-            }}>
+        <div className="flex flex-row flex-wrap overflow-hidden relative border-solid border-2 border-sky-500 rounded-md">
             <div
                 className="relative z-10 flex justify-between items-center w-full h-28 rounded-md cxs:flex-col cxs:h-fit csm:flex-col csm:h-fit bg-white duration-300 "
                 style={{
