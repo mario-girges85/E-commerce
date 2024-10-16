@@ -1,37 +1,44 @@
+import React from "react";
 import { Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
-const SITEMAP = [
-  {
-    title: "Company",
-    links: ["About Us", "Careers", "Our Team", "Projects"],
-  },
-  {
-    title: "Help Center",
-    links: ["Discord", "Twitter", "GitHub", "Contact Us"],
-  },
-  {
-    title: "Resources",
-    links: ["Blog", "Newsletter", "Free Products", "Affiliate Program"],
-  },
-  {
-    title: "Products",
-    links: ["Templates", "UI Kits", "Icons", "Mockups"],
-  },
-];
+const Footer = () => {
+  const SITEMAP = [
+    {
+      title: "Company",
+      links: ["About Us", "Careers", "Our Team"],
+    },
+    {
+      title: "Support",
+      links: [
+        "Customer Service",
+        "Return Policy",
+        "Contact Us",
+        "Terms and Conditions",
+      ],
+    },
+    // {
+    //   title: "Resources",
+    //   links: ["Blog", "Free Products", "Affiliate Program"],
+    // },
+    // {
+    //   title: "Products",
+    //   links: ["Templates", "UI Kits", "Icons", "Mockups"],
+    // },
+  ];
 
-const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
-function Footer() {
   return (
-    <footer className=" w-full  ">
-      <div className="mx-auto w-full max-w-7xl px-8">
-        <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative   shadow-blue-gray-500 w-full dark:bg-black dark:shadow-light-green-600 ">
+      <div className="mx-auto w-full  px-8 ">
+        <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 ">
           {SITEMAP.map(({ title, links }, key) => (
             <div key={key} className="w-full">
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="mb-4 font-bold uppercase opacity-50"
+                className="mb-4 font-extrabold uppercase text-blue-gray-500  dark:text-light-green-600"
               >
                 {title}
               </Typography>
@@ -41,34 +48,34 @@ function Footer() {
                     key={key}
                     as="li"
                     color="blue-gray"
-                    className="font-normal"
+                    className="font-normal dark:text-white"
                   >
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="inline-block py-1 pr-2 transition-transform hover:scale-105"
                     >
                       {link}
-                    </a>
+                    </Link>
                   </Typography>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-        <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
+        <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between ">
           <Typography
             variant="small"
-            className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0"
+            className="mb-4 text-center font-normal text-blue-gray-500 md:mb-0 dark:text-light-green-600"
           >
             &copy; {currentYear}{" "}
-            <a href="https://material-tailwind.com/">Material Tailwind</a>. All
-            Rights Reserved.
+            <Link to="https://material-tailwind.com/">Material Tailwind</Link>.
+            All Rights Reserved.
           </Typography>
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
             <Typography
-              as="a"
-              href="#"
-              className="opacity-80 transition-opacity hover:opacity-100"
+              as={Link}
+              to="#"
+              className="opacity-80 transition-opacity hover:opacity-100 dark:text-white"
             >
               <svg
                 className="h-5 w-5"
@@ -84,9 +91,9 @@ function Footer() {
               </svg>
             </Typography>
             <Typography
-              as="a"
-              href="#"
-              className="opacity-80 transition-opacity hover:opacity-100"
+              as={Link}
+              to="#"
+              className="opacity-80 transition-opacity hover:opacity-100 dark:text-white"
             >
               <svg
                 className="h-5 w-5"
@@ -102,9 +109,9 @@ function Footer() {
               </svg>
             </Typography>
             <Typography
-              as="a"
-              href="#"
-              className="opacity-80 transition-opacity hover:opacity-100"
+              as={Link}
+              to="#"
+              className="opacity-80 transition-opacity hover:opacity-100 dark:text-white"
             >
               <svg
                 className="h-5 w-5"
@@ -116,9 +123,9 @@ function Footer() {
               </svg>
             </Typography>
             <Typography
-              as="a"
-              href="#"
-              className="opacity-80 transition-opacity hover:opacity-100"
+              as={Link}
+              to="#"
+              className="opacity-80 transition-opacity hover:opacity-100 dark:text-white"
             >
               <svg
                 className="h-5 w-5"
@@ -134,9 +141,9 @@ function Footer() {
               </svg>
             </Typography>
             <Typography
-              as="a"
-              href="#"
-              className="opacity-80 transition-opacity hover:opacity-100"
+              as={Link}
+              to="#"
+              className="opacity-80 transition-opacity hover:opacity-100 dark:text-white"
             >
               <svg
                 className="h-5 w-5"
@@ -156,6 +163,12 @@ function Footer() {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;
+
+// export function FooterWithSitemap() {
+//   return (
+
+//   );
+// }
