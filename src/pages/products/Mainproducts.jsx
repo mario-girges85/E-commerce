@@ -51,6 +51,7 @@ const Mainproducts = () => {
           cart: usercart,
         }
       );
+
       // Swal.fire({
       //   position: "top-end",
       //   icon: "success",
@@ -71,6 +72,7 @@ const Mainproducts = () => {
           cart: usercart,
         }
       );
+
       // Swal.fire({
       //   position: "top-end",
       //   icon: "success",
@@ -157,12 +159,12 @@ const Mainproducts = () => {
   }, [fromValue, toValue, category]);
 
   return (
-    <div className="flex flex-col gap-3 justify-between items-start w-[85%] m-auto pt-4">
+    <div className="flex flex-col dark:bg-backcolor gap-3 justify-between items-start px-20 pt-4">
       {/**=================================filter====================================================== */}
       <div>
         <React.Fragment>
           <h1
-            className="cursor-pointer p-3 text-blue-gray-900 font-bold underline underline-offset-8"
+            className="cursor-pointer dark:text-maincolor p-3 text-blue-gray-900 font-bold underline underline-offset-8"
             onClick={openDrawer}
           >
             Filter
@@ -170,11 +172,12 @@ const Mainproducts = () => {
           <Drawer
             open={open}
             onClose={closeDrawer}
-            className="flex flex-col justify-start items-center gap-4 w-[100%] p-3"
+            className="flex flex-col justify-start items-center gap-4 w-[100%] p-3 dark:bg-backcolor_top"
           >
             <div className="flex flex-col justify-start items-start gap-4 w-[100%] p-3 border-solid border-b-2 border-gray-400">
-              <h1 className="w-full text-nowrap">Price</h1>
+              <h1 className="w-full text-nowrap dark:text-white">Price</h1>
               <Input
+                color={localStorage.theme == "dark" ? "white" : "black"}
                 label="From"
                 type="number"
                 min="0"
@@ -182,6 +185,8 @@ const Mainproducts = () => {
                 onChange={check_from}
               />
               <Input
+                // className="dark:text-white dark:border-white"
+                color={localStorage.theme == "dark" ? "white" : "black"}
                 label="To"
                 type="number"
                 min="0"
@@ -191,11 +196,12 @@ const Mainproducts = () => {
             </div>
 
             <div className="w-full flex flex-col justify-start items-start gap-4 p-3">
-              <h1>Category</h1>
+              <h1 className="dark:text-white">Category</h1>
               <Select
                 label="Select category"
                 value={category}
                 onChange={(val) => setcategory(val)}
+                // color={localStorage.theme == "dark" ? "white" : "black"}
               >
                 <Option value="All">All</Option>
                 <Option value="Electronics">Electronics</Option>
@@ -209,7 +215,7 @@ const Mainproducts = () => {
       {/**======================================================================================= */}
 
       {/*products*/}
-      <div className="mt-5 m-auto flex flex-row flex-wrap gap-5 justify-evenly items-center">
+      <div className="mt-5 m-auto flex flex-row flex-wrap gap-5 justify-evenly items-center ">
         {filteredProducts.map((product) => (
           <Product
             key={product.id}
