@@ -25,7 +25,18 @@ const Mainproducts = () => {
       });
   }
   useEffect(() => getusercart(), []);
-
+  // alert
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
   //post to cart
   function postusercart(data) {
     let product = data;
@@ -40,14 +51,17 @@ const Mainproducts = () => {
           cart: usercart,
         }
       );
-      Swal.fire({
-        width: "300px",
 
-        position: "bottom-end",
+      // Swal.fire({
+      //   position: "top-end",
+      //   icon: "success",
+      //   title: `${data.name} count = ${data.count} `,
+      //   showConfirmButton: false,
+      //   timer: 1500,
+      // });
+      Toast.fire({
         icon: "success",
-        title: `${data.name} count = ${data.count} `,
-        showConfirmButton: false,
-        timer: 1500,
+        title: `${data.name} added successfully`,
       });
     } else {
       newcart.push(product);
@@ -58,14 +72,17 @@ const Mainproducts = () => {
           cart: usercart,
         }
       );
-      Swal.fire({
-        width: "300px",
 
-        position: "bottom-end",
+      // Swal.fire({
+      //   position: "top-end",
+      //   icon: "success",
+      //   title: `${data.name} added successfully `,
+      //   showConfirmButton: false,
+      //   timer: 1500,
+      // });
+      Toast.fire({
         icon: "success",
         title: `${data.name} added successfully `,
-        showConfirmButton: false,
-        timer: 1500,
       });
     }
   }

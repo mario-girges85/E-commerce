@@ -25,10 +25,10 @@ const Product = (props) => {
   } = props.data;
   const { postusercart } = props;
   const [productcart] = useState({
-    count: 1,
     code: code,
     name: name,
     price: price,
+    count: 1,
     image: image,
   });
 
