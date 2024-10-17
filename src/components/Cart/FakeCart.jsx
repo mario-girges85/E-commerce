@@ -3,16 +3,16 @@ import { useState } from "react";
 const FakeCart = ({ item, numOfItems, dele }) => {
     const [deleAnimation, edeleAnimation] = useState(false);
     return (
-        <div className="flex flex-row flex-wrap overflow-hidden relative border-solid border-2 border-sky-500 rounded-md">
+        <div className="flex flex-row flex-wrap overflow-hidden relative border-solid border-2 border-sky-500 rounded-md dark:text-white">
             <div
-                className="relative z-10 flex justify-between items-center w-full h-28 rounded-md cxs:flex-col cxs:h-fit csm:flex-col csm:h-fit bg-white duration-300 "
+                className="relative z-10 flex justify-between items-center w-full h-28 rounded-md cxs:flex-col cxs:h-fit csm:flex-col csm:h-fit bg-white duration-300 dark:bg-backcolor"
                 style={{
                     transform:
                         deleAnimation == item.code
                             ? "translateX(-100%)"
                             : "translateX(0)",
                 }}>
-                <div className="flex flex-col justify-start items-center gap-5 w-1/5 h-full cxs:justify-evenly cxs:w-full cxs:gap-0 cxs:h-32 csm:justify-evenly csm:w-full csm:gap-0 csm:h-32">
+                <div className="flex flex-col justify-start items-center gap-5 w-1/3 h-full cxs:justify-evenly cxs:w-full cxs:gap-0 cxs:h-32 csm:justify-evenly csm:w-full csm:gap-0 csm:h-32">
                     <span className="w-full text-center size-5 font-bold font-Inria cxs:w-fit csm:w-fit">
                         Product
                     </span>
@@ -37,7 +37,7 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                     </span>
                     <div className="flex justify-evenly items-center w-full ">
                         <button
-                            className="size-10 rounded-md bg-gray-200"
+                            className="size-10 rounded-md bg-gray-200 dark:bg-maincolor dark:text-black"
                             onClick={() => {
                                 numOfItems(item.code, "-");
                             }}>
@@ -45,7 +45,7 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                         </button>
                         <span className="text-xl">{item.count}</span>
                         <button
-                            className="size-10 rounded-md bg-gray-200"
+                            className="size-10 rounded-md bg-gray-200 dark:bg-maincolor dark:text-black"
                             onClick={() => numOfItems(item.code, "+")}>
                             +
                         </button>
@@ -59,7 +59,7 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                 </div>
                 <div>
                     <button
-                        className="flex justify-center items-center size-8 bg-gray-200 rounded-l-full cxs:rounded-t-full cxs:rounded-b-none csm:rounded-t-full csm:rounded-b-none"
+                        className="flex justify-center items-center size-8 bg-gray-200 rounded-l-full cxs:rounded-t-full cxs:rounded-b-none csm:rounded-t-full csm:rounded-b-none dark:bg-maincolor dark:text-black"
                         onClick={() => {
                             edeleAnimation(item.code);
                             setTimeout(() => {
@@ -80,7 +80,7 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                     </button>
                 </div>
             </div>
-            <div className="flex justify-end items-center absolute w-full h-28 bg-red-500 rounded-md csm:h-full cxs:h-full">
+            <div className="flex justify-end items-center absolute w-full h-28 bg-red-500 rounded-md csm:h-full cxs:h-full ">
                 <svg
                     className="size-10 mr-5"
                     viewBox="0 0 24 24"

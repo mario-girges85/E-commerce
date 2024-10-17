@@ -68,10 +68,10 @@ const Cart = () => {
         return total;
     };
     return (
-        <div className="flex flex-col gap-5 w-full h-fit select-none my-8 font-Inria">
+        <div className="flex flex-col gap-5 w-full h-fit py-5 select-none font-Inria dark:bg-backcolor">
             {/* Heding */}
             <div className="flex justify-center w-full">
-                <span className="flex justify-center items-center w-fit size-12 font-bold">
+                <span className="flex justify-center items-center w-fit size-12 mt-5 font-bold dark:text-maincolor">
                     Shopping Cart
                 </span>
             </div>
@@ -90,7 +90,7 @@ const Cart = () => {
                                 alt="Empty Cart Image"
                                 className=" w-[300px] h-[300px]"
                             />
-                            <span className="font-bold">
+                            <span className="font-bold dark:text-maincolor">
                                 Cart is Feeling Light ?
                             </span>
                             <button
@@ -112,39 +112,39 @@ const Cart = () => {
                             </div>
                         ))
                     ) : (
-                        // Needed it to complete syntax for else if statment
-                        // it will never go there no state to match
-                        console.log("case 0")
+                        ""
                     )}
                 </div>
                 {/* Checkout */}
                 <div
-                    className="sticky top-1/4 flex flex-col items-center gap-5 w-[350px] h-[400px] p-3 rounded-md shadow-xl cxs:w-11/12 csm:w-11/12 cmd:w-11/12 clg:w-11/12 cxl:w-[300px]"
+                    className="sticky top-1/4 flex flex-col items-center gap-5 w-[350px] h-[400px] p-3 rounded-md shadow-xl cxs:w-11/12 csm:w-11/12 cmd:w-11/12 clg:w-11/12 cxl:w-[300px] dark:outline-white dark:outline cxs:my-5 csm:my-5 cmd:my-5 clg:my-5"
                     style={{
                         display:
                             apiData.length != 0 && arrived ? "flex" : "none",
                     }}>
-                    <span className="my-3">Summary</span>
+                    <span className=" my-3 font-extrabold dark:text-maincolor">
+                        Summary
+                    </span>
                     <hr className="w-11/12 text-black " />
-                    <div className="flex justify-between w-11/12">
+                    <div className="flex justify-between w-11/12 dark:text-white">
                         <span>Subtotal</span>
                         <span>{total()}</span>
                     </div>
-                    <div className="flex justify-between w-11/12">
+                    <div className="flex justify-between w-11/12 dark:text-white">
                         <span>Taxes</span>
                         <span>{total() * 0.1}</span>
                     </div>
-                    <div className="flex justify-between w-11/12">
+                    <div className="flex justify-between w-11/12 dark:text-white">
                         <span>Shipping</span>
                         <span>FREE</span>
                     </div>
                     <hr className="w-11/12 text-black " />
-                    <div className="flex justify-between w-11/12 my-2">
+                    <div className="flex justify-between w-11/12 my-2 dark:text-white">
                         <span>Total</span>
                         <span>{total() * 0.1 + total()}</span>
                     </div>
                     <div>
-                        <button className="w-full bg-black text-white py-3 px-20 rounded-lg text-sm">
+                        <button className="w-full bg-black text-white py-3 px-20 rounded-lg text-sm dark:bg-maincolor dark:text-black">
                             CHECKOUT
                         </button>
                     </div>
