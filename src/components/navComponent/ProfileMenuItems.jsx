@@ -15,6 +15,7 @@ import {
   PowerIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 // profile menu component
 const profileMenuItems = [
@@ -79,7 +80,12 @@ export function AvatarWithUserDropdown() {
                 strokeWidth: 2,
               })}
               <Typography
-                as="span"
+                onClick={() => {
+                  isLastItem && localStorage.removeItem("ud");
+                  window.location.reload();
+                }}
+                as={Link}
+                to=""
                 variant="small"
                 className="font-normal"
                 color={isLastItem ? "red" : "inherit"}
