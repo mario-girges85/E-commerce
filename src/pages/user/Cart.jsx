@@ -28,14 +28,19 @@ const Cart = () => {
         getdata();
     }, []);
 
+    const postData = (newcart) => {
+        axios({
+            method: "patch",
+            url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
+            data: {
+                cart: newcart,
+            },
+        });
+    };
+
     const numOfItems = (codeOfitem, sign) => {
         let temp = [...apiData];
         const newarray = temp.map((item) => {
-            // if (item.code == codeOfitem && sign == "+") {
-            //     item.count += 1;
-            // } else if (item.code == codeOfitem && sign == "-") {
-            //     item.count > 1 ? (item.count -= 1) : item.count;
-            // }
             item.code == codeOfitem && sign == "+"
                 ? (item.count += 1)
                 : item.code == codeOfitem && sign == "-"
@@ -46,26 +51,14 @@ const Cart = () => {
             return item;
         });
         editApiData(newarray);
-        axios({
-            method: "patch",
-            url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
-            data: {
-                cart: newarray,
-            },
-        });
+        postData(newarray);
     };
 
     const dele = (codeOfitem) => {
         let temp = apiData;
         let newObj = temp.filter((item) => item.code != codeOfitem);
         editApiData(newObj);
-        axios({
-            method: "patch",
-            url: `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
-            data: {
-                cart: newObj,
-            },
-        });
+        postData(newObj);
     };
 
     const total = () => {
@@ -87,7 +80,9 @@ const Cart = () => {
                 {/* Items */}
                 <div className="flex flex-col items-center w-11/12 cxl:w-2/3 c2xl:w-2/3 gap-7 cxs:mb-5">
                     {apiData.length == 0 && !arrived ? (
-                        <Spinner className="h-12 w-12" />
+                        <div className="flex justify-center items-start h-[500px]">
+                            <Spinner className="h-12 w-12" />
+                        </div>
                     ) : apiData.length == 0 && arrived ? (
                         <div className="flex flex-col items-center gap-5 w-[500px] my-5  cxs:w-[300px] cxs:h-[300px]">
                             <img
@@ -117,12 +112,14 @@ const Cart = () => {
                             </div>
                         ))
                     ) : (
+                        // Needed it to complete syntax for else if statment
+                        // it will never go there no state to match
                         console.log("case 0")
                     )}
                 </div>
                 {/* Checkout */}
                 <div
-                    className=" flex flex-col items-center gap-5 w-[350px] h-[400px] p-3 rounded-md shadow-xl cxs:w-11/12 csm:w-11/12 cmd:w-11/12 clg:w-11/12 cxl:w-[300px]"
+                    className="sticky top-1/4 flex flex-col items-center gap-5 w-[350px] h-[400px] p-3 rounded-md shadow-xl cxs:w-11/12 csm:w-11/12 cmd:w-11/12 clg:w-11/12 cxl:w-[300px]"
                     style={{
                         display:
                             apiData.length != 0 && arrived ? "flex" : "none",
