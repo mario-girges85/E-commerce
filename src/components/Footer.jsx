@@ -30,7 +30,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative   shadow-blue-gray-500 w-full dark:bg-black dark:shadow-light-green-600 ">
+    <footer className="relative   shadow-blue-gray-500 w-full dark:bg-backcolor  ">
       <div className="mx-auto w-full  px-8 ">
         <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 ">
           {SITEMAP.map(({ title, links }, key) => (
@@ -38,7 +38,7 @@ const Footer = () => {
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="mb-4 font-extrabold uppercase text-blue-gray-500  dark:text-light-green-600"
+                className="mb-4 font-extrabold uppercase text-blue-gray-500  dark:text-maincolor"
               >
                 {title}
               </Typography>
@@ -63,14 +63,6 @@ const Footer = () => {
           ))}
         </div>
         <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between ">
-          <Typography
-            variant="small"
-            className="mb-4 text-center font-normal text-blue-gray-500 md:mb-0 dark:text-light-green-600"
-          >
-            &copy; {currentYear}{" "}
-            <Link to="https://material-tailwind.com/">Material Tailwind</Link>.
-            All Rights Reserved.
-          </Typography>
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
             <Typography
               as={Link}

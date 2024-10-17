@@ -3,11 +3,11 @@ import { Typography } from "@material-tailwind/react";
 
 const FreeShipping = () => {
   return (
-    <div className="flex flex-col mb-2 px-2 py-6 rounded-3xl shadow-2xl  shadow-blue-gray-500 md:flex-row justify-around   dark:bg-black  dark:shadow-light-green-600">
-      <div className="flex flex-col items-center mb-10 md:mb-0">
+    <div className="flex flex-col  mb-2 px-2 py-6   shadow-blue-gray-500 md:flex-row justify-around   dark:bg-backcolor  ">
+      <div className="flex flex-col items-center">
         <Typography
           variant="h2"
-          className="text-center text-blue-gray-500 dark:text-light-green-600"
+          className="text-center text-blue-gray-500 dark:text-maincolor"
         >
           Fast Secure Payments
         </Typography>
@@ -20,7 +20,7 @@ const FreeShipping = () => {
       <div className="flex flex-col items-center mb-10 md:mb-0">
         <Typography
           variant="h2"
-          className="text-blue-gray-500 dark:text-light-green-600"
+          className="text-blue-gray-500 dark:text-maincolor"
         >
           Free Shipping
         </Typography>
@@ -33,7 +33,7 @@ const FreeShipping = () => {
       <div className="flex flex-col items-center">
         <Typography
           variant="h2"
-          className="text-center text-blue-gray-500 dark:text-light-green-600"
+          className="text-center text-blue-gray-500 dark:text-maincolor"
         >
           Premium Products
         </Typography>
