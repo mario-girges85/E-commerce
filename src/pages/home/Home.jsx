@@ -3,7 +3,7 @@ import Slider from "./Slider";
 import FreeShipping from "./FreeShipping";
 const Home = () => {
   return (
-    <div>
+    <div className="flex-col justify-center dark:bg-backcolor flex gap-10 ">
       <Slider />
       <FreeShipping />
     </div>
