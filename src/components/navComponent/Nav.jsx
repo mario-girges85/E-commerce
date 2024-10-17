@@ -10,7 +10,7 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className=" items-center  flex md:flex-row md:justify-between  content-center  px-6  py-1 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 justify-between  dark:bg-backcolor dark:bg-opacity-98 ">
+    <div className=" items-center  flex-col flex-nowrap flex md:flex-row md:justify-between  content-center  px-6  py-1 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 justify-between  dark:bg-backcolor dark:bg-opacity-98 ">
       {/* Logo is always displayed and burger */}
       <div className="flex w-full  md:w-[10%] justify-between md:justify-around   items-center   ">
         <h1 className="text-blue-gray-500 dark:text-maincolor font-semibold text-2xl">
@@ -36,7 +36,9 @@ const Nav = () => {
       </div>
 
       {/* avatar */}
-      <ProfileMenuItems />
+      <div>
+        <ProfileMenuItems />
+      </div>
     </div>
   );
 };

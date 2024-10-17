@@ -8,11 +8,12 @@ import {
   Select,
   Option,
   Button,
+  Spinner,
 } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 const Mainproducts = () => {
   //products data
-  const [productsdata, setproductsdata] = useState([]);
+  const [productsdata, setproductsdata] = useState([""]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   //get old cart data
@@ -159,7 +160,7 @@ const Mainproducts = () => {
   }, [fromValue, toValue, category]);
 
   return (
-    <div className="flex flex-col dark:bg-backcolor gap-3 justify-between items-start px-20 pt-4">
+    <div className="flex  flex-col dark:bg-backcolor gap-3 justify-between items-start px-20 pt-4">
       {/**=================================filter====================================================== */}
       <div>
         <React.Fragment>
@@ -215,16 +216,23 @@ const Mainproducts = () => {
       {/**======================================================================================= */}
 
       {/*products*/}
-      <div className="mt-5 m-auto flex flex-row flex-wrap gap-5 justify-evenly items-center ">
-        {filteredProducts.map((product) => (
-          <Product
-            key={product.id}
-            usercart={usercart}
-            setusercart={setusercart}
-            data={product}
-            postusercart={postusercart}
-          />
-        ))}
+      <div className="mt-5 m-auto  flex flex-row flex-wrap gap-5 justify-evenly items-center ">
+        {productsdata == "" ? (
+          <div className="flex min-h-[80vh] flex-col justify-center items-center gap-5">
+            <Spinner className="size-12" />
+            <h1>Loading</h1>
+          </div>
+        ) : (
+          filteredProducts.map((product) => (
+            <Product
+              key={product.id}
+              usercart={usercart}
+              setusercart={setusercart}
+              data={product}
+              postusercart={postusercart}
+            />
+          ))
+        )}
       </div>
     </div>
   );
