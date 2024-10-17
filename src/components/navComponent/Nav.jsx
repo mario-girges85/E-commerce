@@ -1,13 +1,14 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import React, { useState } from "react";
 import ProfileMenuItems from "./ProfileMenuItems";
 import NavListItems from "./NavListItems";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 
 import DarkMood from "./DarkMood";
-import { Typography, Link, Button } from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 const Nav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
     return (
         <div className="flex justify-around items-center h-fit gap-5 py-2 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 dark:bg-backcolor dark:bg-opacity-98 ">
@@ -28,11 +29,23 @@ const Nav = () => {
                 </div>
             </div>
             {/* avatar */}
-            <div className={`${isMenuOpen ? "h-60" : "h-fit"}`}>
-                <ProfileMenuItems className="fit" />
-            </div>
+            <div className={`${isMenuOpen && "self-start"}`}>
+        {localStorage.ud == undefined ? (
+          <Link
+            className="text-2xl font-semibold dark:text-white dark:bg-maincolor bg-blue-gray-500 text-white rounded-lg p-2 m-2 "
+            to="/login"
+          >
+            Login
+          </Link>
+        ) : (
+          <div className={`${isMenuOpen ? "h-60" : "h-fit"}`}>
+            <ProfileMenuItems className="fit " />
+          </div>
+        )}
+      </div>
         </div>
     );
+
 };
 
 export default Nav;

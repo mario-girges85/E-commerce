@@ -6,11 +6,9 @@ import {
   CardFooter,
   Typography,
   Rating,
-  Avatar,
-  Tooltip,
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
-import axios from "axios";
+
 import { useState, useEffect } from "react";
 const Product = (props) => {
   const {
