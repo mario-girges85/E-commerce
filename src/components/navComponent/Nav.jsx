@@ -7,29 +7,29 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import DarkMood from "./DarkMood";
 import { Typography, Button } from "@material-tailwind/react";
 const Nav = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  return (
-    <div className="flex justify-around items-center h-fit gap-5 py-3 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 dark:bg-backcolor dark:bg-opacity-98 ">
-      {/* Menu Items - Hidden on mobile, displayed when the menu is toggled */}
-      <div className="flex justify-around items-center gap-[5vw] cxs:gap-0 csm:gap-0 cmd:gap-0 cxl:gap-[15vw] c2xl:gap-[15vw] cxs:flex-col csm:flex-col cmd:flex-col">
-        <h1 className="flex gap-5 text-blue-gray-500 dark:text-maincolor font-semibold text-2xl">
-          <Bars3Icon
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            class="size-8 text-gray-800 dark:text-white block clg:hidden cxl:hidden c2xl:hidden focus:outline-none"
-          />
-          Little Closet
-        </h1>
-        <div
-          className={`w-fit  md:flex md:items-center  min-w-[fit]  ${
-            isMenuOpen ? "flex" : "hidden"
-          }`}
-        >
-          <NavListItems isMenuOpen={isMenuOpen} />
-        </div>
-      </div>
-      {/* avatar */}
-      <div className={`${isMenuOpen && "self-start"}`}>
+
+    return (
+        <div className="flex justify-around items-center h-fit gap-5 py-2 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 dark:bg-backcolor dark:bg-opacity-98 ">
+            {/* Menu Items - Hidden on mobile, displayed when the menu is toggled */}
+            <div className="flex justify-around items-center gap-[5vw] cxs:gap-0 csm:gap-0 cmd:gap-0 cxl:gap-[15vw] c2xl:gap-[15vw] cxs:flex-col csm:flex-col cmd:flex-col">
+                <h1 className="flex gap-5 text-blue-gray-500 dark:text-maincolor font-semibold text-2xl">
+                    <Bars3Icon
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        class="size-8 text-gray-800 dark:text-white block clg:hidden cxl:hidden c2xl:hidden focus:outline-none"
+                    />
+                    Little Closet
+                </h1>
+                <div
+                    className={`w-fit  md:flex md:items-center  min-w-[fit]  ${
+                        isMenuOpen ? "flex" : "hidden"
+                    }`}>
+                    <NavListItems isMenuOpen={isMenuOpen} />
+                </div>
+            </div>
+            {/* avatar */}
+            <div className={`${isMenuOpen && "self-start"}`}>
         {localStorage.ud == undefined ? (
           <Link
             className="text-2xl font-semibold dark:text-white dark:bg-maincolor bg-blue-gray-500 text-white rounded-lg p-2 m-2 "
@@ -43,8 +43,9 @@ const Nav = () => {
           </div>
         )}
       </div>
-    </div>
-  );
+        </div>
+    );
+
 };
 
 export default Nav;
