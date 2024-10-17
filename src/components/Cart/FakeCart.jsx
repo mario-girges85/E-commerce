@@ -71,7 +71,7 @@ const FakeCart = ({ item, numOfItems, dele }) => {
                             fill="currentColor"
                             stroke-width="0"
                             viewBox="0 0 1024 1024"
-                            class="w-5 h-5"
+                            className="w-5 h-5"
                             height="1em"
                             width="1em"
                             xmlns="http://www.w3.org/2000/svg">

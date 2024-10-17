@@ -132,7 +132,7 @@ const Cart = () => {
                     </div>
                     <div className="flex justify-between w-11/12 dark:text-white">
                         <span>Taxes</span>
-                        <span>{total() * 0.1}</span>
+                        <span>{Math.round(total() * 0.1)}</span>
                     </div>
                     <div className="flex justify-between w-11/12 dark:text-white">
                         <span>Shipping</span>
@@ -141,7 +141,7 @@ const Cart = () => {
                     <hr className="w-11/12 text-black " />
                     <div className="flex justify-between w-11/12 my-2 dark:text-white">
                         <span>Total</span>
-                        <span>{total() * 0.1 + total()}</span>
+                        <span>{Math.round(total() * 0.1 + total())}</span>
                     </div>
                     <div>
                         <button className="w-full bg-black text-white py-3 px-20 rounded-lg text-sm dark:bg-maincolor dark:text-black">
