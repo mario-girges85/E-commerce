@@ -3,42 +3,34 @@ import React, { useState } from "react";
 import ProfileMenuItems from "./ProfileMenuItems";
 import NavListItems from "./NavListItems";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { Typography, Button } from "@material-tailwind/react";
 
+import DarkMood from "./DarkMood";
+import { Typography, Button } from "@material-tailwind/react";
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  console.log(localStorage.ud);
 
   return (
-    <div className=" items-center z-50 relative py-4  flex-col flex-nowrap flex md:flex-row     px-6 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 justify-between  dark:bg-backcolor dark:bg-opacity-98 ">
+    <div className="flex justify-around items-center h-fit gap-5 py-3 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 dark:bg-backcolor dark:bg-opacity-98 ">
       {/* Menu Items - Hidden on mobile, displayed when the menu is toggled */}
-      <div
-        className={` ${
-          isMenuOpen ? "block" : "hidden"
-        } md:flex md:items-center  min-w-[fit]  `}
-      >
-        <NavListItems isMenuOpen={isMenuOpen} />
-      </div>
-
-      {/* Logo is always displayed and burger */}
-      <div className="flex justify-between  md:justify-around   items-center   ">
-        <h1 className="text-blue-gray-500  dark:text-white font-semibold text-2xl">
-          Little Closet
-        </h1>
-        <div>
-          {/* Burger Menu Button (Only visible on mobile) */}
-
+      <div className="flex justify-around items-center gap-[5vw] cxs:gap-0 csm:gap-0 cmd:gap-0 cxl:gap-[15vw] c2xl:gap-[15vw] cxs:flex-col csm:flex-col cmd:flex-col">
+        <h1 className="flex gap-5 text-blue-gray-500 dark:text-maincolor font-semibold text-2xl">
           <Bars3Icon
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            class="h-10 w-10  text-gray-800 mr-3 dark:text-white block md:hidden focus:outline-none"
+            class="size-8 text-gray-800 dark:text-white block clg:hidden cxl:hidden c2xl:hidden focus:outline-none"
           />
+          Little Closet
+        </h1>
+        <div
+          className={`w-fit  md:flex md:items-center  min-w-[fit]  ${
+            isMenuOpen ? "flex" : "hidden"
+          }`}
+        >
+          <NavListItems isMenuOpen={isMenuOpen} />
         </div>
       </div>
-
       {/* avatar */}
-      <div>
+      <div className={`${isMenuOpen && "self-start"}`}>
         {localStorage.ud == undefined ? (
-          // <Button>log in</Button>
           <Link
             className="text-2xl font-semibold dark:text-white dark:bg-maincolor bg-blue-gray-500 text-white rounded-lg p-2 m-2 "
             to="/login"
@@ -46,7 +38,9 @@ const Nav = () => {
             Login
           </Link>
         ) : (
-          <ProfileMenuItems />
+          <div className={`${isMenuOpen ? "h-60" : "h-fit"}`}>
+            <ProfileMenuItems className="fit " />
+          </div>
         )}
       </div>
     </div>
