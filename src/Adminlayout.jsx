@@ -6,7 +6,6 @@ import Add from "./pages/admin/products/Add";
 import Edit from "./pages/admin/products/Edit";
 import View from "./pages/admin/products/View";
 import Users from "./pages/admin/users/Users";
-import Orders from "./pages/admin/orders/Orders";
 import Notfound from "./Notfound";
 import axios from "axios";
 
@@ -19,7 +18,7 @@ const Adminlayout = ({
   setOrders,
 }) => {
   return (
-    <div>
+    <div className="dark:bg-backcolor dark:text-maincolor">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -41,10 +40,6 @@ const Adminlayout = ({
         <Route
           path="/dashboard/users"
           element={<Users users={users} setUsers={setUsers} />}
-        />
-        <Route
-          path="/dashboard/orders"
-          element={<Orders orders={orders} setOrders={setOrders} />}
         />
         <Route path="/*" element={<Notfound />} />
       </Routes>

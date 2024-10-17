@@ -23,6 +23,14 @@ module.exports = withMT({
       // => @media (min-width: 1281px) { ... }
     },
     extend: {},
+    fontFamily: {
+      Inria: ["Inria Sans", "sans-serif"],
+    },
+    colors: {
+      backcolor_top: "#2D3250",
+      backcolor: "#262838",
+      maincolor: "#E3651D",
+    },
   },
   plugins: [],
 });

@@ -25,8 +25,8 @@ const View = ({ products }) => {
   };
 
   return (
-    <div className="my-12 md:my-16 container mx-auto">
-      <Card className="w-[90%] max-w-lg mx-auto bg-white rounded-lg shadow-md text-center">
+    <div className="py-12 md:py-16 container mx-auto">
+      <Card className="max-w-lg mx-auto bg-white dark:bg-backcolor dark:text-maincolor rounded-lg text-center">
         <div className="flex justify-center items-center">
           <img
             src={product?.image}
@@ -41,12 +41,12 @@ const View = ({ products }) => {
             </Typography>
           )}
           {product?.description && (
-            <Typography variant="h5" color="gray" className="my-2">
+            <Typography variant="h6" color="gray" className="my-2">
               {product.description}
             </Typography>
           )}
           {product?.category && (
-            <Typography variant="h5" className="font-bold my-2">
+            <Typography variant="h6" className="font-bold my-2">
               {product.category}
             </Typography>
           )}
@@ -59,8 +59,9 @@ const View = ({ products }) => {
         <CardFooter className="my-2 flex flex-row justify-evenly items-center">
           <IconButton
             variant="outlined"
+            color="deep-purple"
+            className="hover:bg-deep-purple-600 hover:text-white mb-2 md:mb-0"
             onClick={() => navigate(`/admin/dashboard/products/edit/${id}`)}
-            className="hover:bg-purple-600 hover:text-white hover:border-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,8 +74,9 @@ const View = ({ products }) => {
           </IconButton>
           <IconButton
             variant="outlined"
+            color="red"
             onClick={() => navigate(-1)}
-            className="hover:bg-red-600 hover:text-white hover:border-none"
+            className="hover:bg-red-600 hover:text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +86,7 @@ const View = ({ products }) => {
             >
               <path
                 fillRule="evenodd"
-                d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z"
+                d="M9.53 2.47a.75.75 0 0 1 0 1.06L4.81 8.25H15a6.75 6.75 0 0 1 0 13.5h-3a.75.75 0 0 1 0-1.5h3a5.25 5.25 0 1 0 0-10.5H4.81l4.72 4.72a.75.75 0 1 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0Z"
                 clipRule="evenodd"
               />
             </svg>

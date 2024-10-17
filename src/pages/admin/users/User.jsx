@@ -7,34 +7,29 @@ const User = ({
   handleRoleChange,
 }) => {
   return (
-    <tr key={id} className="border-b border-gray-200 text-center">
+    <tr
+      key={id}
+      className="border-b text-center dark:bg-backcolor dark:text-maincolor"
+    >
       <td className="py-3">{firstName + lastName}</td>
       <td className="py-3">
         {email.length >= 10 ? email.substring(0, 10) : email}
       </td>
       <td className="py-3">{role}</td>
-      <td className="py-3 px-3 flex flex-col lg:flex-row items-center lg:justify-evenly gap-y-1">
+      <td className="p-3 flex flex-col items-center lg:flex-row lg:justify-evenly gap-1">
         {role === "admin" ? (
-          <Button
-            className="w-full lg:w-1/2"
-            color="green"
-            onClick={() => handleRoleChange(id, "user")}
-          >
+          <Button color="green" onClick={() => handleRoleChange(id, "user")}>
             Make User
           </Button>
         ) : (
-          <Button
-            className="w-full lg:w-1/2"
-            color="blue"
-            onClick={() => handleRoleChange(id, "admin")}
-          >
+          <Button color="blue" onClick={() => handleRoleChange(id, "admin")}>
             Make Admin
           </Button>
         )}
         <IconButton
+          color="red"
           variant="text"
           onClick={() => handleDeleteUser(id)}
-          className="hover:text-red-600 hover:bg-white w-full lg:w-1/2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

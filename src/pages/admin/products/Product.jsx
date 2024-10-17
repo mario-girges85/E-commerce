@@ -4,15 +4,16 @@ import { IconButton } from "@material-tailwind/react";
 
 const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
   return (
-    <tr key={id} className="border-b border-gray-200 text-center">
+    <tr key={id} className="border-b text-center dark:bg-backcolor dark:text-maincolor">
       <td className="py-3">{name}</td>
       <td className="py-3">{price}</td>
       <td className="py-3">{category}</td>
-      <td className="px-4 py-3 flex flex-col lg:flex-row justify-center gap-y-2 md:gap-x-5 text-center">
+      <td className="px-4 py-3 flex flex-col lg:flex-row justify-center gap-1">
         <Link to={`/admin/dashboard/products/edit/${id}`}>
           <IconButton
             variant="text"
-            className="hover:text-purple-700 hover:bg-white"
+            color="deep-purple"
+            className="hover:bg-white hover:text-deep-purple-900 dark:hover:bg-backcolor dark:hover:text-deep-purple-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +28,8 @@ const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
         <Link to={`/admin/dashboard/products/view/${id}`}>
           <IconButton
             variant="text"
-            className="hover:text-amber-700 hover:bg-white"
+            color="amber"
+            className="hover:bg-white hover:text-amber-900 dark:hover:bg-backcolor dark:hover:text-amber-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -47,8 +49,9 @@ const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
         <Link>
           <IconButton
             variant="text"
+            color="red"
+            className="hover:bg-white hover:text-red-900 dark:hover:bg-backcolor dark:hover:text-red-300"
             onClick={() => deleteProduct(id)}
-            className="hover:text-red-600 hover:bg-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

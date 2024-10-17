@@ -81,10 +81,10 @@ const Users = ({ users, setUsers }) => {
   };
 
   return (
-    <div className="container mx-auto p-4 my-5 md:p-6 lg:p-8 xl:p-10">
-      <div className="w-[90%] mx-auto flex flex-col md:flex-row md:justify-between items-center mb-8 mt-5 md:mb-10 md:mt-8 lg:mb-15">
+    <div className="container mx-auto py-9 px-4 md:p-6 lg:p-8 xl:p-10">
+      <div className="flex flex-col md:flex-row md:justify-between items-center mb-8 mt-5 md:mb-10 md:mt-8 lg:mb-15">
         <h1 className="text-3xl font-bold text-center mb-5 md:mb-0">
-          User Dashboard
+          Users Managment
         </h1>
         <div className="w-full md:w-2/5">
           <Input
@@ -97,54 +97,56 @@ const Users = ({ users, setUsers }) => {
         </div>
       </div>
       <div className="flex flex-col md:flex-row flex-wrap justify-evenly items-center mb-4 md:mb-0 md:mt-2">
-        <div className="flex flex-wrap justify-evenly items-center gap-5 w-full lg:w-2/3 my-2">
-          <div className="w-1/5 md:w-1/4 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
+        <div className="flex flex-col md:flex-row justify-evenly items-center gap-2 w-full md:w-2/3 mb-2">
+          <div className="w-full md:w-1/3 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
               Total:{" "}
-              <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
+              <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
                 {users.length}
               </span>
             </p>
           </div>
-          <div className="w-1/5 md:w-1/4 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
-            <p className="text-lg">
-              Admins:{" "}
-              <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
-                {users.filter((user) => user.role === "admin").length}
-              </span>
-            </p>
-          </div>
-          <div className="w-1/5 md:w-1/4 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
-            <p className="text-lg">
-              Users:{" "}
-              <span className="bg-indigo-500 text-white px-4 p-1 rounded-full text-base">
-                {users.filter((user) => user.role === "user").length}
-              </span>
-            </p>
+          <div className="w-full md:w-2/3 flex justify-evenly">
+            <div className="w-full md:w-1/3 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
+              <p className="text-lg">
+                Admins:{" "}
+                <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
+                  {users.filter((user) => user.role === "admin").length}
+                </span>
+              </p>
+            </div>
+            <div className="w-full md:w-1/3 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
+              <p className="text-lg">
+                Users:{" "}
+                <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
+                  {users.filter((user) => user.role === "user").length}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
       {users.length > 0 ? (
-        <table className="w-full mx-auto bg-white rounded-lg shadow-md">
-          <thead className="bg-gray-100">
-            <tr className="text-gray-600 w-screen">
-              <th className="py-3 w-1/6">Name</th>
-              <th className="py-3 w-1/6">Email</th>
-              <th className="py-3 w-1/6">Role</th>
-              <th className="py-3 w-1/6">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers.map((user) => (
-              <User
-                key={user.id}
-                user={user}
-                handleDeleteUser={handleDeleteUser}
-                handleRoleChange={handleRoleChange}
-              />
-            ))}
-          </tbody>
-        </table>
+          <table>
+            <thead className="dark:bg-backcolor dark:text-maincolor">
+              <tr className="text-gray-600">
+                <th className="py-3 w-1/6">Name</th>
+                <th className="py-3 w-1/6">Email</th>
+                <th className="py-3 w-1/6">Role</th>
+                <th className="py-3 w-1/6">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map((user) => (
+                <User
+                  key={user.id}
+                  user={user}
+                  handleDeleteUser={handleDeleteUser}
+                  handleRoleChange={handleRoleChange}
+                />
+              ))}
+            </tbody>
+          </table>
       ) : (
         <p className="text-center text-gray-500">No users found.</p>
       )}

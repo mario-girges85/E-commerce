@@ -3,11 +3,12 @@ import { Route, Routes } from "react-router-dom";
 import Userlayout from "./Userlayout";
 import Adminlayout from "./Adminlayout";
 import Notfound from "./Notfound";
-import Nav from "./components/Nav";
+import Nav from "./components/navComponent/Nav";
 import Cart from "./pages/user/Cart";
 import Footer from "./components/Footer";
 import axios from "axios";
 const App = () => {
+
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -33,8 +34,9 @@ const App = () => {
     getProducts();
   }, [products]);
 
+  localStorage.theme = "light";
   return (
-    <div>
+    <div className="  ">
       <Nav />
       <Routes>
         <Route path="/*" element={<Userlayout />}></Route>
