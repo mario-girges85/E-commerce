@@ -32,7 +32,7 @@ const App = () => {
   };
   useEffect(() => {
     getusersdata();
-  }, []);
+  }, [users]);
   /*=========================================== */
   /*logged user dat */
   const getuserdata = () => {
@@ -50,7 +50,7 @@ const App = () => {
     if (cn) {
       getuserdata();
     }
-  }, [cn, userid]);
+  }, [cn, userid, userdata]);
   /*=========================================== */
   // getting all products data
   const getproductsdata = () => {
@@ -64,7 +64,7 @@ const App = () => {
         console.error("error catching logged user data");
       });
   };
-  useEffect(() => getproductsdata(), []);
+  useEffect(() => getproductsdata(), [products]);
   return (
     <div className="  ">
       <Nav cn={cn} />
@@ -82,6 +82,14 @@ const App = () => {
             />
           }
         ></Route>
+
+        {/* data var is 
+        products
+        users
+        userdata
+        userid
+        Please don't use something else
+        */}
         <Route path="/admin/*" element={<Adminlayout />}></Route>
         <Route path="*" element={<Notfound />} />
         <Route path="/cart" element={<Cart />} />
