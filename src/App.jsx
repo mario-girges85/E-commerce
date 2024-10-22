@@ -8,49 +8,72 @@ import Cart from "./pages/user/Cart";
 import Footer from "./components/Footer";
 import axios from "axios";
 const App = () => {
-
-  const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
-
-  const getUsers = () => {
+  localStorage.theme = "light";
+  const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
+  const api_users = import.meta.env.VITE_API_URL_USERS;
+  const [users, setusers] = useState([]);
+  const [products, setproducts] = useState([]);
+  const [userdata, setuserdata] = useState(null);
+  const [userid, setuserid] = useState(localStorage.id);
+  const [cn, setcn] = useState(localStorage.cn);
+  /*=========================================== */
+  /*logged user dat */
+  const getuserdata = () => {
     axios
-      .get("https://booming-odd-lark.glitch.me/users")
-      .then((response) => setUsers(response.data));
-  };
-
-  const getProducts = () => {
-    axios
-      .get("https://booming-odd-lark.glitch.me/products")
-      .then((response) => {
-        setProducts(response.data);
+      .get(`${api_users}/${userid}`)
+      .then((data) => {
+        setuserdata(data.data);
+      })
+      .then(() => {})
+      .catch(() => {
+        console.error("error catching logged user data");
       });
   };
-
   useEffect(() => {
-    getUsers();
-  }, [users]);
-
-  useEffect(() => {
-    getProducts();
-  }, [products]);
-
-  localStorage.theme = "light";
+    if (cn) {
+      getuserdata();
+    }
+  }, [cn, userid, userdata]);
+  /*=========================================== */
+  // getting all products data
+  const getproductsdata = () => {
+    axios
+      .get(`${api_products}`)
+      .then((data) => {
+        setproducts(data.data);
+      })
+      .then(() => {})
+      .catch(() => {
+        console.error("error catching logged user data");
+      });
+  };
+  useEffect(() => getproductsdata(), [products]);
   return (
     <div className="  ">
-      <Nav />
+      <Nav cn={cn} />
       <Routes>
-        <Route path="/*" element={<Userlayout />}></Route>
         <Route
-          path="/admin/*"
+          path="/*"
           element={
-            <Adminlayout
-              products={products}
-              setProducts={setProducts}
+            <Userlayout
+              userdata={userdata}
+              userid={userid}
+              setcn={setcn}
+              setuserid={setuserid}
               users={users}
-              setUsers={setUsers}
+              products={products}
             />
           }
         ></Route>
+
+        {/* data var is 
+        products
+        users
+        userdata
+        userid
+        Please don't use something else
+        */}
+        <Route path="/admin/*" element={<Adminlayout />}></Route>
         <Route path="*" element={<Notfound />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
