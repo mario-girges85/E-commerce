@@ -8,6 +8,14 @@ import Cart from "./pages/user/Cart";
 import Footer from "./components/Footer";
 import axios from "axios";
 const App = () => {
+  localStorage.theme = "light";
+  const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
+  const api_users = import.meta.env.VITE_API_URL_USERS;
+  const [users, setusers] = useState([]);
+  const [products, setproducts] = useState([]);
+  const [userdata, setuserdata] = useState(null);
+  const [userid, setuserid] = useState(localStorage.id);
+  const [cn, setcn] = useState(localStorage.cn);
   /*=========================================== */
   /*logged user dat */
   const getuserdata = () => {
