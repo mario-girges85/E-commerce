@@ -42,7 +42,7 @@ const NavListItems = ({ isMenuOpen }) => {
     },
   ];
   return (
-    <ul className="flex items-center justify-start cmd:flex-col csm:flex-col cxs:flex-col gap-2 lg:items-center ">
+    <ul className="mt-2 mb-4 flex flex-col items-center justify-center gap-2  md:mb-0 md:mt-0 md:flex-row lg:items-center ">
       {/*Home */}
       <Typography
         key={navListItems[0].label}
