@@ -120,13 +120,20 @@ const NavListItems = ({ isMenuOpen }) => {
             <MenuHandler className="text-black dark:text-white">
               <Link className="">Dashboard</Link>
             </MenuHandler>
-            <MenuList className="bg-white flex flex-col dark:bg-backcolor justify-between items-center gap-2 text-blue-gray-500 dark:text-white">
-              <MenuItem className="hover:bg-white ">
-                <Link to="/admin/dashboard/products">Products</Link>
-              </MenuItem>
-              <MenuItem className="hover:bg-white">
-                <Link to="/admin/dashboard/users">Users</Link>
-              </MenuItem>
+            <MenuList className="bg-white flex flex-col dark:bg-backcolor justify-between items-center gap-2 text-blue-gray-800 dark:text-maincolor">
+              <Link
+                to="/admin/dashboard/products"
+                className="outline-none w-full"
+              >
+                <MenuItem className="hover:bg-white dark:hover:bg-backcolor dark:hover:text-maincolor text-center">
+                  Products
+                </MenuItem>
+              </Link>
+              <Link to="/admin/dashboard/users" className="outline-none w-full">
+                <MenuItem className="hover:bg-white dark:hover:bg-backcolor dark:hover:text-maincolor text-center">
+                  Users
+                </MenuItem>
+              </Link>
             </MenuList>
           </MenuItem>
         </Menu>
