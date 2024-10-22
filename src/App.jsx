@@ -73,7 +73,15 @@ const App = () => {
         userid
         Please don't use something else
         */}
-        <Route path="/admin/*" element={<Adminlayout />}></Route>
+        <Route
+          path="/admin/*"
+          element={
+            <Adminlayout
+              products={products}
+              setProducts={setproducts}
+            />
+          }
+        ></Route>
         <Route path="*" element={<Notfound />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>

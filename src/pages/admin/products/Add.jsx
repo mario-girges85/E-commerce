@@ -18,15 +18,11 @@ const Add = ({ products, setProducts }) => {
   });
   const navigate = useNavigate();
 
-  const addProduct = (newProduct) => {
-    setProducts([...products, newProduct]);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
     axios
-      .post("https://booming-odd-lark.glitch.me/products", data)
+      .post(import.meta.env.VITE_API_URL_PRODUCTS, data)
       .then(() => {
         Swal.fire({
           position: "top-center",
@@ -35,8 +31,8 @@ const Add = ({ products, setProducts }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        addProduct(data);
         navigate("/admin/dashboard/products");
+        setProducts([...products, data]);
       })
       .catch((error) => {
         console.error(error);

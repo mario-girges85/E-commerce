@@ -23,7 +23,7 @@ const Users = ({ users, setUsers }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://booming-odd-lark.glitch.me/users/${id}`)
+          .delete(`${import.meta.env.VITE_API_URL_USERS}/${id}`)
           .then(() => {
             setUsers(users.filter((user) => user.id !== id));
             Swal.fire({
@@ -55,7 +55,7 @@ const Users = ({ users, setUsers }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`https://booming-odd-lark.glitch.me/users/${id}`, {
+          .patch(`${import.meta.env.VITE_API_URL_USERS}/${id}`, {
             role,
           })
           .then((response) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/user/Home";
 import Products from "./pages/admin/products/Products";
@@ -9,25 +9,35 @@ import Users from "./pages/admin/users/Users";
 import Notfound from "./Notfound";
 import axios from "axios";
 
-const Adminlayout = ({
-  products,
-  setProducts,
-  users,
-  setUsers,
-  orders,
-  setOrders,
-}) => {
+const Adminlayout = ({ products, setProducts }) => {
+  const [users, setUsers] = useState([]);
+
+  const getAllUsers = () => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL_USERS}`)
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, [users]);
+
   return (
     <div className="dark:bg-backcolor dark:text-maincolor">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<Home />} />
         <Route
           path="/dashboard/products"
           element={<Products products={products} setProducts={setProducts} />}
         />
         <Route
           path="/dashboard/products/add"
-          element={<Add products={products} setProducts={setProducts} />}
+          element={<Add products={products} setProducts={setProducts} />} 
         />
         <Route
           path="/dashboard/products/edit/:id"
