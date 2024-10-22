@@ -80,15 +80,15 @@ export function AvatarWithUserDropdown() {
                 strokeWidth: 2,
               })}
               <Typography
-                onClick={() => {
-                  isLastItem && localStorage.removeItem("ud");
-                  window.location.reload();
-                }}
                 as={Link}
                 to=""
                 variant="small"
                 className="font-normal"
                 color={isLastItem ? "red" : "inherit"}
+                onClick={() => {
+                  localStorage.clear();
+                  location.reload();
+                }}
               >
                 {label}
               </Typography>

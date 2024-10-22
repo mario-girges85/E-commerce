@@ -6,7 +6,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 
 import DarkMood from "./DarkMood";
 import { Typography, Button } from "@material-tailwind/react";
-const Nav = () => {
+const Nav = ({ cn }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -30,7 +30,7 @@ const Nav = () => {
       </div>
       {/* avatar */}
       <div className={`${isMenuOpen && "self-start"}`}>
-        {localStorage.ud == undefined ? (
+        {!cn ? (
           <Link
             className="text-2xl font-semibold dark:text-white dark:bg-maincolor bg-blue-gray-500 text-white rounded-lg p-2 m-2 "
             to="/login"
