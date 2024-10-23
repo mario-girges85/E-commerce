@@ -5,10 +5,10 @@ import { IconButton } from "@material-tailwind/react";
 const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
   return (
     <tr className="border-b text-center dark:bg-backcolor dark:text-maincolor">
-      <td className="py-3">{name}</td>
-      <td className="py-3">{price}</td>
-      <td className="py-3">{category}</td>
-      <td className="px-4 py-3 flex flex-col lg:flex-row justify-center gap-1">
+      <td className="py-2 lg:py-3">{name}</td>
+      <td className="py-2 lg:py-3">{price}</td>
+      <td className="py-2 lg:py-3">{category}</td>
+      <td className="px-3 py-2 lg:py-3 flex flex-col lg:flex-row justify-center gap-1">
         <Link to={`/admin/dashboard/products/edit/${id}`}>
           <IconButton
             variant="text"

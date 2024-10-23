@@ -40,13 +40,13 @@ const Add = ({ products, setProducts }) => {
   };
 
   return (
-    <div className="w-5/6 lg:w-3/6 mx-auto py-14">
-      <h1 className="text-2xl font-bold my-5 text-center">Add New Product</h1>
+    <div className="w-5/6 lg:w-3/6 mx-auto py-5 md:py-16">
+      <h1 className="text-2xl font-bold my-3 md:my-5 text-center">Add New Product</h1>
       <form onSubmit={handleSubmit}>
         <div className="my-4">
           <Input
             color="blue"
-            label="Product Name..."
+            label="Name..."
             value={data.name}
             onChange={(event) => setData({ ...data, name: event.target.value })}
           />
@@ -54,7 +54,7 @@ const Add = ({ products, setProducts }) => {
         <div className="my-4">
           <Input
             color="blue"
-            label="Product Description..."
+            label="Description..."
             value={data.description}
             onChange={(event) =>
               setData({ ...data, description: event.target.value })
@@ -64,7 +64,7 @@ const Add = ({ products, setProducts }) => {
         <div className="my-4">
           <Input
             color="blue"
-            label="Product Price..."
+            label="Price..."
             value={data.price}
             onChange={(event) =>
               setData({ ...data, price: event.target.value })
@@ -74,7 +74,7 @@ const Add = ({ products, setProducts }) => {
         <div className="my-4">
           <Input
             color="blue"
-            label="Product Category..."
+            label="Category..."
             value={data.category}
             onChange={(event) =>
               setData({ ...data, category: event.target.value })
@@ -84,7 +84,7 @@ const Add = ({ products, setProducts }) => {
         <div className="my-4">
           <Input
             color="blue"
-            label="Product Image URL..."
+            label="Image URL..."
             value={data.image}
             onChange={(event) =>
               setData({ ...data, image: event.target.value })
@@ -92,13 +92,12 @@ const Add = ({ products, setProducts }) => {
           />
         </div>
 
-        <div className="flex flex-col md:flex-row justify-evenly my-4">
-          <div className="my-3 w-full md:w-2/5">
+        <div className="flex flex-col md:flex-row md:justify-evenly my-4">
+          <div className="my-2 w-full md:w-2/5">
             <Input
               color="blue"
-              label="Product Rating..."
+              label="Rating..."
               type="number"
-              className="w-full"
               value={data.rating.rate}
               onChange={(event) =>
                 setData({
@@ -108,12 +107,11 @@ const Add = ({ products, setProducts }) => {
               }
             />
           </div>
-          <div className="my-3 w-full md:w-2/5">
+          <div className="my-2 w-full md:w-2/5">
             <Input
               color="blue"
-              label="Product Counting..."
+              label="Counting..."
               type="number"
-              className="w-full"
               value={data.rating.count}
               onChange={(event) =>
                 setData({
@@ -125,7 +123,7 @@ const Add = ({ products, setProducts }) => {
           </div>
         </div>
 
-        <div className="my-7 flex justify-evenly items-center">
+        <div className="my-4 md:my-7 flex justify-evenly items-center">
           <IconButton
             variant="outlined"
             color="green"

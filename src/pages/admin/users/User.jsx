@@ -11,12 +11,12 @@ const User = ({
       key={id}
       className="border-b text-center dark:bg-backcolor dark:text-maincolor"
     >
-      <td className="py-3">{firstName + lastName}</td>
-      <td className="py-3">
-        {email.length >= 10 ? email.substring(0, 10) : email}
+      <td className="py-2 lg:py-3 px-1">{(firstName + lastName).substring(0, 7)}</td>
+      <td className="py-2 lg:py-3 px-1">
+        {email.length > 7 ? email.substring(0, 7) : email}
       </td>
-      <td className="py-3">{role}</td>
-      <td className="p-3 flex flex-col items-center lg:flex-row lg:justify-evenly gap-1">
+      <td className="py-2 lg:py-3 px-1">{role}</td>
+      <td className="py-2 lg:py-3 px-2 flex flex-col items-center lg:flex-row lg:justify-evenly gap-1">
         {role === "admin" ? (
           <Button color="green" onClick={() => handleRoleChange(id, "user")}>
             Make User
