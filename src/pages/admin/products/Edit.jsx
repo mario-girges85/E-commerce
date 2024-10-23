@@ -44,7 +44,7 @@ const Edit = ({ products, setProducts }) => {
     event.preventDefault();
 
     axios
-      .put(`https://booming-odd-lark.glitch.me/products/${id}`, data)
+      .put(`${import.meta.env.VITE_API_URL_PRODUCTS}/${id}`, data)
       .then(() => {
         Swal.fire({
           position: "top-center",

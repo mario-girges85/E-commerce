@@ -4,7 +4,7 @@ import { IconButton } from "@material-tailwind/react";
 
 const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
   return (
-    <tr key={id} className="border-b text-center dark:bg-backcolor dark:text-maincolor">
+    <tr className="border-b text-center dark:bg-backcolor dark:text-maincolor">
       <td className="py-3">{name}</td>
       <td className="py-3">{price}</td>
       <td className="py-3">{category}</td>

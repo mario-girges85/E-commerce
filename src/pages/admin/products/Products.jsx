@@ -24,14 +24,14 @@ const Products = ({ products, setProducts }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://booming-odd-lark.glitch.me/products/${id}`)
+          .delete(`${import.meta.env.VITE_API_URL_PRODUCTS}/${id}`)
           .then(() => {
-            setProducts(products.filter((product) => product.id !== id));
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
               icon: "success",
             });
+            setProducts(products.filter((product) => product.id !== id));
           })
           .catch((error) => {
             console.error(error);
