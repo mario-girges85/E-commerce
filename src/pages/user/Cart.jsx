@@ -2,8 +2,8 @@ import axios from "axios";
 import FakeCart from "../../components/Cart/FakeCart";
 import { useEffect, useState } from "react";
 import EmptyCartImage from "../images/Empty_Cart.svg";
-import { useNavigate } from "react-router-dom";
-import { Spinner } from "@material-tailwind/react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Spinner } from "@material-tailwind/react";
 
 const Cart = () => {
     const [apiData, editApiData] = useState([]);
@@ -79,8 +79,10 @@ const Cart = () => {
             <div className="flex flex-row justify-evenly w-full min-h-[100%] cxs:flex-col cxs:items-center csm:flex-col csm:items-center cmd:flex-col cmd:items-center clg:flex-col clg:items-center ">
                 {/* Items */}
                 <div className="flex flex-col items-center w-11/12 cxl:w-2/3 c2xl:w-2/3 gap-7 cxs:mb-5">
-                    {apiData.length == 0 && !arrived ? (
-                        <div className="flex justify-center items-start h-[500px]">
+                    {apiData.length == 0 &&
+                    !arrived &&
+                    localStorage.ud != undefined ? (
+                        <div className="flex justify-center items-start h-svh">
                             <Spinner className="h-12 w-12" />
                         </div>
                     ) : apiData.length == 0 && arrived ? (
@@ -90,12 +92,12 @@ const Cart = () => {
                                 alt="Empty Cart Image"
                                 className=" w-[300px] h-[300px]"
                             />
-                            <span className="font-bold dark:text-maincolor">
+                            <span className="font-bold">
                                 Cart is Feeling Light ?
                             </span>
                             <button
                                 onClick={() => {
-                                    goproducts("/products");
+                                    navigate("/products");
                                 }}
                                 className=" flex justify-center items-center w-1/2 h-10 text-center bg-black text-white rounded-lg text-sm cxs:py-[20px]">
                                 Go Back to Products
@@ -111,7 +113,18 @@ const Cart = () => {
                                 />
                             </div>
                         ))
+                    ) : localStorage.ud == undefined ? (
+                        <div className="flex flex-col justify-center items-center gap-5 w-full h-svh">
+                            <div className="dark:text-white">
+                                Please sign in First
+                            </div>
+                            <Link to="/login">
+                                <Button>Go To Log in</Button>
+                            </Link>
+                        </div>
                     ) : (
+                        // Needed it to complete syntax for else if statment
+                        // it will never go there no state to match
                         ""
                     )}
                 </div>
@@ -132,7 +145,7 @@ const Cart = () => {
                     </div>
                     <div className="flex justify-between w-11/12 dark:text-white">
                         <span>Taxes</span>
-                        <span>{Math.round(total() * 0.1)}</span>
+                        <span>{total() * 0.1}</span>
                     </div>
                     <div className="flex justify-between w-11/12 dark:text-white">
                         <span>Shipping</span>
@@ -141,7 +154,7 @@ const Cart = () => {
                     <hr className="w-11/12 text-black " />
                     <div className="flex justify-between w-11/12 my-2 dark:text-white">
                         <span>Total</span>
-                        <span>{Math.round(total() * 0.1 + total())}</span>
+                        <span>{total() * 0.1 + total()}</span>
                     </div>
                     <div>
                         <button className="w-full bg-black text-white py-3 px-20 rounded-lg text-sm dark:bg-maincolor dark:text-black">
