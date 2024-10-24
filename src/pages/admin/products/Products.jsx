@@ -46,8 +46,8 @@ const Products = ({ products, setProducts }) => {
   };
 
   return (
-    <div className="container mx-auto py-9 px-4 md:p-6 lg:p-8 xl:p-10">
-      <div className="flex flex-col md:flex-row md:justify-between items-center mb-8 mt-5 md:mb-10 md:mt-8 lg:mb-15">
+    <div className="container mx-auto py-3 px-4 md:p-6 lg:p-8">
+      <div className="flex flex-col md:flex-row md:justify-between items-center mb-6 mt-5 md:mb-10 md:mt-8 lg:mb-10">
         <h1 className="text-3xl font-bold text-center mb-5 md:mb-0">
           Products Management
         </h1>
@@ -61,26 +61,31 @@ const Products = ({ products, setProducts }) => {
           />
         </div>
       </div>
-      <div className="flex flex-col md:flex-row flex-wrap justify-between items-center mb-4 md:mb-0 md:mt-2">
+      <div className="flex flex-col md:flex-row flex-wrap justify-between items-center mb-4 md:mb-0">
         <div className="flex flex-col md:flex-row justify-evenly items-center gap-2 w-full md:w-2/3 mb-2">
-          <div className="w-full md:w-1/3 xl:w-1/5 mb-4 md:mb-6 lg:mb-8 text-center">
+          <div className="w-full md:w-1/3 xl:w-1/5 mb-2 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
-              Count:{" "}
               <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
-                {products.length}
+                Count {" "}
+                <span className="text-maincolor dark:text-backcolor">
+                  {products.length}
+                </span>
               </span>
             </p>
           </div>
-          <div className="w-full md:w-2/4 xl:w-2/5 mb-4 md:mb-6 lg:mb-8 text-center">
+          <div className="w-full md:w-2/4 xl:w-2/5 mb-2 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
-              Last added:{" "}
               <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
-                {products[products.length - 1]?.name?.substring(0, 8) || "N/A"}
+                Last added {" "}
+                <span className="text-maincolor dark:text-backcolor">
+                  {products[products.length - 1]?.name?.substring(0, 8) ||
+                    "N/A"}
+                </span>
               </span>
             </p>
           </div>
         </div>
-        <div className="w-1/2 lg:w-1/3 xl:w-1/4 mb-4 md:mb-6 lg:mb-8 text-center">
+        <div className="w-1/2 lg:w-1/3 xl:w-1/4 mb-2 md:mb-6 lg:mb-8 text-center">
           <Link to="/admin/dashboard/products/add">
             <IconButton
               color="green"

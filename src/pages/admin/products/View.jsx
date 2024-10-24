@@ -25,16 +25,16 @@ const View = ({ products }) => {
   };
 
   return (
-    <div className="py-12 md:py-16 container mx-auto">
-      <Card className="max-w-lg mx-auto bg-white dark:bg-backcolor dark:text-maincolor rounded-lg text-center">
+    <div className="py-3 md:py-10 lg:py-16 container mx-auto">
+      <Card className="max-w-lg mx-auto bg-white dark:bg-backcolor dark:text-maincolor rounded-lg text-center shadow-none">
         <div className="flex justify-center items-center">
           <img
             src={product?.image}
             alt={product?.name}
-            className="w-3/5 max-w-full h-80 object-cover my-2"
+            className="w-3/5 max-w-full h-80 object-cover mt-2"
           />
         </div>
-        <CardBody className="px-6 py-4">
+        <CardBody className="px-6 py-2">
           {product?.name && (
             <Typography variant="h5" className="font-bold">
               {product.name}
@@ -56,11 +56,11 @@ const View = ({ products }) => {
             </Typography>
           )}
         </CardBody>
-        <CardFooter className="my-2 flex flex-row justify-evenly items-center">
+        <CardFooter className="flex flex-row justify-evenly items-center">
           <IconButton
             variant="outlined"
             color="deep-purple"
-            className="hover:bg-deep-purple-600 hover:text-white mb-2 md:mb-0"
+            className="hover:bg-deep-purple-600 hover:text-white"
             onClick={() => navigate(`/admin/dashboard/products/edit/${id}`)}
           >
             <svg
