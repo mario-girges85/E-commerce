@@ -6,7 +6,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 
 import DarkMood from "./DarkMood";
 import { Typography, Button } from "@material-tailwind/react";
-const Nav = ({ cn }) => {
+const Nav = ({ cn, userdata }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ const Nav = ({ cn }) => {
             isMenuOpen ? "flex" : "hidden"
           }`}
         >
-          <NavListItems isMenuOpen={isMenuOpen} />
+          <NavListItems userdata={userdata} isMenuOpen={isMenuOpen} />
         </div>
       </div>
       {/* avatar */}

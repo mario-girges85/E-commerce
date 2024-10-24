@@ -11,7 +11,7 @@ import {
   Spinner,
 } from "@material-tailwind/react";
 import Swal from "sweetalert2";
-const Mainproducts = () => {
+const Mainproducts = ({ products }) => {
   //products data
   const [productsdata, setproductsdata] = useState([""]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -20,7 +20,7 @@ const Mainproducts = () => {
   const [usercart, setusercart] = useState([]);
   function getusercart() {
     axios
-      .get(`https://booming-odd-lark.glitch.me/users/${localStorage.ud}`)
+      .get(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`)
       .then(({ data }) => {
         setusercart(data.cart);
       });
@@ -46,20 +46,10 @@ const Mainproducts = () => {
       const index = newcart.findIndex((item) => item.name == data.name);
       newcart[index].count += 1;
       setusercart(newcart);
-      axios.patch(
-        `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
-        {
-          cart: usercart,
-        }
-      );
+      axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+        cart: usercart,
+      });
 
-      // Swal.fire({
-      //   position: "top-end",
-      //   icon: "success",
-      //   title: `${data.name} count = ${data.count} `,
-      //   showConfirmButton: false,
-      //   timer: 1500,
-      // });
       Toast.fire({
         icon: "success",
         title: `${data.name} added successfully`,
@@ -67,20 +57,10 @@ const Mainproducts = () => {
     } else {
       newcart.push(product);
       setusercart(newcart);
-      axios.patch(
-        `https://booming-odd-lark.glitch.me/users/${localStorage.ud}`,
-        {
-          cart: usercart,
-        }
-      );
+      axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+        cart: usercart,
+      });
 
-      // Swal.fire({
-      //   position: "top-end",
-      //   icon: "success",
-      //   title: `${data.name} added successfully `,
-      //   showConfirmButton: false,
-      //   timer: 1500,
-      // });
       Toast.fire({
         icon: "success",
         title: `${data.name} added successfully `,
@@ -116,12 +96,10 @@ const Mainproducts = () => {
 
   //getting products data
   const getdata = () => {
-    axios
-      .get("https://booming-odd-lark.glitch.me/products")
-      .then(({ data }) => {
-        setproductsdata(data);
-        setFilteredProducts(data); // initialize with all products
-      });
+    axios.get(`${import.meta.env.VITE_API_URL_PRODUCTS}`).then(({ data }) => {
+      setproductsdata(data);
+      setFilteredProducts(data); // initialize with all products
+    });
   };
 
   //apply filter

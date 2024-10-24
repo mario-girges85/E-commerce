@@ -12,6 +12,7 @@ const Userlayout = ({
   setcn,
   userdata,
   products,
+  usercart,
 }) => {
   return (
     <div>
@@ -20,13 +21,19 @@ const Userlayout = ({
         <Route path="/" element={<Home />} />
         <Route
           path="/products"
-          element={<Mainproducts products={products} />}
+          element={
+            <Mainproducts
+              userdata={userdata}
+              products={products}
+              usercart={usercart}
+            />
+          }
         />
         <Route
           path="/login"
           element={
             <LogIn
-              userdata={userdata}
+              user={userdata}
               setcn={setcn}
               setuserid={setuserid}
               userid={userid}

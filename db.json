@@ -1,0 +1,359 @@
+{
+  "users": [
+    {
+      "firstname": "Beshoy",
+      "lastname": "Mounir",
+      "email": "admin",
+      "password": "admin2",
+      "gender": "male",
+      "phonenumber": "01281245667",
+      "role": "admin",
+      "birthday": "21/11/2002",
+      "cart": [
+        {
+          "code": 108,
+          "name": "iPhone 16 plus",
+          "price": 999,
+          "count": 1,
+          "image": "https://cdn.webshopapp.com/shops/276718/files/464158745/660x660x2/tuniq-box-of-10-tuniq-iphone-16-plus-tempered-glas.jpg"
+        },
+        {
+          "code": 102,
+          "name": "pepsi",
+          "price": 80,
+          "count": 8,
+          "image": "https://eldahan.com.eg/wp-content/uploads/2021/10/Pepsi.webp"
+        },
+        {
+          "code": 104,
+          "name": "kranshy",
+          "price": 10,
+          "count": 1,
+          "image": "https://mcprod.hyperone.com.eg/media/catalog/product/cache/1ca275941aea0ae98b372dcb44b7c67a/6/2/6221031491825_-_55-65g-1.jpg"
+        },
+        {
+          "code": 109,
+          "name": "Water",
+          "price": 5,
+          "count": 1,
+          "image": "https://www.nestlepurelife.com/pk/sites/g/files/xknfdk411/files/330ml_6.jpg"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "firstName": "Kyrils",
+      "lastName": "Rizk",
+      "email": "kerodex224@gmail.com",
+      "password": "kero123",
+      "gender": "male",
+      "phonenumber": "00000000000",
+      "role": "admin",
+      "cart": [],
+      "id": 2
+    },
+    {
+      "firstName": "mario",
+      "lastName": "girges",
+      "email": "",
+      "password": "",
+      "phone": "",
+      "gender": "",
+      "cart": [
+        {
+          "id": 2,
+          "name": "pepsi",
+          "price": 20,
+          "count": 5,
+          "image": "https://eldahan.com.eg/wp-content/uploads/2021/10/Pepsi.webp"
+        },
+        {
+          "id": 4,
+          "name": "kranshy",
+          "price": 10,
+          "count": 3,
+          "image": "https://mcprod.hyperone.com.eg/media/catalog/product/cache/1ca275941aea0ae98b372dcb44b7c67a/6/2/6221031491825_-_55-65g-1.jpg"
+        }
+      ],
+      "id": 3,
+      "role": "user"
+    },
+    {
+      "firstName": "kero",
+      "lastName": "kero",
+      "email": "kerodex224@gmail.com",
+      "password": "kerokero",
+      "phone": "00000000000",
+      "gender": "male",
+      "role": "user",
+      "cart": [],
+      "id": 4
+    },
+    {
+      "firstName": "Kyrils",
+      "lastName": "Rizk",
+      "email": "kerodex224@gmail.com",
+      "password": "kerokero",
+      "phonenumber": "00000000",
+      "gender": "male",
+      "cart": [
+        {
+          "code": 101,
+          "name": "shipsi",
+          "price": 10,
+          "count": 1,
+          "image": "https://cdnprod.mafretailproxy.com/sys-master-root/h7f/h8b/14952261287966/462087_main.jpg_480Wx480H"
+        },
+        {
+          "code": 102,
+          "name": "pepsi",
+          "price": 20,
+          "count": 1,
+          "image": "https://eldahan.com.eg/wp-content/uploads/2021/10/Pepsi.webp"
+        }
+      ],
+      "id": 5,
+      "role": "user"
+    },
+    {
+      "firstName": "Kyrils",
+      "lastName": "Rizk",
+      "email": "kerodex224@gmail.com",
+      "password": "kero123456",
+      "phonenumber": "00000000000",
+      "gender": "male",
+      "cart": [],
+      "id": 6,
+      "role": "user"
+    },
+    {
+      "firstName": "mario",
+      "lastName": "gerges",
+      "email": "mario85.girges@gmail.com",
+      "password": "1234",
+      "phonenumber": "01285948011",
+      "gender": "male",
+      "cart": [
+        {
+          "id": 3,
+          "name": "3aser",
+          "price": 15,
+          "count": 1
+        },
+        {
+          "count": 3,
+          "code": 104,
+          "name": "kranshy",
+          "price": 10,
+          "image": "https://mcprod.hyperone.com.eg/media/catalog/product/cache/1ca275941aea0ae98b372dcb44b7c67a/6/2/6221031491825_-_55-65g-1.jpg"
+        },
+        {
+          "code": 101,
+          "name": "shipsi",
+          "price": 10,
+          "count": 4,
+          "image": "https://cdnprod.mafretailproxy.com/sys-master-root/h7f/h8b/14952261287966/462087_main.jpg_480Wx480H"
+        }
+      ],
+      "id": 7,
+      "role": "admin"
+    },
+    {
+      "firstName": "test",
+      "lastName": "test2",
+      "email": "test@test",
+      "password": "1234",
+      "phonenumber": "01288888888",
+      "gender": "male",
+      "cart": [],
+      "id": 8,
+      "role": "user"
+    },
+    {
+      "firstName": "hazem",
+      "lastName": "soliman",
+      "email": "hazem@gmail.com",
+      "password": "123456",
+      "phonenumber": "0123456789",
+      "gender": "male",
+      "cart": [],
+      "id": 9
+    },
+    {
+      "firstName": "keor",
+      "lastName": "kero",
+      "email": "keor",
+      "password": "",
+      "phonenumber": "",
+      "gender": "",
+      "cart": [],
+      "id": 10
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "password": "",
+      "phonenumber": "",
+      "gender": "",
+      "cart": [],
+      "id": 11
+    },
+    {
+      "firstName": "olka",
+      "lastName": "olka2",
+      "email": "olka@gmail.com",
+      "password": "olkaolka",
+      "phonenumber": "012121212",
+      "gender": "female",
+      "cart": [],
+      "id": 12
+    }
+  ],
+
+  "products": [
+    {
+      "id": 1,
+      "code": 101,
+      "name": "shipsi",
+      "description": "",
+      "price": 10,
+      "category": "food",
+      "image": "https://cdnprod.mafretailproxy.com/sys-master-root/h7f/h8b/14952261287966/462087_main.jpg_480Wx480H",
+      "rating": {
+        "rate": 3.4,
+        "count": 120
+      }
+    },
+    {
+      "id": 2,
+      "code": 102,
+      "name": "pepsi",
+      "description": "",
+      "price": 20,
+      "category": "food",
+      "image": "https://eldahan.com.eg/wp-content/uploads/2021/10/Pepsi.webp",
+      "rating": {
+        "rate": 1,
+        "count": 120
+      }
+    },
+    {
+      "id": 3,
+      "code": 103,
+      "name": "3aser",
+      "description": "",
+      "price": 7,
+      "category": "food",
+      "image": "https://cdn.mafrservices.com/sys-master-root/hec/h9d/26751948226590/450352_main.jpg?im=Resize=1700",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 4,
+      "code": 104,
+      "name": "kranshy",
+      "description": "",
+      "price": 10,
+      "category": "food",
+      "image": "https://mcprod.hyperone.com.eg/media/catalog/product/cache/1ca275941aea0ae98b372dcb44b7c67a/6/2/6221031491825_-_55-65g-1.jpg",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 5,
+      "code": 105,
+      "name": "Mix",
+      "description": "",
+      "price": 15,
+      "category": "food",
+      "image": "https://cdn.mafrservices.com/sys-master-root/hc6/ha3/26626175696926/12728_main.jpg?im=Resize=480",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 6,
+      "code": 106,
+      "name": "Water Mellon",
+      "description": "ايه بطييخ",
+      "price": 50,
+      "category": "food",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRqmEoSPpA4QeMGvt6zObhBPaHSl9JRpxSgQ&s",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 7,
+      "code": 107,
+      "name": "TokTok",
+      "description": "Bygeb flos",
+      "price": 200,
+      "category": "vehicles",
+      "image": "https://media.gemini.media/img/large/2022/12/28/2022_12_28_14_26_22_44.jpg",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 8,
+      "code": 108,
+      "name": "iPhone 16 plus",
+      "description": "1TB 6GB of memory",
+      "price": 999,
+      "category": "Electronics",
+      "image": "https://cdn.webshopapp.com/shops/276718/files/464158745/660x660x2/tuniq-box-of-10-tuniq-iphone-16-plus-tempered-glas.jpg",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 9,
+      "code": 109,
+      "name": "Water",
+      "description": "",
+      "price": 5,
+      "category": "food",
+      "image": "https://www.nestlepurelife.com/pk/sites/g/files/xknfdk411/files/330ml_6.jpg",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 10,
+      "code": 110,
+      "name": "ASUS TUF Gaming GeForce RTX 4090",
+      "description": "",
+      "price": 3000,
+      "category": "Electronics",
+      "image": "https://m.media-amazon.com/images/I/81-Q4kEcj5L._AC_SL1500_.jpg",
+      "rating": {
+        "rate": 3.9,
+        "count": 120
+      }
+    },
+    {
+      "id": 11,
+      "code": 111,
+      "name": "Developer",
+      "description": "A slave can sit in front of his laptop for 12 continuous hours.",
+      "price": 12.5,
+      "category": "food",
+      "image": "https://bairesdev.mo.cloudinary.net/blog/2022/08/portrait-of-a-man-using-a-computer-in-a-modern-office-picture-id1344688156-1.jpg?tx=w_1920,q_auto",
+      "rating": {
+        "rate": "4.5",
+        "count": "14"
+      }
+    }
+  ]
+}
