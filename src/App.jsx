@@ -16,6 +16,7 @@ const App = () => {
   const [userdata, setuserdata] = useState(null);
   const [userid, setuserid] = useState(localStorage.id);
   const [cn, setcn] = useState(localStorage.cn);
+  const [usercart, setusercart] = useState(null);
   /*=========================================== */
   /*logged user dat */
   const getuserdata = () => {
@@ -24,7 +25,9 @@ const App = () => {
       .then((data) => {
         setuserdata(data.data);
       })
-      .then(() => {})
+      .then(() => {
+        setusercart(userdata.cart);
+      })
       .catch(() => {
         console.error("error catching logged user data");
       });
@@ -33,7 +36,8 @@ const App = () => {
     if (cn) {
       getuserdata();
     }
-  }, [cn, userid, userdata]);
+  }, [cn, userid]);
+
   /*=========================================== */
   // getting all products data
   const getproductsdata = () => {
@@ -44,13 +48,15 @@ const App = () => {
       })
       .then(() => {})
       .catch(() => {
-        console.error("error catching logged user data");
+        console.error("error catching products data");
       });
   };
+
   useEffect(() => getproductsdata(), [products]);
+
   return (
     <div className="  ">
-      <Nav cn={cn} />
+      <Nav userdata={userdata} cn={cn} />
       <Routes>
         <Route
           path="/*"
@@ -62,6 +68,7 @@ const App = () => {
               setuserid={setuserid}
               users={users}
               products={products}
+              usercart={usercart}
             />
           }
         ></Route>

@@ -18,7 +18,7 @@ import {
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DarkMood from "./DarkMood";
-const NavListItems = ({ isMenuOpen }) => {
+const NavListItems = ({ isMenuOpen, userdata }) => {
   const navListItems = [
     {
       label: "Home",
