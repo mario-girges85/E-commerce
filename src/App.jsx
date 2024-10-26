@@ -29,6 +29,9 @@ const App = () => {
       .then(() => {
         setusercart(userdata.cart);
       })
+      .then(() => {
+        console.log("logged user data DONE");
+      })
       .catch(() => {
         console.error("error catching logged user data");
       });
@@ -47,6 +50,9 @@ const App = () => {
       .then((res) => {
         setUsersData(res.data);
       })
+      .then(() => {
+        console.log("users data DONE");
+      })
       .catch((err) => {
         console.error(err);
         console.log("error catching all users data");
@@ -55,7 +61,7 @@ const App = () => {
 
   useEffect(() => {
     getAllUsers();
-  }, [usersData]);
+  }, []);
 
   /*=========================================== */
   // getting all products data
@@ -65,13 +71,15 @@ const App = () => {
       .then((data) => {
         setproducts(data.data);
       })
-      .then(() => {})
+      .then(() => {
+        console.log("products done");
+      })
       .catch(() => {
         console.error("error catching products data");
       });
   };
 
-  useEffect(() => getproductsdata(), [products]);
+  useEffect(() => getproductsdata(), []);
 
   return (
     <div className="  ">
