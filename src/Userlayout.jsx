@@ -25,7 +25,7 @@ const Userlayout = ({
             <Mainproducts
               userdata={userdata}
               products={products}
-              usercart={usercart}
+              previouscart={usercart}
             />
           }
         />

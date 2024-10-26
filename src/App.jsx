@@ -12,7 +12,7 @@ const App = () => {
   const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
   const api_users = import.meta.env.VITE_API_URL_USERS;
   const [users, setusers] = useState(null);
-  const [products, setproducts] = useState([]);
+  const [products, setproducts] = useState(null);
   const [userdata, setuserdata] = useState(null);
   const [userid, setuserid] = useState(localStorage.id);
   const [cn, setcn] = useState(localStorage.cn);
@@ -27,9 +27,6 @@ const App = () => {
       })
       .then(() => {
         setusercart(userdata.cart);
-      })
-      .then(() => {
-        console.log("logged user data DONE");
       })
       .catch(() => {
         console.error("error catching logged user data failed");
@@ -56,7 +53,6 @@ const App = () => {
         console.log("error catching all users data");
       });
   };
-
   useEffect(() => {
     if (users == null) {
       getAllUsers();
@@ -79,7 +75,11 @@ const App = () => {
       });
   };
 
-  useEffect(() => getproductsdata(), []);
+  useEffect(() => {
+    if (products == null) {
+      getproductsdata();
+    }
+  }, [products]);
 
   return (
     <div className="  ">
