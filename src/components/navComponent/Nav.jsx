@@ -6,6 +6,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 
 import DarkMood from "./DarkMood";
 import { Typography, Button } from "@material-tailwind/react";
+import Logo from "./Logo";
 const Nav = ({ cn, userdata }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -18,7 +19,7 @@ const Nav = ({ cn, userdata }) => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             class="size-8 text-gray-800 dark:text-white block clg:hidden cxl:hidden c2xl:hidden focus:outline-none"
           />
-          Little Closet
+          <Logo />
         </h1>
         <div
           className={`w-fit  md:flex md:items-center  min-w-[fit]  ${

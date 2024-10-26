@@ -19,7 +19,7 @@ const DarkMood = () => {
   }, [mode]);
 
   return mode == "light" ? (
-    <div className="  justify-center flex  items-center   border-2 border-solid box-border p-1 border-blue-gray-500 rounded-lg">
+    <div className="  justify-center flex  items-center hover:bg-blue-gray-100 p-2 rounded-md    ">
       <MoonIcon
         variant="outlined"
         className="flex items-center cursor-pointer  w-fit h-7 text-blue-gray-500 md:ml-0"
@@ -30,10 +30,10 @@ const DarkMood = () => {
       />
     </div>
   ) : (
-    <div className="justify-center flex  items-center   border-2 border-solid box-border p-1 border-white rounded-lg ">
+    <div className="justify-center flex  items-center hover:bg-blue-gray-100 p-2 rounded-md hover:text-white ">
       <SunIcon
         variant="outlined"
-        className="flex items-center cursor-pointer  w-fit h-7 text-maincolor md:ml-0 "
+        className="flex items-center cursor-pointer  w-fit h-7  text-maincolor md:ml-0 "
         onClick={() => {
           setMode("light");
           localStorage.theme = "light";
