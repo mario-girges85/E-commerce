@@ -49,6 +49,7 @@ const App = () => {
       })
       .catch((err) => {
         console.error(err);
+        console.log("error catching all users data");
       });
   };
 
