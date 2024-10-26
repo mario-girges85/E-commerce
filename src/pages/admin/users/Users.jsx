@@ -96,13 +96,13 @@ const Users = ({ users, setUsers }) => {
           />
         </div>
       </div>
-      <div className="flex flex-col md:flex-row flex-wrap justify-evenly items-center mb-4 md:mb-0">
+      <div className="flex flex-col md:flex-row flex-wrap justify-evenly items-center mb-2 md:mb-0">
         <div className="flex flex-col md:flex-row justify-evenly items-center gap-2 w-full md:w-2/3 mb-2">
           <div className="w-full md:w-1/3 xl:w-1/5 mb-2 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
-              <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
+              <span className="dark:text-maincolor px-3 text-base">
                 Total{" "}
-                <span className="text-maincolor dark:text-backcolor">
+                <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
                   {users.length}
                 </span>
               </span>
@@ -111,19 +111,19 @@ const Users = ({ users, setUsers }) => {
           <div className="w-full md:w-2/3 flex justify-evenly">
             <div className="w-full md:w-1/3 xl:w-1/5 mb-2 md:mb-6 lg:mb-8 text-center">
               <p className="text-lg">
-                <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
+                <span className="dark:text-maincolor px-3 text-base">
                   Admins{" "}
-                  <span className="text-maincolor dark:text-backcolor">
+                  <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
                     {users.filter((user) => user.role === "admin").length}
                   </span>
                 </span>
               </p>
             </div>
-            <div className="w-full md:w-1/3 xl:w-1/5 mb-2 md:mb-6 lg:mb-8 text-center">
+            <div className="w-full md:w-1/3 xl:w-1/5 md:mb-6 lg:mb-8 text-center">
               <p className="text-lg">
-                <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
+                <span className="dark:text-maincolor px-3 text-base">
                   Users{" "}
-                  <span className="text-maincolor dark:text-backcolor">
+                  <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
                     {users.filter((user) => user.role === "user").length}
                   </span>
                 </span>

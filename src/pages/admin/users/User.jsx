@@ -11,18 +11,18 @@ const User = ({
       key={id}
       className="border-b text-center dark:bg-backcolor dark:text-maincolor"
     >
-      <td className="py-2 lg:py-3 px-1">{(firstName + lastName).substring(0, 7)}</td>
-      <td className="py-2 lg:py-3 px-1">
+      <td scope="col" className="py-2 lg:py-3 px-1">{(firstName + lastName).substring(0, 6)}</td>
+      <td scope="col" className="py-2 lg:py-3 px-1">
         {email.length > 7 ? email.substring(0, 7) : email}
       </td>
-      <td className="py-2 lg:py-3 px-1">{role}</td>
-      <td className="py-2 lg:py-3 px-2 flex flex-col items-center lg:flex-row lg:justify-evenly gap-1">
+      <td scope="col" className="py-2 lg:py-3 px-1">{role}</td>
+      <td scope="col" className="py-2 lg:py-3 px-1 flex flex-col items-center lg:flex-row lg:justify-evenly gap-1">
         {role === "admin" ? (
-          <Button color="green" onClick={() => handleRoleChange(id, "user")}>
+          <Button color="green" className="" onClick={() => handleRoleChange(id, "user")}>
             Make User
           </Button>
         ) : (
-          <Button color="blue" onClick={() => handleRoleChange(id, "admin")}>
+          <Button color="blue" className="" onClick={() => handleRoleChange(id, "admin")}>
             Make Admin
           </Button>
         )}

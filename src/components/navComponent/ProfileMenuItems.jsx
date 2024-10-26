@@ -42,48 +42,48 @@ export function AvatarWithUserDropdown() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        <MenuItem
-          onClick={closeMenu}
-          key="Profile"
-          className="flex items-center gap-2 rounded "
+        <Typography
+          as={Link}
+          to=""
+          variant="small"
+          className="font-normal"
+          color={"inherit"}
         >
-          {React.createElement(UserCircleIcon, {
-            className: `h-4 w-4 `,
-            strokeWidth: 2,
-          })}
-          <Typography
-            as={Link}
-            to=""
-            variant="small"
-            className="font-normal"
-            color={"inherit"}
+          <MenuItem
+            onClick={closeMenu}
+            key="Profile"
+            className="flex items-center gap-2 rounded "
           >
+            {React.createElement(UserCircleIcon, {
+              className: `h-4 w-4 `,
+              strokeWidth: 2,
+            })}
             profile
-          </Typography>
-        </MenuItem>
-        <MenuItem
-          onClick={closeMenu}
-          key="Profile"
-          className="flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+          </MenuItem>
+        </Typography>
+        <Typography
+          as={Link}
+          to=""
+          variant="small"
+          className="font-normal"
+          color={"red"}
+          onClick={() => {
+            localStorage.clear();
+            location.reload();
+          }}
         >
-          {React.createElement(PowerIcon, {
-            className: `h-4 w-4 text-red-500`,
-            strokeWidth: 2,
-          })}
-          <Typography
-            as={Link}
-            to=""
-            variant="small"
-            className="font-normal"
-            color={"red"}
-            onClick={() => {
-              localStorage.clear();
-              location.reload();
-            }}
+          <MenuItem
+            onClick={closeMenu}
+            key="Profile"
+            className="flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
           >
+            {React.createElement(PowerIcon, {
+              className: `h-4 w-4 text-red-500`,
+              strokeWidth: 2,
+            })}
             Sign out
-          </Typography>
-        </MenuItem>
+          </MenuItem>
+        </Typography>
       </MenuList>
     </Menu>
   );

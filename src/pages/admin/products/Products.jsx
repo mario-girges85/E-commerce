@@ -65,9 +65,9 @@ const Products = ({ products, setProducts }) => {
         <div className="flex flex-col md:flex-row justify-evenly items-center gap-2 w-full md:w-2/3 mb-2">
           <div className="w-full md:w-1/3 xl:w-1/5 mb-2 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
-              <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
+              <span className="dark:text-maincolor px-3 text-base">
                 Count {" "}
-                <span className="text-maincolor dark:text-backcolor">
+                <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
                   {products.length}
                 </span>
               </span>
@@ -75,9 +75,9 @@ const Products = ({ products, setProducts }) => {
           </div>
           <div className="w-full md:w-2/4 xl:w-2/5 mb-2 md:mb-6 lg:mb-8 text-center">
             <p className="text-lg">
-              <span className="bg-backcolor text-white dark:bg-maincolor dark:text-backcolor px-3 py-1 rounded-full text-base">
+              <span className="dark:text-maincolor px-3 text-base">
                 Last added {" "}
-                <span className="text-maincolor dark:text-backcolor">
+                <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
                   {products[products.length - 1]?.name?.substring(0, 8) ||
                     "N/A"}
                 </span>
@@ -85,7 +85,7 @@ const Products = ({ products, setProducts }) => {
             </p>
           </div>
         </div>
-        <div className="w-1/2 lg:w-1/3 xl:w-1/4 mb-2 md:mb-6 lg:mb-8 text-center">
+        <div className="w-1/2 lg:w-1/3 xl:w-1/4 md:mb-6 lg:mb-8 text-center">
           <Link to="/admin/dashboard/products/add">
             <IconButton
               color="green"

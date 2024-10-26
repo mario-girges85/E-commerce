@@ -12,6 +12,7 @@ const App = () => {
   const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
   const api_users = import.meta.env.VITE_API_URL_USERS;
   const [users, setusers] = useState([]);
+  const [usersData, setUsersData] = useState([]);
   const [products, setproducts] = useState([]);
   const [userdata, setuserdata] = useState(null);
   const [userid, setuserid] = useState(localStorage.id);
@@ -37,6 +38,23 @@ const App = () => {
       getuserdata();
     }
   }, [cn, userid]);
+
+  /*=========================================== */
+  // getting all users
+  const getAllUsers = () => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL_USERS}`)
+      .then((res) => {
+        setUsersData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, [usersData]);
 
   /*=========================================== */
   // getting all products data
@@ -72,20 +90,14 @@ const App = () => {
             />
           }
         ></Route>
-
-        {/* data var is 
-        products
-        users
-        userdata
-        userid
-        Please don't use something else
-        */}
         <Route
           path="/admin/*"
           element={
             <Adminlayout
               products={products}
               setProducts={setproducts}
+              usersData={usersData}
+              setUsersData={setUsersData}
             />
           }
         ></Route>
