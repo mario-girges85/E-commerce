@@ -15,12 +15,18 @@ import {
   ShoppingCartIcon,
   ChartBarSquareIcon,
 } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DarkMood from "./DarkMood";
 const NavListItems = ({ isMenuOpen, userdata }) => {
-  // console.log(userdata);
-  const user = useState(userdata);
+  const [role, setrole] = useState(null);
+  useEffect(() => {
+    if (userdata != null) {
+      setrole(userdata.role);
+    }
+  }),
+    [userdata];
+
   const navListItems = [
     {
       label: "Home",
@@ -106,7 +112,7 @@ const NavListItems = ({ isMenuOpen, userdata }) => {
       </Typography>
 
       {/*dash board*/}
-      {user.role == "admin" && (
+      {role == "admin" && (
         <Typography
           key={navListItems[3].label}
           as={Link}
