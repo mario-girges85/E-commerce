@@ -89,12 +89,13 @@ const App = () => {
           path="/*"
           element={
             <Userlayout
+              userdata={userdata}
               userid={userid}
               setcn={setcn}
               setuserid={setuserid}
               users={users}
               products={products}
-              usercart={usercart}
+              previouscart={usercart}
             />
           }
         ></Route>
