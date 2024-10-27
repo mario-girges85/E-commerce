@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const Edit = ({ products, setProducts }) => {
   const [data, setData] = useState({
+    code: 0,
     name: "",
     description: "",
     price: 0,
@@ -24,9 +25,7 @@ const Edit = ({ products, setProducts }) => {
   }, [id]);
 
   const viewProduct = () => {
-    const foundProduct = products.find(
-      (product) => product.id === parseInt(id)
-    );
+    const foundProduct = products?.find((product) => product._id == id);
     if (foundProduct) {
       setData(foundProduct);
     }

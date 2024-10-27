@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -6,8 +6,15 @@ import User from "./User";
 
 const Users = ({ users, setUsers }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [usersData, setUsersData] = useState(users);
 
-  const filteredUsers = users.filter((user) =>
+  useEffect(() => {
+    if (usersData) {
+      setUsers(usersData.map((user) => ({ ...user, id: user._id })));
+    }
+  }, [usersData]);
+
+  const filteredUsers = users?.filter((user) =>
     user?.firstName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -25,7 +32,7 @@ const Users = ({ users, setUsers }) => {
         axios
           .delete(`${import.meta.env.VITE_API_URL_USERS}/${id}`)
           .then(() => {
-            setUsers(users.filter((user) => user.id !== id));
+            setUsers(users.filter((user) => user._id !== id));
             Swal.fire({
               title: "Deleted",
               text: "User has been deleted.",
@@ -60,7 +67,7 @@ const Users = ({ users, setUsers }) => {
           })
           .then((response) => {
             setUsers(
-              users.map((user) => (user.id === id ? response.data : user))
+              users.map((user) => (user._id === id ? response.data : user))
             );
             Swal.fire({
               title: "Changed",
@@ -103,7 +110,7 @@ const Users = ({ users, setUsers }) => {
               <span className="dark:text-maincolor px-3 text-base">
                 Total{" "}
                 <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
-                  {users.length}
+                  {users?.length}
                 </span>
               </span>
             </p>
@@ -114,7 +121,7 @@ const Users = ({ users, setUsers }) => {
                 <span className="dark:text-maincolor px-3 text-base">
                   Admins{" "}
                   <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
-                    {users.filter((user) => user.role === "admin").length}
+                    {users?.filter((user) => user.role === "admin").length}
                   </span>
                 </span>
               </p>
@@ -124,7 +131,7 @@ const Users = ({ users, setUsers }) => {
                 <span className="dark:text-maincolor px-3 text-base">
                   Users{" "}
                   <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
-                    {users.filter((user) => user.role === "user").length}
+                    {users?.filter((user) => user.role === "user").length}
                   </span>
                 </span>
               </p>
@@ -132,7 +139,7 @@ const Users = ({ users, setUsers }) => {
           </div>
         </div>
       </div>
-      {users.length > 0 ? (
+      {users?.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="w-full mx-auto rounded-lg">
             <thead className="dark:bg-backcolor dark:text-maincolor">

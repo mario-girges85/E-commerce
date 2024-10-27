@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input, IconButton } from "@material-tailwind/react";
 import axios from "axios";
@@ -7,12 +7,20 @@ import Swal from "sweetalert2";
 
 const Products = ({ products, setProducts }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [productsData, setProductsData] = useState(products);
 
-  const filteredProducts = products.filter((product) =>
+  useEffect(() => {
+    if (productsData) {
+      setProducts(productsData.map((product) => ({ ...product, id: product._id })));
+    }
+  }, [productsData]);
+
+  const filteredProducts = products?.filter((product) =>
     product?.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const deleteProduct = (id) => {
+    !id && console.error("Product ID is required");
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -31,10 +39,10 @@ const Products = ({ products, setProducts }) => {
               text: "Your file has been deleted.",
               icon: "success",
             });
-            setProducts(products.filter((product) => product.id !== id));
+            setProducts(products.filter((product) => product._id !== id));
           })
           .catch((error) => {
-            console.error(error);
+            console.log(error);
             Swal.fire({
               title: "Error!",
               text: "There was an error deleting the product.",
@@ -68,7 +76,7 @@ const Products = ({ products, setProducts }) => {
               <span className="dark:text-maincolor px-3 text-base">
                 Count {" "}
                 <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
-                  {products.length}
+                  {products?.length}
                 </span>
               </span>
             </p>
@@ -78,8 +86,7 @@ const Products = ({ products, setProducts }) => {
               <span className="dark:text-maincolor px-3 text-base">
                 Last added {" "}
                 <span className="text-white bg-backcolor dark:text-backcolor dark:bg-maincolor rounded-full py-1 px-2">
-                  {products[products.length - 1]?.name?.substring(0, 8) ||
-                    "N/A"}
+                  {products?.length > 0 ? products[products?.length - 1].name.substring(0, 8) : "N/A"}
                 </span>
               </span>
             </p>
@@ -108,7 +115,7 @@ const Products = ({ products, setProducts }) => {
           </Link>
         </div>
       </div>
-      {filteredProducts.length > 0 ? (
+      {filteredProducts?.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="w-full mx-auto rounded-lg">
             <thead className="dark:bg-backcolor dark:text-maincolor">

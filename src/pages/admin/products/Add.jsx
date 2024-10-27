@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const Add = ({ products, setProducts }) => {
   const [data, setData] = useState({
+    code: Number(products.length + 1),
     name: "",
     description: "",
     price: "",
@@ -41,7 +42,9 @@ const Add = ({ products, setProducts }) => {
 
   return (
     <div className="w-5/6 lg:w-3/6 mx-auto py-5 md:py-16">
-      <h1 className="text-2xl font-bold my-3 md:my-5 text-center">Add New Product</h1>
+      <h1 className="text-2xl font-bold my-3 md:my-5 text-center">
+        Add New Product
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="my-4">
           <Input
