@@ -1,21 +1,15 @@
-
-import React, { useEffect, useState } from 'react'
-import img1 from '../images/img_3.json'
-import { Button, Checkbox, Input, Radio } from '@material-tailwind/react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import Lottie from 'lottie-react'
-
-
-
-
-
-
+import React, { useEffect, useState } from "react";
+import img1 from "../images/img_3.json";
+import { Button, Checkbox, Input, Radio } from "@material-tailwind/react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Lottie from "lottie-react";
+const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
+const api_users = import.meta.env.VITE_API_URL_USERS;
 const SignUp = ({ users }) => {
-	const [userData, setuserData] = useState([]);
+  const [userData, setuserData] = useState([]);
 
   console.log(users);
-
 
   const [user, setUser] = useState({
     firstName: "",
@@ -39,69 +33,72 @@ const SignUp = ({ users }) => {
     }));
   };
 
+  const newErrors = {};
+  const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+  Object.keys(user).forEach((key) => {
+    if (user[key] === "") {
+      newErrors[key] = `${
+        key.charAt(0).toUpperCase() + key.slice(1)
+      } is required`;
+    }
+  });
 
-		const newErrors = {}
-		const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-		Object.keys(user).forEach((key) => {
-			if (user[key] === '') {
-				newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required`
-			}
-		})
-		if (!emailRegex.test(user.email)) {
-			newErrors.email = 'not valid email'
-		} else if (user.password !== user.confirmPassword) {
-			newErrors.confirmPassword = "Passwords don't match"
-		} else if (Object.keys(newErrors).length > 0) {
-			setErrors(newErrors)
-			return
-		}
-		const userInfo = {
-			firstName: user.firstName,
-			lastName: user.lastName,
-			email: user.email,
-			password: user.password,
-			phonenumber: user.phonenumber,
-			gender: user.gender,
-			cart: [],
-		}
-		const existingUser =
-			userData &&
-			userData.find((existingUser) => existingUser.email.toLowerCase() === user.email.toLowerCase())
-
-		if (existingUser) {
-			alert('Email already exists, go to login')
-			return
-		}
-		axios
-			.post(`${import.meta.env.VITE_API_URL_USERS}`, userInfo)
-			.then(() => {
-				navigate('/login')
-			})
-			.catch((error) => console.error(error.message))
-	}
-	const checkTheUser = () => {
-		axios({
-			method: 'get',
-			url: `${import.meta.env.VITE_API_URL_USERS}`,
-		})
-			.then((res) => {
-				setuserData(res.data)
-			})
-			.catch((err) => console.error(err.message))
-	}
-
-	useEffect(() => {
-		checkTheUser()
-	}, [])
-
-
-    axios
-      .post("https://booming-odd-lark.glitch.me/users", userInfo)
-      .then(() => {
-        navigate("/login");
-      })
-      .catch((error) => console.error(error.message));
+  if (!emailRegex.test(user.email)) {
+    newErrors.email = "not valid email";
+  } else if (user.password !== user.confirmPassword) {
+    newErrors.confirmPassword = "Passwords don't match";
+  } else if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
+  }
+  const userInfo = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    password: user.password,
+    phonenumber: user.phonenumber,
+    gender: user.gender,
+    cart: [],
   };
+  const existingUser =
+    userData &&
+    userData.find(
+      (existingUser) =>
+        existingUser.email.toLowerCase() === user.email.toLowerCase()
+    );
+
+  if (existingUser) {
+    alert("Email already exists, go to login");
+    return;
+  }
+  axios
+    .post(`${import.meta.env.VITE_API_URL_USERS}`, userInfo)
+    .then(() => {
+      navigate("/login");
+    })
+    .catch((error) => console.error(error.message));
+
+  const checkTheUser = () => {
+    axios({
+      method: "get",
+      url: `${import.meta.env.VITE_API_URL_USERS}`,
+    })
+      .then((res) => {
+        setuserData(res.data);
+      })
+      .catch((err) => console.error(err.message));
+  };
+
+  useEffect(() => {
+    checkTheUser();
+  }, []);
+
+  axios
+    .post(`${api_users}`, userInfo)
+    .then(() => {
+      navigate("/login");
+    })
+    .catch((error) => console.error(error.message));
 
   return (
     <div className="flex w-full h-screen dark:bg-[#050C9C]">
