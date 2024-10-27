@@ -11,7 +11,7 @@ const App = () => {
   localStorage.theme = "light";
   const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
   const api_users = import.meta.env.VITE_API_URL_USERS;
-  const [users, setusers] = useState([]);
+  const [users, setusers] = useState(null);
   const [usersData, setUsersData] = useState([]);
   const [products, setproducts] = useState([]);
   const [userdata, setuserdata] = useState(null);
@@ -23,8 +23,9 @@ const App = () => {
   const getuserdata = () => {
     axios
       .get(`${api_users}/${userid}`)
-      .then((data) => {
-        setuserdata(data.data);
+      .then(({ data }) => {
+        setuserdata(data);
+        console.log(data);
       })
       .then(() => {
         setusercart(userdata.cart);
@@ -33,7 +34,7 @@ const App = () => {
         console.log("logged user data DONE");
       })
       .catch(() => {
-        console.error("error catching logged user data");
+        console.error("error catching logged user data failed");
       });
   };
   useEffect(() => {
@@ -47,21 +48,23 @@ const App = () => {
   const getAllUsers = () => {
     axios
       .get(`${import.meta.env.VITE_API_URL_USERS}`)
-      .then((res) => {
-        setUsersData(res.data);
+      .then(({ data }) => {
+        setusers(data);
       })
       .then(() => {
+        console.log(users);
         console.log("users data DONE");
       })
       .catch((err) => {
-        console.error(err);
         console.log("error catching all users data");
       });
   };
 
   useEffect(() => {
-    getAllUsers();
-  }, []);
+    if (users == null) {
+      getAllUsers();
+    }
+  }, [users]);
 
   /*=========================================== */
   // getting all products data
