@@ -31,11 +31,12 @@ const LogIn = ({ users, userid, userdata, setuserid, setcn }) => {
 			return
 		}
 
-		const loginUser = allUsers.find(({ email, password, id }) => {
+		const loginUser = allUsers.find(({ email, password }) => {
 			return email === user.email && password === user.password
 		})
-
-		if (loginUser) {
+		if (allUsers.email !== user.email) {
+			alert(' Not found please sign up ')
+		} else if (loginUser) {
 			localStorage.setItem('id', loginUser.id)
 			setuserid(loginUser.id)
 			localStorage.id = loginUser.id
