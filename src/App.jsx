@@ -96,6 +96,7 @@ const App = () => {
               users={users}
               products={products}
               previouscart={usercart}
+              usercart={usercart}
             />
           }
         ></Route>
