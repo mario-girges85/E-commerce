@@ -11,65 +11,36 @@ import {
   Spinner,
 } from "@material-tailwind/react";
 import Swal from "sweetalert2";
-const Mainproducts = ({ products, previouscart, userdata }) => {
+const Mainproducts = ({ products, userdata }) => {
   //products data
+
   const [productsdata, setproductsdata] = useState([""]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  //getting products data
+  const getdata = () => {
+    setproductsdata(products);
+    setFilteredProducts(products); // initialize with all products
+  };
+  //update data on component load
+  useEffect(() => {
+    if (products != null) {
+      getdata();
+    }
+  }, [products, productsdata]);
 
   //get old cart data
-  const [usercart, setusercart] = useState([]);
-  function getusercart() {
-    setusercart(previouscart);
-  }
-
+  const [usercart, setusercart] = useState(null);
+  const getusercart = () => {
+    setusercart(userdata.cart);
+  };
   useEffect(() => {
-    if (usercart == []) {
+    if (userdata != null) {
       getusercart();
     }
-  }, [usercart, previouscart]);
-  // alert
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "bottom-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
-  //post to cart
-  // function postusercart(data) {
-  //   let product = data;
-  //   let newcart = usercart;
-  //   if (usercart.some((item) => item.name === data.name)) {
-  //     const index = newcart.findIndex((item) => item.name == data.name);
-  //     newcart[index].count += 1;
-  //     setusercart(newcart);
-  //     axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
-  //       cart: usercart,
-  //     });
+  }, [usercart]);
 
-  //     Toast.fire({
-  //       icon: "success",
-  //       title: `${data.name} added successfully`,
-  //     });
-  //   } else {
-  //     newcart.push(product);
-  //     setusercart(newcart);
-  //     axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
-  //       cart: usercart,
-  //     });
-
-  //     Toast.fire({
-  //       icon: "success",
-  //       title: `${data.name} added successfully `,
-  //     });
-  //   }
-  // }
   function postusercart(data) {
-    if (!localStorage.cn) {
+    if (!localStorage.cn || usercart == null) {
       Swal.fire({
         title: "Login",
         text: "You have to login first",
@@ -90,7 +61,7 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
       }
 
       axios
-        .put(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+        .patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
           cart: usercart,
         })
         .then(() => {
@@ -126,34 +97,39 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
       settoValue(value);
     }
   };
-
-  //getting products data
-  const getdata = () => {
-    axios.get(`${import.meta.env.VITE_API_URL_PRODUCTS}`).then(({ data }) => {
-      setproductsdata(data);
-      setFilteredProducts(data); // initialize with all products
-    });
-  };
-  //update data on component load
-  useEffect(() => {
-    if (productsdata == "") {
-      getdata();
-    }
-  }, [products]);
-
+  // alert
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
   //apply filter
   //apply filter
   const applyfilter = () => {
     let filtered = productsdata.filter((product) => {
-      return (
-        (fromValue <= product.price &&
-          toValue >= product.price &&
-          category == product.category &&
-          category != "All") ||
-        (toValue >= product.price &&
-          fromValue <= product.price &&
-          category == "All")
-      );
+      if (fromValue == 0 && toValue == 0 && category == "All") {
+        return product;
+
+        // no price   yes category
+      } else if (fromValue == 0 && toValue == 0 && category != "All") {
+        return product.category == category;
+
+        // yes price yes category
+      } else if (toValue >= fromValue && category != "All") {
+        return (
+          product.price >= fromValue &&
+          product.price <= toValue &&
+          product.category == category
+        );
+      } else {
+        return product.price >= fromValue && product.price <= toValue;
+      }
     });
     setFilteredProducts(filtered);
   };
