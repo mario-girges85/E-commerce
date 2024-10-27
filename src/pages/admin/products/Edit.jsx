@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const Edit = ({ products, setProducts }) => {
   const [data, setData] = useState({
+    code: 0,
     name: "",
     description: "",
     price: 0,
@@ -24,18 +25,20 @@ const Edit = ({ products, setProducts }) => {
   }, [id]);
 
   const viewProduct = () => {
-    const foundProduct = products.find(
-      (product) => product.id === parseInt(id)
-    );
-    if (foundProduct) {
-      setData(foundProduct);
-    }
+    axios
+      .get(`${import.meta.env.VITE_API_URL_PRODUCTS}/${id}`)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching product data:", error);
+      });
   };
 
   const editProduct = (updatedProduct) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
+        product.id == updatedProduct.id ? updatedProduct : product
       )
     );
   };

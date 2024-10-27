@@ -19,7 +19,7 @@ const View = ({ products }) => {
 
   const viewProduct = () => {
     const foundProduct = products.find(
-      (product) => product.id === parseInt(id)
+      (product) => product?.id === id
     );
     setProduct(foundProduct);
   };

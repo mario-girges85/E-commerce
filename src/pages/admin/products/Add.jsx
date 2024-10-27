@@ -6,9 +6,10 @@ import Swal from "sweetalert2";
 
 const Add = ({ products, setProducts }) => {
   const [data, setData] = useState({
+    code: Number(products.length + 1),
     name: "",
     description: "",
-    price: "",
+    price: 0,
     category: "",
     image: "",
     rating: {
@@ -23,7 +24,7 @@ const Add = ({ products, setProducts }) => {
 
     axios
       .post(import.meta.env.VITE_API_URL_PRODUCTS, data)
-      .then(() => {
+      .then(async () => {
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -39,9 +40,13 @@ const Add = ({ products, setProducts }) => {
       });
   };
 
+/******  845a21ba-a8b0-4df3-8a8b-cd2194d41a9c  *******/
+
   return (
     <div className="w-5/6 lg:w-3/6 mx-auto py-5 md:py-16">
-      <h1 className="text-2xl font-bold my-3 md:my-5 text-center">Add New Product</h1>
+      <h1 className="text-2xl font-bold my-3 md:my-5 text-center">
+        Add New Product
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="my-4">
           <Input
@@ -81,6 +86,7 @@ const Add = ({ products, setProducts }) => {
             }
           />
         </div>
+
         <div className="my-4">
           <Input
             color="blue"

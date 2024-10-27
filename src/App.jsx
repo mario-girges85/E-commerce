@@ -44,8 +44,14 @@ const App = () => {
   const getAllUsers = () => {
     axios
       .get(`${import.meta.env.VITE_API_URL_USERS}`)
-      .then((res) => {
-        setUsersData(res.data);
+      .then(async (res) => {
+        let data = res.data;
+        await Promise.all(
+          data.map((item) => {
+            item.id = item._id;
+          })
+        );
+        setUsersData(data);
       })
       .catch((err) => {
         console.error(err);
@@ -61,8 +67,14 @@ const App = () => {
   const getproductsdata = () => {
     axios
       .get(`${api_products}`)
-      .then((data) => {
-        setproducts(data.data);
+      .then(async (res) => {
+        let data = res.data;
+        await Promise.all(
+          data.map((item) => {
+            item.id = item._id;
+          })
+        );
+        setproducts(data);
       })
       .then(() => {})
       .catch(() => {
