@@ -29,7 +29,7 @@ module.exports = withMT({
     colors: {
       backcolor_top: "#2D3250",
       backcolor: "#262838",
-      maincolor: "#E3651D",
+      maincolor: "#7AB2D3",
     },
   },
   plugins: [],
