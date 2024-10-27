@@ -9,6 +9,8 @@ import femaleImage from "../images/woman-user-circle-icon.svg";
 import { FaRegUser, FaBirthdayCake } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+//
+import { useForm } from "react-hook-form";
 
 const Profile = () => {
     const [userData, eUserData] = useState();
@@ -16,16 +18,20 @@ const Profile = () => {
     const [arrived, earrived] = useState(false);
     const [showInfo, eShowInfo] = useState(false);
     const [editMode, eEditMode] = useState(false);
-    const [valid, eValid] = useState(fasle);
+    const [valid, eValid] = useState(false);
 
-    console.log(userData);
+    // const {
+    //     register,
+    //     handleSubmit,
+    //     formState: { errors },
+    // } = useForm();
 
     const postData = () => {
         axios({
             method: "patch",
             url: `${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`,
             data: userData,
-        }).then(() => console.log("Done"));
+        }).then(() => eValid(false));
     };
 
     useEffect(() => {
@@ -72,7 +78,7 @@ const Profile = () => {
                             onChange={(e) =>
                                 eUserData({
                                     ...userData,
-                                    firstName: e.target.value,
+                                    firstname: e.target.value,
                                 })
                             }
                             icon={
@@ -91,7 +97,7 @@ const Profile = () => {
                             onChange={(e) =>
                                 eUserData({
                                     ...userData,
-                                    lastName: e.target.value,
+                                    lastname: e.target.value,
                                 })
                             }
                             icon={
@@ -148,7 +154,7 @@ const Profile = () => {
                             onChange={(e) =>
                                 eUserData({
                                     ...userData,
-                                    date: e.target.value,
+                                    birthday: e.target.value,
                                 })
                             }
                             type={showInfo ? "text" : "password"}
