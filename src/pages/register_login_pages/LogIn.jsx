@@ -30,22 +30,24 @@ const LogIn = ({ users, userid, userdata, setuserid, setcn }) => {
       return;
     }
 
-    const loginUser = allUsers.find(({ email, password, id }) => {
-      return email === user.email && password === user.password;
-    });
-    console.log(loginUser);
 
-    if (loginUser) {
-      localStorage.setItem("id", loginUser._id);
-      setuserid(loginUser._id);
-      localStorage.id = loginUser._id;
-      localStorage.cn = true;
-      setcn(true);
-      navigate("/");
-    } else {
-      console.log("Invalid credentials");
-    }
-  };
+		const loginUser = allUsers.find(({ email, password }) => {
+			return email === user.email && password === user.password
+		})
+		if (allUsers.email !== user.email) {
+			alert(' Not found please sign up ')
+		} else if (loginUser) {
+			localStorage.setItem('id', loginUser.id)
+			setuserid(loginUser.id)
+			localStorage.id = loginUser.id
+			localStorage.cn = true
+			setcn(true)
+			navigate('/')
+		} else {
+			console.log('Invalid credentials')
+		}
+	}
+
 
   const checkTheUser = () => {
     setAllUsers(users);
