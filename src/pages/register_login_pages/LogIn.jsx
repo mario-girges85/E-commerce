@@ -9,11 +9,16 @@ const LogIn = ({ users, userid, userdata, setuserid, setcn }) => {
     email: "",
     password: "",
   });
+
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [allUsers, setAllUsers] = useState(users);
+  const [allUsers, setAllUsers] = useState(null);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    setAllUsers(users);
+  }, [users]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -30,11 +35,13 @@ const LogIn = ({ users, userid, userdata, setuserid, setcn }) => {
       return;
     }
 
-    const loginUser = allUsers.find(({ email, password, id }) => {
+    const loginUser = allUsers.find(({ email, password }) => {
       return email === user.email && password === user.password;
     });
 
+
     if (loginUser) {
+
       localStorage.setItem("id", loginUser._id);
       setuserid(loginUser._id);
       localStorage.id = loginUser._id;

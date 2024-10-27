@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Notfound from "./Notfound";
@@ -6,6 +7,11 @@ import Mainproducts from "./pages/products/Mainproducts";
 import LogIn from "./pages/register_login_pages/LogIn";
 import SignUp from "./pages/register_login_pages/SignUp";
 import Profile from "./pages/user/Profile";
+
+
+
+
+
 const Userlayout = ({
   users,
   userid,
@@ -30,6 +36,7 @@ const Userlayout = ({
             />
           }
         />
+
         <Route
           path="/login"
           element={
@@ -44,9 +51,11 @@ const Userlayout = ({
         />
         <Route path="signup" element={<SignUp users={users} />} />
         <Route path="profile" element={<Profile users={users} />} />
+
       </Routes>
     </div>
   );
 };
 
-export default Userlayout;
+
+export default Userlayout
