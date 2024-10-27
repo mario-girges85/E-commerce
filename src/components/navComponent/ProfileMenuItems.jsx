@@ -15,11 +15,10 @@ import {
   PowerIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function AvatarWithUserDropdown() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
@@ -44,7 +43,7 @@ export function AvatarWithUserDropdown() {
       <MenuList className="p-1">
         <Typography
           as={Link}
-          to=""
+          to="/profile"
           variant="small"
           className="font-normal"
           color={"inherit"}
