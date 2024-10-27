@@ -5,11 +5,7 @@ import EmptyCartImage from "../images/Empty_Cart.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Spinner } from "@material-tailwind/react";
 
-const Cart = ({ products, users, usercart, userid }) => {
-  // console.log(products);
-  // console.log(users);
-  // console.log(userid);
-
+const Cart = ({ userid }) => {
   const [apiData, editApiData] = useState([]);
   const [arrived, earrived] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +16,7 @@ const Cart = ({ products, users, usercart, userid }) => {
   const getdata = () => {
     axios({
       method: "get",
-      url: `${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`,
+      url: `${import.meta.env.VITE_API_URL_USERS}/${userid}`,
     }).then(({ data }) => {
       editApiData(data.cart);
       earrived(true);
@@ -35,7 +31,7 @@ const Cart = ({ products, users, usercart, userid }) => {
   const postData = (newcart) => {
     axios({
       method: "patch",
-      url: `${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`,
+      url: `${import.meta.env.VITE_API_URL_USERS}/${userid}`,
       data: {
         cart: newcart,
       },

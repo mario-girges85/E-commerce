@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import img1 from "../images/img_3.json";
 import { Button, Checkbox, Input, Radio } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Lottie from "lottie-react";
 
-const SignUp = ({ users }) => {
-  console.log(users);
+const SignUp = () => {
+  const [userData, setuserData] = useState([]);
 
   const [user, setUser] = useState({
     firstName: "",
@@ -44,15 +44,12 @@ const SignUp = ({ users }) => {
     });
     if (!emailRegex.test(user.email)) {
       newErrors.email = "not valid email";
-    }
-    if (user.password !== user.confirmPassword) {
+    } else if (user.password !== user.confirmPassword) {
       newErrors.confirmPassword = "Passwords don't match";
-    }
-    if (Object.keys(newErrors).length > 0) {
+    } else if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
     const userInfo = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -62,14 +59,38 @@ const SignUp = ({ users }) => {
       gender: user.gender,
       cart: [],
     };
+    const existingUser =
+      userData &&
+      userData.find(
+        (existingUser) =>
+          existingUser.email.toLowerCase() === user.email.toLowerCase()
+      );
 
+    if (existingUser) {
+      alert("Email already exists, go to login");
+      return;
+    }
     axios
-      .post("https://booming-odd-lark.glitch.me/users", userInfo)
+      .post(`${import.meta.env.VITE_API_URL_USERS}`, userInfo)
       .then(() => {
         navigate("/login");
       })
       .catch((error) => console.error(error.message));
   };
+  const checkTheUser = () => {
+    axios({
+      method: "get",
+      url: `${import.meta.env.VITE_API_URL_USERS}`,
+    })
+      .then((res) => {
+        setuserData(res.data);
+      })
+      .catch((err) => console.error(err.message));
+  };
+
+  useEffect(() => {
+    checkTheUser();
+  }, []);
 
   return (
     <div className="flex w-full h-screen dark:bg-[#050C9C]">
