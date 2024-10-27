@@ -38,9 +38,10 @@ const LogIn = ({ users, userid, userdata, setuserid, setcn }) => {
     const loginUser = allUsers.find(({ email, password }) => {
       return email === user.email && password === user.password;
     });
-    if (loginUser.email !== user.email) {
-      alert(" Not found please sign up ");
-    } else if (loginUser) {
+
+
+    if (loginUser) {
+
       localStorage.setItem("id", loginUser._id);
       setuserid(loginUser._id);
       localStorage.id = loginUser._id;
@@ -48,7 +49,7 @@ const LogIn = ({ users, userid, userdata, setuserid, setcn }) => {
       setcn(true);
       navigate("/");
     } else {
-      console.log("Invalid credentials");
+      alert(" Not found please sign up ");
     }
   };
 

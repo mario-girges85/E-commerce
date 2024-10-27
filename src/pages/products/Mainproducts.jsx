@@ -13,9 +13,9 @@ import {
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 const Mainproducts = ({ products, previouscart, userdata }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   //products data
-  const [productsdata, setproductsdata] = useState([]);
+  const [productsdata, setproductsdata] = useState([""]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   // alert
   const Toast = Swal.mixin({
@@ -29,6 +29,35 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
       toast.onmouseleave = Swal.resumeTimer;
     },
   });
+  //post to cart
+  function postusercart(data) {
+    let product = data;
+    let newcart = cart;
+    if (usercart.some((item) => item.name === data.name)) {
+      const index = newcart.findIndex((item) => item.name == data.name);
+      newcart[index].count += 1;
+      setusercart(newcart);
+      axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+        cart: usercart,
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: `${data.name} added successfully`,
+      });
+    } else {
+      newcart.push(product);
+      setusercart(newcart);
+      axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+        cart: usercart,
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: `${data.name} added successfully `,
+      });
+    }
+  }
 
   //get old cart data
   const [usercart, setusercart] = useState([]);
@@ -36,41 +65,6 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
     setusercart(previouscart);
   }
   useEffect(() => getusercart(), [previouscart]);
-
-  //post to cart
-  function postusercart(data) {
-    if (!localStorage.cn) {
-      Swal.fire({
-        title: "Login",
-        text: "You have to login first",
-        icon: "warning",
-      }).then(() => {
-        navigate("/login");
-      });
-    } else {
-      let product = data;
-      let newcart = usercart;
-      if (usercart.some((item) => item.name === data.name)) {
-        const index = newcart.findIndex((item) => item.name == data.name);
-        newcart[index].count += 1;
-        setusercart(newcart);
-      } else {
-        newcart.push(product);
-        setusercart(newcart);
-      }
-
-      axios
-        .put(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
-          cart: usercart,
-        })
-        .then(() => {
-          Toast.fire({
-            icon: "success",
-            title: `${data.name} added successfully`,
-          });
-        });
-    }
-  }
 
   //filter value
   const [fromValue, setfromValue] = useState(0);
@@ -106,7 +100,7 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
   //update data on component load
   useEffect(() => {
     getdata();
-  }, [products]);
+  }, []);
 
   //apply filter
   const applyfilter = () => {
