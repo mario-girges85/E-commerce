@@ -11,8 +11,6 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Profile = () => {
-    const api_users = import.meta.env.VITE_API_URL_USERS;
-    //
     const [userData, eUserData] = useState();
     const [arrived, earrived] = useState(false);
     const [showInfo, eShowInfo] = useState(false);
@@ -20,7 +18,7 @@ const Profile = () => {
     useEffect(() => {
         axios({
             method: "get",
-            url: `${api_users}/${localStorage.id}`,
+            url: `${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`,
         })
             .then(({ data }) => {
                 eUserData(data);
