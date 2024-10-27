@@ -12,20 +12,18 @@ const App = () => {
   const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
   const api_users = import.meta.env.VITE_API_URL_USERS;
   const [users, setusers] = useState(null);
-  const [usersData, setUsersData] = useState([]);
   const [products, setproducts] = useState([]);
   const [userdata, setuserdata] = useState(null);
   const [userid, setuserid] = useState(localStorage.id);
   const [cn, setcn] = useState(localStorage.cn);
   const [usercart, setusercart] = useState(null);
   /*=========================================== */
-  /*logged user dat */
+  /*logged user data */
   const getuserdata = () => {
     axios
       .get(`${api_users}/${userid}`)
       .then(({ data }) => {
         setuserdata(data);
-        console.log(data);
       })
       .then(() => {
         setusercart(userdata.cart);
@@ -52,8 +50,7 @@ const App = () => {
         setusers(data);
       })
       .then(() => {
-        console.log(users);
-        console.log("users data DONE");
+        console.log("all users data DONE");
       })
       .catch((err) => {
         console.log("error catching all users data");
@@ -92,7 +89,6 @@ const App = () => {
           path="/*"
           element={
             <Userlayout
-              userdata={userdata}
               userid={userid}
               setcn={setcn}
               setuserid={setuserid}
@@ -102,19 +98,31 @@ const App = () => {
             />
           }
         ></Route>
+
         <Route
           path="/admin/*"
           element={
             <Adminlayout
               products={products}
               setProducts={setproducts}
-              usersData={usersData}
-              setUsersData={setUsersData}
+              usersData={users}
+              setUsersData={setusers}
             />
           }
         ></Route>
+
         <Route path="*" element={<Notfound />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              products={products}
+              users={users}
+              usercart={usercart}
+              userid={userid}
+            />
+          }
+        />
       </Routes>
       <Footer />
     </div>
