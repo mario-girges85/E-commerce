@@ -40,35 +40,67 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
     },
   });
   //post to cart
-  function postusercart(data) {
-    let product = data;
-    let newcart = usercart;
-    if (usercart.some((item) => item.name === data.name)) {
-      const index = newcart.findIndex((item) => item.name == data.name);
-      newcart[index].count += 1;
-      setusercart(newcart);
-      axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
-        cart: usercart,
-      });
+  // function postusercart(data) {
+  //   let product = data;
+  //   let newcart = usercart;
+  //   if (usercart.some((item) => item.name === data.name)) {
+  //     const index = newcart.findIndex((item) => item.name == data.name);
+  //     newcart[index].count += 1;
+  //     setusercart(newcart);
+  //     axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+  //       cart: usercart,
+  //     });
 
-      Toast.fire({
-        icon: "success",
-        title: `${data.name} added successfully`,
+  //     Toast.fire({
+  //       icon: "success",
+  //       title: `${data.name} added successfully`,
+  //     });
+  //   } else {
+  //     newcart.push(product);
+  //     setusercart(newcart);
+  //     axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+  //       cart: usercart,
+  //     });
+
+  //     Toast.fire({
+  //       icon: "success",
+  //       title: `${data.name} added successfully `,
+  //     });
+  //   }
+  // }
+  function postusercart(data) {
+    if (!localStorage.cn) {
+      Swal.fire({
+        title: "Login",
+        text: "You have to login first",
+        icon: "warning",
+      }).then(() => {
+        navigate("/login");
       });
     } else {
-      newcart.push(product);
-      setusercart(newcart);
-      axios.patch(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
-        cart: usercart,
-      });
+      let product = data;
+      let newcart = usercart;
+      if (usercart.some((item) => item.name === data.name)) {
+        const index = newcart.findIndex((item) => item.name == data.name);
+        newcart[index].count += 1;
+        setusercart(newcart);
+      } else {
+        newcart.push(product);
+        setusercart(newcart);
+      }
 
-      Toast.fire({
-        icon: "success",
-        title: `${data.name} added successfully `,
-      });
+      axios
+        .put(`${import.meta.env.VITE_API_URL_USERS}/${localStorage.id}`, {
+          cart: usercart,
+        })
+        .then(() => {
+          Toast.fire({
+            icon: "success",
+            title: `${data.name} added successfully`,
+          });
+        });
     }
   }
-
   //filter value
   const [fromValue, setfromValue] = useState(0);
   const [toValue, settoValue] = useState(0);
