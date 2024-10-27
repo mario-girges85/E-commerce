@@ -6,11 +6,12 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 
 import DarkMood from "./DarkMood";
 import { Typography, Button } from "@material-tailwind/react";
+import Logo from "./Logo";
 const Nav = ({ cn, userdata }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex justify-around items-center h-fit gap-5 py-2 shadow-md shadow-blue-gray-500 bg-white bg-opacity-90 dark:bg-backcolor dark:bg-opacity-98 ">
+    <div className="flex justify-around items-center h-fit gap-5 py-2 shadow-none shadow-blue-gray-500 bg-white bg-opacity-90 dark:bg-backcolor dark:bg-opacity-98 ">
       {/* Menu Items - Hidden on mobile, displayed when the menu is toggled */}
       <div className="flex justify-around items-center gap-[5vw] cxs:gap-0 csm:gap-0 cmd:gap-0 cxl:gap-[15vw] c2xl:gap-[15vw] cxs:flex-col csm:flex-col cmd:flex-col">
         <h1 className="flex gap-5 text-blue-gray-500 dark:text-maincolor font-semibold text-2xl">
@@ -18,7 +19,7 @@ const Nav = ({ cn, userdata }) => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             class="size-8 text-gray-800 dark:text-white block clg:hidden cxl:hidden c2xl:hidden focus:outline-none"
           />
-          Little Closet
+          <Logo />
         </h1>
         <div
           className={`w-fit  md:flex md:items-center  min-w-[fit]  ${

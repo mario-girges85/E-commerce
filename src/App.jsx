@@ -11,26 +11,25 @@ const App = () => {
   localStorage.theme = "light";
   const api_products = import.meta.env.VITE_API_URL_PRODUCTS;
   const api_users = import.meta.env.VITE_API_URL_USERS;
-  const [users, setusers] = useState([]);
-  const [usersData, setUsersData] = useState([]);
-  const [products, setproducts] = useState([]);
+  const [users, setusers] = useState(null);
+  const [products, setproducts] = useState(null);
   const [userdata, setuserdata] = useState(null);
   const [userid, setuserid] = useState(localStorage.id);
   const [cn, setcn] = useState(localStorage.cn);
   const [usercart, setusercart] = useState(null);
   /*=========================================== */
-  /*logged user dat */
+  /*logged user data */
   const getuserdata = () => {
     axios
       .get(`${api_users}/${userid}`)
-      .then((data) => {
-        setuserdata(data.data);
+      .then(({ data }) => {
+        setuserdata(data);
       })
       .then(() => {
         setusercart(userdata.cart);
       })
       .catch(() => {
-        console.error("error catching logged user data");
+        console.error("error catching logged user data failed");
       });
   };
   useEffect(() => {
@@ -44,17 +43,21 @@ const App = () => {
   const getAllUsers = () => {
     axios
       .get(`${import.meta.env.VITE_API_URL_USERS}`)
-      .then((res) => {
-        setUsersData(res.data);
+      .then(({ data }) => {
+        setusers(data);
+      })
+      .then(() => {
+        console.log("all users data DONE");
       })
       .catch((err) => {
-        console.error(err);
+        console.log("error catching all users data");
       });
   };
-
   useEffect(() => {
-    getAllUsers();
-  }, [usersData]);
+    if (users == null) {
+      getAllUsers();
+    }
+  }, [users]);
 
   /*=========================================== */
   // getting all products data
@@ -64,13 +67,19 @@ const App = () => {
       .then((data) => {
         setproducts(data.data);
       })
-      .then(() => {})
+      .then(() => {
+        console.log("products done");
+      })
       .catch(() => {
         console.error("error catching products data");
       });
   };
 
-  useEffect(() => getproductsdata(), [products]);
+  useEffect(() => {
+    if (products == null) {
+      getproductsdata();
+    }
+  }, [products]);
 
   return (
     <div className="  ">
@@ -80,7 +89,6 @@ const App = () => {
           path="/*"
           element={
             <Userlayout
-              userdata={userdata}
               userid={userid}
               setcn={setcn}
               setuserid={setuserid}
@@ -90,19 +98,31 @@ const App = () => {
             />
           }
         ></Route>
+
         <Route
           path="/admin/*"
           element={
             <Adminlayout
               products={products}
               setProducts={setproducts}
-              usersData={usersData}
-              setUsersData={setUsersData}
+              usersData={users}
+              setUsersData={setusers}
             />
           }
         ></Route>
+
         <Route path="*" element={<Notfound />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              products={products}
+              users={users}
+              usercart={usercart}
+              userid={userid}
+            />
+          }
+        />
       </Routes>
       <Footer />
     </div>

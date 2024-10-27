@@ -15,10 +15,18 @@ import {
   ShoppingCartIcon,
   ChartBarSquareIcon,
 } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DarkMood from "./DarkMood";
 const NavListItems = ({ isMenuOpen, userdata }) => {
+  const [role, setrole] = useState(null);
+  useEffect(() => {
+    if (userdata != null) {
+      setrole(userdata.role);
+    }
+  }),
+    [userdata];
+
   const navListItems = [
     {
       label: "Home",
@@ -104,40 +112,46 @@ const NavListItems = ({ isMenuOpen, userdata }) => {
       </Typography>
 
       {/*dash board*/}
-      <Typography
-        key={navListItems[3].label}
-        as={Link}
-        variant="small"
-        color="gray"
-        className="font-medium w-fit text-blue-gray-500 dark:text-maincolor"
-      >
-        <Menu>
-          <MenuItem className="flex items-center gap-2 lg:rounded-full">
-            {React.createElement(navListItems[3].icon, {
-              className:
-                "h-[18px] w-[18px] dark:bg-backcolor justify-between items-center gap-2 text-blue-gray-500 dark:text-maincolor",
-            })}{" "}
-            <MenuHandler className="text-black dark:text-white">
-              <Link className="">Dashboard</Link>
-            </MenuHandler>
-            <MenuList className="bg-white flex flex-col dark:bg-backcolor justify-between items-center gap-2 text-blue-gray-800 dark:text-maincolor">
-              <Link
-                to="/admin/dashboard/products"
-                className="outline-none w-full"
-              >
-                <MenuItem className="hover:bg-white dark:hover:bg-backcolor dark:hover:text-maincolor text-center">
-                  Products
-                </MenuItem>
-              </Link>
-              <Link to="/admin/dashboard/users" className="outline-none w-full">
-                <MenuItem className="hover:bg-white dark:hover:bg-backcolor dark:hover:text-maincolor text-center">
-                  Users
-                </MenuItem>
-              </Link>
-            </MenuList>
-          </MenuItem>
-        </Menu>
-      </Typography>
+      {role == "admin" && (
+        <Typography
+          key={navListItems[3].label}
+          as={Link}
+          variant="small"
+          color="gray"
+          className="font-medium w-fit text-blue-gray-500 dark:text-maincolor"
+        >
+          <Menu>
+            <MenuItem className="flex items-center gap-2 lg:rounded-full">
+              {React.createElement(navListItems[3].icon, {
+                className:
+                  "h-[18px] w-[18px] dark:bg-backcolor justify-between items-center gap-2 text-blue-gray-500 dark:text-maincolor",
+              })}{" "}
+              <MenuHandler className="text-black dark:text-white">
+                <Link className="">Dashboard</Link>
+              </MenuHandler>
+              <MenuList className="bg-white flex flex-col dark:bg-backcolor justify-between items-center gap-2 text-blue-gray-800 dark:text-maincolor">
+                <Link
+                  to="/admin/dashboard/products"
+                  className="outline-none w-full"
+                >
+                  <MenuItem className="hover:bg-white dark:hover:bg-backcolor dark:hover:text-maincolor text-center">
+                    Products
+                  </MenuItem>
+                </Link>
+                <Link
+                  to="/admin/dashboard/users"
+                  className="outline-none w-full"
+                >
+                  <MenuItem className="hover:bg-white dark:hover:bg-backcolor dark:hover:text-maincolor text-center">
+                    Users
+                  </MenuItem>
+                </Link>
+              </MenuList>
+            </MenuItem>
+          </Menu>
+        </Typography>
+      )}
+
       {/* dark mood */}
       {<DarkMood />}
     </ul>

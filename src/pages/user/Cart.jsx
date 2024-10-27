@@ -5,7 +5,11 @@ import EmptyCartImage from "../images/Empty_Cart.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Spinner } from "@material-tailwind/react";
 
-const Cart = () => {
+const Cart = ({ products, users, usercart, userid }) => {
+  // console.log(products);
+  // console.log(users);
+  // console.log(userid);
+
   const [apiData, editApiData] = useState([]);
   const [arrived, earrived] = useState(false);
   const navigate = useNavigate();
