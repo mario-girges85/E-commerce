@@ -6,7 +6,7 @@ import User from "./User";
 
 const Users = ({ users, setUsers }) => {
   const [searchQuery, setSearchQuery] = useState("");
-//   const filteredUsers = users.filter((user) =>
+  //   const filteredUsers = users.filter((user) =>
   const [usersData, setUsersData] = useState(users);
 
   useEffect(() => {
@@ -15,9 +15,7 @@ const Users = ({ users, setUsers }) => {
     }
   }, [usersData]);
 
-
-    user?.firstName?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  user?.firstName?.toLowerCase().includes(searchQuery.toLowerCase());
 
   const handleDeleteUser = (id) => {
     Swal.fire({
