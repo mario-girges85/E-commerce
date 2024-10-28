@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IconButton } from "@material-tailwind/react";
 
-const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
+const Product = ({ product: { _id, name, price, category }, deleteProduct }) => {
   return (
     <tr className="border-b text-center dark:bg-backcolor dark:text-maincolor">
       <td className="py-2 lg:py-3">{name}</td>
       <td className="py-2 lg:py-3">{price}</td>
       <td className="py-2 lg:py-3">{category}</td>
       <td className="px-3 py-2 lg:py-3 flex flex-col lg:flex-row justify-center gap-1">
-        <Link to={`/admin/dashboard/products/edit/${id}`}>
+        <Link to={`/admin/dashboard/products/edit/${_id}`}>
           <IconButton
             variant="text"
             color="deep-purple"
@@ -25,7 +25,7 @@ const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
             </svg>
           </IconButton>
         </Link>
-        <Link to={`/admin/dashboard/products/view/${id}`}>
+        <Link to={`/admin/dashboard/products/view/${_id}`}>
           <IconButton
             variant="text"
             color="amber"
@@ -51,7 +51,7 @@ const Product = ({ product: { id, name, price, category }, deleteProduct }) => {
             variant="text"
             color="red"
             className="hover:bg-white hover:text-red-900 dark:hover:bg-backcolor dark:hover:text-red-300"
-            onClick={() => deleteProduct(id)}
+            onClick={() => deleteProduct(_id)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

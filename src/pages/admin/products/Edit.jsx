@@ -26,13 +26,18 @@ const Edit = ({ products, setProducts }) => {
 
   const viewProduct = () => {
     axios
-      .get(`${import.meta.env.VITE_API_URL_PRODUCTS}/${id}`)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching product data:", error);
-      });
+//       .get(`${import.meta.env.VITE_API_URL_PRODUCTS}/${id}`)
+//       .then((response) => {
+//         setData(response.data);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching product data:", error);
+//       });
+    const foundProduct = products?.find((product) => product._id == id);
+    if (foundProduct) {
+      setData(foundProduct);
+    }
+
   };
 
   const editProduct = (updatedProduct) => {

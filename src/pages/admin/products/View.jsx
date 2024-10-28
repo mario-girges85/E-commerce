@@ -18,9 +18,13 @@ const View = ({ products }) => {
   }, [id, products]);
 
   const viewProduct = () => {
-    const foundProduct = products.find(
-      (product) => product?.id === id
-    );
+
+//     const foundProduct = products.find(
+//       (product) => product?.id === id
+//     );
+
+    const foundProduct = products?.find((product) => product._id == id);
+
     setProduct(foundProduct);
   };
 

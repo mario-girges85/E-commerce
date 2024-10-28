@@ -2,13 +2,13 @@ import React from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 
 const User = ({
-  user: { id, firstName, lastName, email, role },
+  user: { _id, firstName, lastName, email, role },
   handleDeleteUser,
   handleRoleChange,
 }) => {
   return (
     <tr
-      key={id}
+      key={_id}
       className="border-b text-center dark:bg-backcolor dark:text-maincolor"
     >
       <td scope="col" className="py-2 lg:py-3 px-1">{(firstName + lastName).substring(0, 6)}</td>
@@ -18,18 +18,18 @@ const User = ({
       <td scope="col" className="py-2 lg:py-3 px-1">{role}</td>
       <td scope="col" className="py-2 lg:py-3 px-1 flex flex-col items-center lg:flex-row lg:justify-evenly gap-1">
         {role === "admin" ? (
-          <Button color="green" className="" onClick={() => handleRoleChange(id, "user")}>
+          <Button color="green" className="" onClick={() => handleRoleChange(_id, "user")}>
             Make User
           </Button>
         ) : (
-          <Button color="blue" className="" onClick={() => handleRoleChange(id, "admin")}>
+          <Button color="blue" className="" onClick={() => handleRoleChange(_id, "admin")}>
             Make Admin
           </Button>
         )}
         <IconButton
           color="red"
           variant="text"
-          onClick={() => handleDeleteUser(id)}
+          onClick={() => handleDeleteUser(_id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
