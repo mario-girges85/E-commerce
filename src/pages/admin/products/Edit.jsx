@@ -25,16 +25,25 @@ const Edit = ({ products, setProducts }) => {
   }, [id]);
 
   const viewProduct = () => {
+    axios
+//       .get(`${import.meta.env.VITE_API_URL_PRODUCTS}/${id}`)
+//       .then((response) => {
+//         setData(response.data);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching product data:", error);
+//       });
     const foundProduct = products?.find((product) => product._id == id);
     if (foundProduct) {
       setData(foundProduct);
     }
+
   };
 
   const editProduct = (updatedProduct) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
+        product.id == updatedProduct.id ? updatedProduct : product
       )
     );
   };

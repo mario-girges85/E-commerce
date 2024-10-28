@@ -6,6 +6,7 @@ import User from "./User";
 
 const Users = ({ users, setUsers }) => {
   const [searchQuery, setSearchQuery] = useState("");
+//   const filteredUsers = users.filter((user) =>
   const [usersData, setUsersData] = useState(users);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const Users = ({ users, setUsers }) => {
     }
   }, [usersData]);
 
-  const filteredUsers = users?.filter((user) =>
+
     user?.firstName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -62,7 +63,7 @@ const Users = ({ users, setUsers }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`${import.meta.env.VITE_API_URL_USERS}/${id}`, {
+          .put(`${import.meta.env.VITE_API_URL_USERS}/${id}`, {
             role,
           })
           .then((response) => {
