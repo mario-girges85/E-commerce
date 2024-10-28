@@ -6,7 +6,7 @@ import Mainproducts from "./pages/products/Mainproducts";
 import LogIn from "./pages/register_login_pages/LogIn";
 import SignUp from "./pages/register_login_pages/SignUp";
 import Profile from "./pages/user/Profile";
-
+import EditProfile from "./pages/user/EditProfile";
 const Userlayout = ({
   users,
   userid,
@@ -49,6 +49,7 @@ const Userlayout = ({
           path="profile"
           element={<Profile userdata={userdata} users={users} />}
         />
+        <Route path="editprofile" element={<EditProfile />}></Route>
       </Routes>
     </div>
   );
