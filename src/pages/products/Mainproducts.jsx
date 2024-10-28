@@ -199,7 +199,7 @@ const Mainproducts = ({ products, userdata }) => {
         {productsdata == "" ? (
           <div className="flex min-h-[80vh] flex-col justify-center items-center gap-5">
             <Spinner className="size-12" />
-            <h1>Loading</h1>
+            <h1 className="dark:text-white">Loading</h1>
           </div>
         ) : (
           filteredProducts.map((product) => (
