@@ -29,7 +29,6 @@ const SignUp = () => {
 			[name]: value,
 		}))
 	}
-
 	const handleOnSubmit = (e) => {
 		e.preventDefault()
 
@@ -37,7 +36,9 @@ const SignUp = () => {
 		const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
 		Object.keys(user).forEach((key) => {
 			if (user[key] === '') {
-				newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required`
+				newErrors[key] = `${
+					key.charAt(0).toUpperCase() + key.slice(1)
+				} is required`
 			}
 		})
 		if (!emailRegex.test(user.email)) {
@@ -57,16 +58,23 @@ const SignUp = () => {
 			gender: user.gender,
 			cart: [],
 		}
+
 		const existingUser =
 			userData &&
-			userData.find((existingUser) => existingUser.email.toLowerCase() === user.email.toLowerCase())
+			userData.find(
+				(existingUser) =>
+					existingUser.email.toLowerCase() === user.email.toLowerCase()
+			)
 
 		if (existingUser) {
 			alert('Email already exists, go to login')
 			return
 		}
-		axios
-			.post(`${import.meta.env.VITE_API_URL_USERS}`, userInfo)
+		axios({
+			method: 'post',
+			url: `${import.meta.env.VITE_API_URL_USERS}`,
+			data: userInfo,
+		})
 			.then(() => {
 				navigate('/login')
 			})
@@ -88,7 +96,7 @@ const SignUp = () => {
 	}, [])
 
 	return (
-		<div className='flex w-full h-screen dark:bg-[#050C9C]'>
+		<div className='flex w-full mt-20 mb-20 h-screen dark:bg-[#050C9C]'>
 			<div className='hidden lg:flex ml-12 h-[full] item-center justify-center '>
 				<Lottie animationData={img1} />
 			</div>
@@ -104,7 +112,9 @@ const SignUp = () => {
 					<div className='grid grid-cols-1 lg:grid-cols-2 justify-center w-full gap-6 lg:gap-9'>
 						<div>
 							{errors.firstName && (
-								<p className='text-red-500 dark:text-white font-bold mb-1'>{errors.firstName}</p>
+								<p className='text-red-500 dark:text-white font-bold mb-1'>
+									{errors.firstName}
+								</p>
 							)}
 							<Input
 								className='dark:text-white '
@@ -117,7 +127,9 @@ const SignUp = () => {
 						</div>
 						<div>
 							{errors.lastName && (
-								<p className='text-red-500 dark:text-white   font-bold mb-1 '>{errors.lastName}</p>
+								<p className='text-red-500 dark:text-white   font-bold mb-1 '>
+									{errors.lastName}
+								</p>
 							)}
 							<Input
 								className='dark:text-white '
@@ -130,7 +142,9 @@ const SignUp = () => {
 						</div>
 						<div>
 							{errors.email && (
-								<p className='text-red-500 dark:text-white  font-bold mb-1'>{errors.email}</p>
+								<p className='text-red-500 dark:text-white  font-bold mb-1'>
+									{errors.email}
+								</p>
 							)}
 							<Input
 								className='dark:text-white '
@@ -143,7 +157,9 @@ const SignUp = () => {
 						</div>
 						<div>
 							{errors.phonenumber && (
-								<p className='text-red-500 dark:text-white  font-bold mb-1'>{errors.phonenumber}</p>
+								<p className='text-red-500 dark:text-white  font-bold mb-1'>
+									{errors.phonenumber}
+								</p>
 							)}
 							<Input
 								className='dark:text-white '
@@ -157,7 +173,9 @@ const SignUp = () => {
 						</div>
 						<div>
 							{errors.password && (
-								<p className='text-red-500 dark:text-white  font-bold mb-1'>{errors.password}</p>
+								<p className='text-red-500 dark:text-white  font-bold mb-1'>
+									{errors.password}
+								</p>
 							)}
 							<Input
 								className='dark:text-white '
@@ -192,7 +210,9 @@ const SignUp = () => {
 					</div>
 					<div className='flex items-center m-4 dark:text-white '>
 						{errors.gender ? (
-							<p className='text-red-500 dark:text-white  font-bold mb-1'>{errors.gender}</p>
+							<p className='text-red-500 dark:text-white  font-bold mb-1'>
+								{errors.gender}
+							</p>
 						) : (
 							'Gender'
 						)}
