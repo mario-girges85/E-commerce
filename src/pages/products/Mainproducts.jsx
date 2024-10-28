@@ -11,12 +11,22 @@ import {
   Spinner,
 } from "@material-tailwind/react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
 const Mainproducts = ({ products, previouscart, userdata }) => {
-  // const navigate = useNavigate();
   //products data
   const [productsdata, setproductsdata] = useState([""]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+  //get old cart data
+  const [usercart, setusercart] = useState([]);
+  function getusercart() {
+    setusercart(previouscart);
+  }
+
+  useEffect(() => {
+    if (usercart == []) {
+      getusercart();
+    }
+  }, [usercart, previouscart]);
   // alert
   const Toast = Swal.mixin({
     toast: true,
@@ -32,7 +42,7 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
   //post to cart
   function postusercart(data) {
     let product = data;
-    let newcart = cart;
+    let newcart = usercart;
     if (usercart.some((item) => item.name === data.name)) {
       const index = newcart.findIndex((item) => item.name == data.name);
       newcart[index].count += 1;
@@ -58,13 +68,6 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
       });
     }
   }
-
-  //get old cart data
-  const [usercart, setusercart] = useState([]);
-  function getusercart() {
-    setusercart(previouscart);
-  }
-  useEffect(() => getusercart(), [previouscart]);
 
   //filter value
   const [fromValue, setfromValue] = useState(0);
@@ -94,14 +97,19 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
 
   //getting products data
   const getdata = () => {
-    setproductsdata(products);
-    setFilteredProducts(products); // initialize with all products
+    axios.get(`${import.meta.env.VITE_API_URL_PRODUCTS}`).then(({ data }) => {
+      setproductsdata(data);
+      setFilteredProducts(data); // initialize with all products
+    });
   };
   //update data on component load
   useEffect(() => {
-    getdata();
-  }, []);
+    if (productsdata == "") {
+      getdata();
+    }
+  }, [products]);
 
+  //apply filter
   //apply filter
   const applyfilter = () => {
     let filtered = productsdata.filter((product) => {
@@ -117,7 +125,6 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
     });
     setFilteredProducts(filtered);
   };
-
   //update filtered products whenever filter values or apply button changes
   useEffect(() => {
     applyfilter();
@@ -178,6 +185,7 @@ const Mainproducts = ({ products, previouscart, userdata }) => {
         </React.Fragment>
       </div>
       {/**======================================================================================= */}
+
       {/*products*/}
       <div className="mt-5 m-auto  flex flex-row flex-wrap gap-5 justify-evenly items-center ">
         {productsdata == "" ? (
