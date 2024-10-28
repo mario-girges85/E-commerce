@@ -9,7 +9,7 @@ const Add = ({ products, setProducts }) => {
     code: Number(products.length + 1),
     name: "",
     description: "",
-    price: "",
+    price: 0,
     category: "",
     image: "",
     rating: {
@@ -24,7 +24,7 @@ const Add = ({ products, setProducts }) => {
 
     axios
       .post(import.meta.env.VITE_API_URL_PRODUCTS, data)
-      .then(() => {
+      .then(async () => {
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -39,6 +39,8 @@ const Add = ({ products, setProducts }) => {
         console.error(error);
       });
   };
+
+/******  845a21ba-a8b0-4df3-8a8b-cd2194d41a9c  *******/
 
   return (
     <div className="w-5/6 lg:w-3/6 mx-auto py-5 md:py-16">
@@ -84,6 +86,7 @@ const Add = ({ products, setProducts }) => {
             }
           />
         </div>
+
         <div className="my-4">
           <Input
             color="blue"
