@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+const Profile = () => {
+  const api_users = import.meta.env.VITE_API_URL_USERS;
+  const [data, setdata] = useState(null);
 
-const Profile = ({ userdata }) => {
-  const [data, setdata] = useState();
   const getuserdata = () => {
-    setdata(userdata);
+    axios.get(`${api_users}/${localStorage.id}`).then(({ data }) => {
+      setdata(data);
+    });
   };
   useEffect(() => {
-    if (data == undefined) {
+    if (data == null) {
       getuserdata();
     }
-  }, [userdata]);
-  console.log(data);
+    console.log(data);
+  }, [data]);
 
   return <div></div>;
 };
