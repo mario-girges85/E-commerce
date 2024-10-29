@@ -39,7 +39,14 @@ const Nav = ({ cn, userdata }) => {
             Login
           </Link>
         ) : (
-          <div className={`${isMenuOpen ? "h-60" : "h-fit"}`}>
+          <div
+            className={`${
+              isMenuOpen
+                ? "h-60 flex flex-row items-center gap-2"
+                : "h-fit flex flex-row items-center gap-2"
+            }`}
+          >
+            <h1>{userdata?.firstname}</h1>
             <ProfileMenuItems className="fit " />
           </div>
         )}
