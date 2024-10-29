@@ -36,7 +36,7 @@ const App = () => {
     if (cn) {
       getuserdata();
     }
-  }, [cn, userid]);
+  }, [cn, userid, userdata]);
 
   /*=========================================== */
   // getting all users
@@ -44,21 +44,20 @@ const App = () => {
     axios
       .get(`${import.meta.env.VITE_API_URL_USERS}`)
 
-      .then(async (res) => {
-        let data = res.data;
-        await Promise.all(
-          data.map((item) => {
-            item.id = item._id;
-          })
-        );
-        setUsersData(data);
+      // .then(async (res) => {
+      //   let data = res.data;
+      //   await Promise.all(
+      //     data.map((item) => {
+      //       item.id = item._id;
+      //     })
+      //   );
+      //   setUsersData(data);
 
-//       .then(({ data }) => {
-//         setusers(data);
-//       })
-//       .then(() => {
-//         console.log("all users data DONE");
-
+      .then(({ data }) => {
+        setusers(data);
+      })
+      .then(() => {
+        console.log("all users data DONE");
       })
       .catch((err) => {
         console.log("error catching all users data");
@@ -117,18 +116,19 @@ const App = () => {
             />
           }
         ></Route>
-
-        <Route
-          path="/admin/*"
-          element={
-            <Adminlayout
-              products={products}
-              setProducts={setproducts}
-              usersData={users}
-              setUsersData={setusers}
-            />
-          }
-        ></Route>
+        {userdata?.role == "admin" && (
+          <Route
+            path="/admin/*"
+            element={
+              <Adminlayout
+                products={products}
+                setProducts={setproducts}
+                usersData={users}
+                setUsersData={setusers}
+              />
+            }
+          ></Route>
+        )}
 
         <Route path="*" element={<Notfound />} />
         <Route
